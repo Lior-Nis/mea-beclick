@@ -1499,7 +1499,7 @@ h1, h2, h3, h4 {
   /* Grid: slides|photos|games in row 1, dashboard centered in row 2 */
   .tutors-showcase {
     display: grid;
-    grid-template-columns: 80px 1fr 80px;
+    grid-template-columns: 110px 1fr 110px;
     grid-template-rows: auto auto;
     column-gap: 2px;
     row-gap: 0.8rem;
