@@ -478,6 +478,9 @@ h1, h2, h3, h4 {
 .hero-mini-carousel { grid-column: 1; grid-row: 1; }
 .hero-games-mini    { grid-column: 3; grid-row: 1; }
 
+/* Desktop size for games carousel (matches slides carousel) */
+.games-carousel-outer { width: 160px; }
+
 .tutor-card {
   position: relative;
   cursor: pointer;
@@ -1223,45 +1226,88 @@ h1, h2, h3, h4 {
 
 /* ── RESPONSIVE ────────────────────────────────────────────── */
 @media (max-width: 680px) {
-  /* 3 equal columns — carousel | dashboard | games */
+  /* Switch to flexbox — avoids grid/direction centering issues */
   .tutors-showcase {
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: auto auto;
-    direction: ltr;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     max-width: 100%;
     width: 100%;
-    column-gap: 6px;
+    column-gap: 5px;
     row-gap: 0.6rem;
-    padding: 0 8px;
+    padding: 0 6px;
     box-sizing: border-box;
+    direction: ltr;
   }
 
-  /* Photos span the full top row, centered */
+  /* Photos: full-width first row, always centered */
   .tutors-preview {
-    grid-column: 1 / 4;
-    grid-row: 1;
-    order: unset;
+    flex-basis: 100%;
+    order: 1;
     justify-content: center;
+    align-items: flex-end;
+    gap: 1.5rem;
   }
 
-  /* Second row: 3 equal panels */
-  .hero-mini-carousel  { grid-column: 1; grid-row: 2; order: unset; width: 100%; }
-  .hero-dashboard-mini { grid-column: 2; grid-row: 2; order: unset; width: 100%; justify-self: stretch; }
-  .hero-games-mini     { grid-column: 3; grid-row: 2; order: unset; width: 100%; }
+  /* 3 panels: equal-width second row */
+  .hero-mini-carousel {
+    flex: 1;
+    order: 2;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    grid-column: unset;
+    grid-row: unset;
+  }
 
-  /* All three panels the same height */
-  .games-collage         { width: 100%; height: 115px; }
-  .slides-carousel-outer { width: 100%; height: 115px; }
+  .hero-dashboard-mini {
+    flex: 1;
+    order: 3;
+    min-width: 0;
+    width: auto;
+    align-items: center;
+    grid-column: unset;
+    grid-row: unset;
+  }
 
-  /* Dashboard matches carousel/games height (chrome ~26px + screen 89px = 115px) */
-  .dashboard-mockup-mini { width: 100%; }
-  .mockup-screen-mini    { width: 100%; height: 89px; }
+  .hero-games-mini {
+    flex: 1;
+    order: 4;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    grid-column: unset;
+    grid-row: unset;
+  }
+
+  /* All three inner panels — identical 78px height */
+  .slides-carousel-outer,
+  .games-carousel-outer {
+    width: 100%;
+    height: 78px;
+  }
+
+  .dashboard-mockup-mini {
+    width: 100%;
+    height: 78px;
+    overflow: hidden;
+  }
+
+  .mockup-chrome { padding: 3px 5px; }
+
+  .mockup-screen-mini {
+    width: 100%;
+    height: 60px;
+  }
+
   .mockup-screen-mini iframe {
-    transform: scale(0.16);
+    transform: scale(0.11);
     transform-origin: top left;
   }
 
-  /* Hide the label tags on mobile to save space */
+  /* Hide label tags on mobile */
   .hero-preview-title { display: none; }
 
   .showcase-side {
@@ -1378,28 +1424,52 @@ h1, h2, h3, h4 {
   width: 100%;
 }
 
-/* ── Games Collage ───────────────────────────────────────── */
-.games-collage {
+/* ── Games Carousel ──────────────────────────────────────── */
+.games-carousel-outer {
   width: 160px;
   height: 210px;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
-  gap: 5px;
-  border-radius: 12px;
   overflow: hidden;
+  border-radius: 12px;
+  position: relative;
   box-shadow: 0 8px 30px rgba(0, 80, 80, 0.15);
   border: 1px solid var(--border-card);
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    black 0%,
+    black 82%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    black 0%,
+    black 82%,
+    transparent 100%
+  );
 }
 
-.gc-card {
+.games-carousel-track {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  animation: scroll-up 14s linear infinite;
+  padding: 6px 0;
+}
+
+.games-carousel-track:hover {
+  animation-play-state: paused;
+}
+
+.gmc-card {
+  flex-shrink: 0;
   width: 100%;
-  height: 100%;
+  height: 90px;
+  border-radius: 8px;
+  border: 1.5px solid var(--border-card);
   overflow: hidden;
   display: block;
 }
 
-.gc-card svg {
+.gmc-card svg {
   width: 100%;
   height: 100%;
   display: block;
@@ -1516,7 +1586,7 @@ h1, h2, h3, h4 {
   #header { position: relative; }
   .hero-title   { font-size: 2.4rem; }
   .hero-sub-b   { font-size: 1.35rem; }
-  .tutors-preview { gap: 2.5rem; }
+  .tutors-preview { gap: 1.5rem; }
   .about-inner  { padding: 2rem 1.2rem; }
   .pricing-grid { grid-template-columns: 1fr; max-width: 320px; }
   .testimonials-grid { grid-template-columns: 1fr; }
@@ -1524,9 +1594,8 @@ h1, h2, h3, h4 {
 }
 
 @media (max-width: 480px) {
-  #hero { padding: 3rem 1rem 4.5rem; }
+  #hero { padding: 3rem 0.5rem 4.5rem; }
   .showcase-grid { grid-template-columns: 1fr; }
   .nav-cta { display: none; }
   .hfc { min-width: 160px; }
-  .slides-carousel-outer { max-width: 100%; }
 }
