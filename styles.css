@@ -1256,13 +1256,13 @@ h1, h2, h3, h4 {
   /* All three inner panels — same size */
   .slides-carousel-outer,
   .games-carousel-outer {
-    width: 100%;
+    width: 126px;
     height: 68px;
     order: 1;
   }
 
   .dashboard-mockup-mini {
-    width: 100%;
+    width: 126px;
     height: 68px;
     overflow: hidden;
     order: 1;
@@ -1271,12 +1271,12 @@ h1, h2, h3, h4 {
   .mockup-chrome { padding: 3px 5px; }
 
   .mockup-screen-mini {
-    width: 100%;
+    width: 126px;
     height: 50px;
   }
 
   .mockup-screen-mini iframe {
-    transform: scale(0.12);
+    transform: scale(0.11);
     transform-origin: top left;
   }
 
