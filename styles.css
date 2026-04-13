@@ -1496,79 +1496,89 @@ h1, h2, h3, h4 {
 
 /* ── RESPONSIVE 680px — must stay at end to override base styles ── */
 @media (max-width: 680px) {
-  /* Switch to flexbox — avoids grid/direction centering issues */
+  /* Grid: slides|photos|games in row 1, dashboard centered in row 2 */
   .tutors-showcase {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    max-width: 100%;
-    width: 100%;
+    display: grid;
+    grid-template-columns: 80px 1fr 80px;
+    grid-template-rows: auto auto;
     column-gap: 4px;
-    row-gap: 0.6rem;
+    row-gap: 0.8rem;
     padding: 0 4px;
     box-sizing: border-box;
     direction: ltr;
+    max-width: 100%;
+    width: 100%;
   }
 
-  /* Photos: full-width first row, always centered */
+  /* Photos — center column, row 1 */
   .tutors-preview {
-    flex-basis: 100%;
-    order: 1;
+    grid-column: 2;
+    grid-row: 1;
     justify-content: center;
     align-items: flex-end;
-    gap: 1.5rem;
+    gap: 1.2rem;
   }
 
-  /* 3 panels: equal-width second row */
-  .hero-mini-carousel,
-  .hero-dashboard-mini,
-  .hero-games-mini {
-    flex: 1;
-    min-width: 0;
+  /* Slides — left column, row 1 */
+  .hero-mini-carousel {
+    grid-column: 1;
+    grid-row: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: auto;
-    grid-column: unset;
-    grid-row: unset;
+    width: 100%;
   }
 
-  .hero-mini-carousel  { order: 2; }
-  .hero-dashboard-mini { order: 3; }
-  .hero-games-mini     { order: 4; }
+  /* Dashboard — spans all columns, row 2, centered */
+  .hero-dashboard-mini {
+    grid-column: 1 / 4;
+    grid-row: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
 
-  /* All three inner panels — same size */
+  /* Games — right column, row 1 */
+  .hero-games-mini {
+    grid-column: 3;
+    grid-row: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+
+  /* Slides & games carousels fill their column */
   .slides-carousel-outer,
   .games-carousel-outer {
     width: 100%;
     height: 130px;
-    order: 1;
   }
 
+  /* Dashboard spans full width, same height */
   .dashboard-mockup-mini {
-    width: 100% !important;
+    width: 260px !important;
     height: 130px !important;
     overflow: hidden;
-    order: 1;
-    border-radius: 6px;
+    border-radius: 8px;
   }
 
-  .mockup-chrome { padding: 2px 4px !important; }
+  .mockup-chrome { padding: 3px 6px !important; }
 
   .mockup-screen-mini {
-    width: 100% !important;
-    height: 114px !important;
+    width: 260px !important;
+    height: 112px !important;
   }
 
   .mockup-screen-mini iframe {
-    transform: scale(0.16) !important;
+    transform: scale(0.22) !important;
     transform-origin: top left;
   }
 
   /* Labels below each panel */
   .hero-preview-title {
     display: block !important;
-    order: 2;
     font-size: 0.55rem;
     font-weight: 700;
     text-align: center;
