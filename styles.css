@@ -1261,16 +1261,6 @@ h1, h2, h3, h4 {
     grid-row: unset;
   }
 
-  .hero-dashboard-mini {
-    flex: 1;
-    order: 3;
-    min-width: 0;
-    width: auto;
-    align-items: center;
-    grid-column: unset;
-    grid-row: unset;
-  }
-
   .hero-games-mini {
     flex: 1;
     order: 4;
@@ -1282,29 +1272,11 @@ h1, h2, h3, h4 {
     grid-row: unset;
   }
 
-  /* All three inner panels — identical 78px height */
+  /* All three inner panels — 120×74px */
   .slides-carousel-outer,
   .games-carousel-outer {
-    width: 100%;
-    height: 78px;
-  }
-
-  .dashboard-mockup-mini {
-    width: 100%;
-    height: 78px;
-    overflow: hidden;
-  }
-
-  .mockup-chrome { padding: 3px 5px; }
-
-  .mockup-screen-mini {
-    width: 100%;
-    height: 60px;
-  }
-
-  .mockup-screen-mini iframe {
-    transform: scale(0.11);
-    transform-origin: top left;
+    width: 120px;
+    height: 74px;
   }
 
   /* Hide label tags on mobile */
