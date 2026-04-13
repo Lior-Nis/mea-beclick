@@ -488,21 +488,7 @@ h1, h2, h3, h4 {
   padding-bottom: 28px;
 }
 
-/* Decorative ring */
-.tutor-card::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -58%);
-  width: 90px;
-  height: 90px;
-  border-radius: 50%;
-  border: 2.5px dashed var(--accent-soft);
-  opacity: 0.5;
-  animation: spin-slow 12s linear infinite;
-  pointer-events: none;
-}
+.tutor-card::before { display: none; }
 
 /* Glow behind image */
 .tutor-card::after {
