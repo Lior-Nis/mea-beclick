@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>שיעורים פרטיים — ניקול וליאור</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Heebo', sans-serif;
+      background: #f0f4ff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      overflow-x: hidden;
+    }
+
+    /* ══════════════════════════════════════
+       CARD
+    ══════════════════════════════════════ */
+    .ad {
+      width: min(540px, 96vw);
+      background: #ffffff;
+      border-radius: 36px;
+      overflow: hidden;
+      box-shadow: 0 20px 80px rgba(79, 70, 229, 0.18), 0 4px 20px rgba(0,0,0,0.08);
+      position: relative;
+    }
+
+    /* ── Top banner ── */
+    .ad-top {
+      background: linear-gradient(135deg, #4F46E5 0%, #7C3AED 60%, #A855F7 100%);
+      padding: 40px 36px 52px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Wavy bottom edge */
+    .ad-top::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0; right: 0;
+      height: 40px;
+      background: #ffffff;
+      border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+    }
+
+    /* Floating bubbles in banner */
+    .bubble {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.08);
+      animation: float-bubble 6s ease-in-out infinite;
+    }
+    .bubble:nth-child(1) { width: 80px; height: 80px; top: -20px; right: 20px; animation-delay: 0s; }
+    .bubble:nth-child(2) { width: 50px; height: 50px; top: 30px; left: 15px; animation-delay: 1.5s; }
+    .bubble:nth-child(3) { width: 110px; height: 110px; bottom: 20px; left: -30px; animation-delay: 0.8s; }
+    .bubble:nth-child(4) { width: 35px; height: 35px; bottom: 10px; right: 60px; animation-delay: 2.5s; }
+
+    @keyframes float-bubble {
+      0%, 100% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-14px) scale(1.04); }
+    }
+
+    .ad-tag {
+      display: inline-block;
+      background: rgba(255,255,255,0.2);
+      border: 1.5px solid rgba(255,255,255,0.4);
+      color: white;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      padding: 5px 18px;
+      border-radius: 20px;
+      margin-bottom: 14px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .ad-title {
+      font-size: 3.4rem;
+      font-weight: 900;
+      color: white;
+      line-height: 1.1;
+      position: relative;
+      z-index: 1;
+      text-shadow: 0 2px 12px rgba(0,0,0,0.15);
+    }
+    .ad-title .yellow { color: #FCD34D; }
+
+    .ad-emojis {
+      font-size: 2rem;
+      margin-top: 10px;
+      position: relative;
+      z-index: 1;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+    }
+    .ad-emojis span {
+      display: inline-block;
+      animation: wiggle 2s ease-in-out infinite;
+      cursor: default;
+      transition: transform 0.15s;
+    }
+    .ad-emojis span:hover { transform: scale(1.4) rotate(-10deg); }
+    .ad-emojis span:nth-child(1) { animation-delay: 0s; }
+    .ad-emojis span:nth-child(2) { animation-delay: 0.3s; }
+    .ad-emojis span:nth-child(3) { animation-delay: 0.6s; }
+    .ad-emojis span:nth-child(4) { animation-delay: 0.9s; }
+    .ad-emojis span:nth-child(5) { animation-delay: 1.2s; }
+
+    @keyframes wiggle {
+      0%, 100% { transform: rotate(-4deg) translateY(0); }
+      50% { transform: rotate(4deg) translateY(-5px); }
+    }
+
+    /* ── Body ── */
+    .ad-body {
+      padding: 28px 32px 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    /* Feature cards */
+    .features {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .feat {
+      background: #F8F7FF;
+      border: 2px solid transparent;
+      border-radius: 18px;
+      padding: 16px 14px;
+      text-align: center;
+      cursor: pointer;
+      transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s, background 0.2s;
+      user-select: none;
+    }
+    .feat:hover {
+      transform: translateY(-4px) scale(1.03);
+      border-color: #C4B5FD;
+      box-shadow: 0 8px 24px rgba(124, 58, 237, 0.13);
+      background: #EDE9FE;
+    }
+    .feat:active { transform: scale(0.96); }
+    .feat .feat-icon { font-size: 2rem; display: block; margin-bottom: 6px; }
+    .feat h4 { font-size: 0.92rem; font-weight: 800; color: #3730A3; margin-bottom: 3px; }
+    .feat p  { font-size: 0.78rem; color: #6B7280; line-height: 1.4; }
+
+    /* Section title */
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #7C3AED;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+    .section-label.big {
+      font-size: 1.3rem;
+      letter-spacing: 0.02em;
+    }
+
+    /* Subjects bubbles */
+    .subjects {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+    }
+    .subj {
+      background: linear-gradient(135deg, #EDE9FE, #F0FDF4);
+      border: 1.5px solid #DDD6FE;
+      color: #4338CA;
+      font-size: 0.85rem;
+      font-weight: 700;
+      padding: 7px 16px;
+      border-radius: 30px;
+      cursor: default;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .subj:hover {
+      transform: translateY(-3px) scale(1.06);
+      box-shadow: 0 6px 16px rgba(99, 102, 241, 0.2);
+    }
+
+    /* Prices */
+    .prices {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+    .price-card {
+      background: #FAFAFA;
+      border: 2px solid #E5E7EB;
+      border-radius: 18px;
+      padding: 14px 10px;
+      text-align: center;
+      transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+      cursor: default;
+    }
+    .price-card:hover {
+      transform: translateY(-5px);
+      border-color: #A78BFA;
+      box-shadow: 0 10px 28px rgba(124,58,237,0.12);
+    }
+    .price-card.star {
+      background: linear-gradient(135deg, #4F46E5, #7C3AED);
+      border-color: #4F46E5;
+    }
+    .price-card.star .p-amount { color: #FCD34D; }
+    .price-card.star .p-label { color: rgba(255,255,255,0.8); }
+    .price-card.star .p-name { color: white; }
+
+    .p-name   { font-size: 0.82rem; font-weight: 700; color: #6B7280; margin-bottom: 4px; }
+    .p-amount { font-size: 1.7rem; font-weight: 900; color: #111827; line-height: 1; }
+    .p-label  { font-size: 0.72rem; color: #9CA3AF; margin-top: 3px; }
+
+    /* CTA button */
+    .cta-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: linear-gradient(135deg, #25D366, #128C7E);
+      color: white;
+      font-family: 'Heebo', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 900;
+      padding: 18px 24px;
+      border-radius: 18px;
+      border: none;
+      cursor: pointer;
+      width: 100%;
+      box-shadow: 0 6px 24px rgba(37, 211, 102, 0.35);
+      transition: transform 0.15s, box-shadow 0.15s;
+      text-decoration: none;
+      animation: pulse-btn 2.5s ease-in-out infinite;
+    }
+    .cta-btn:hover {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 12px 32px rgba(37, 211, 102, 0.45);
+      animation: none;
+    }
+    .cta-btn:active { transform: scale(0.97); }
+    .cta-icon { font-size: 1.4rem; }
+
+    @keyframes pulse-btn {
+      0%, 100% { box-shadow: 0 6px 24px rgba(37,211,102,0.35); }
+      50% { box-shadow: 0 6px 36px rgba(37,211,102,0.6); }
+    }
+
+    /* Footer note */
+    .ad-footer {
+      background: #F8F7FF;
+      border-top: 1.5px solid #EDE9FE;
+      padding: 14px 32px;
+      text-align: center;
+      font-size: 0.78rem;
+      color: #9CA3AF;
+      font-weight: 600;
+    }
+    .ad-footer span { color: #7C3AED; }
+
+    /* ── Confetti canvas ── */
+    #confetti-canvas {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 999;
+    }
+  </style>
+</head>
+<body>
+
+  <canvas id="confetti-canvas"></canvas>
+
+  <div class="ad" id="ad">
+
+    <!-- Top banner -->
+    <div class="ad-top">
+      <div class="bubble"></div>
+      <div class="bubble"></div>
+      <div class="bubble"></div>
+      <div class="bubble"></div>
+
+      <div class="ad-tag">✦ שיעורים פרטיים ✦</div>
+      <h1 class="ad-title">בואו <span class="yellow">נלמד</span><br>ביחד! 🎓</h1>
+      <div class="ad-emojis">
+        <span>📚</span><span>✏️</span><span>🧮</span><span>🔬</span><span>💻</span>
+      </div>
+    </div>
+
+    <!-- Body -->
+    <div class="ad-body">
+
+      <!-- Features -->
+      <div>
+        <div class="section-label big">מה מיוחד אצלנו?</div>
+        <div class="features">
+          <div class="feat" onclick="pop(this)">
+            <span class="feat-icon">🤖</span>
+            <h4>בינה מלאכותית</h4>
+            <p>חומר מותאם אישית לכל תלמיד</p>
+          </div>
+          <div class="feat" onclick="pop(this)">
+            <span class="feat-icon">🎮</span>
+            <h4>שיעורי בית מהנים</h4>
+            <p>משחקים, כרטיסיות ומבחונים אינטראקטיביים</p>
+          </div>
+          <div class="feat" onclick="pop(this)" style="grid-column: 1 / -1; max-width: 220px; margin: 0 auto; width: 100%;">
+            <span class="feat-icon">❤️</span>
+            <h4>יחס אישי</h4>
+            <p>כל תלמיד מקבל תשומת לב מלאה</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Subjects -->
+      <div>
+        <div class="section-label">מה אנחנו מלמדים?</div>
+        <div class="subjects">
+          <div class="subj">📖 עברית</div>
+          <div class="subj">📐 מתמטיקה</div>
+          <div class="subj">🔭 פיזיקה</div>
+          <div class="subj">🌍 אנגלית</div>
+          <div class="subj">💻 מחשבים</div>
+        </div>
+      </div>
+
+      <!-- Prices -->
+      <div>
+        <div class="section-label">מחירים לשיעור</div>
+        <div class="prices">
+          <div class="price-card">
+            <div class="p-name">יחיד</div>
+            <div class="p-amount">₪120</div>
+            <div class="p-label">45 דקות</div>
+          </div>
+          <div class="price-card star">
+            <div class="p-name">כפול ⭐</div>
+            <div class="p-amount">₪215</div>
+            <div class="p-label">שעה וחצי</div>
+          </div>
+          <div class="price-card">
+            <div class="p-name">משולש</div>
+            <div class="p-amount">₪300</div>
+            <div class="p-label">שעתיים ורבע</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CTA -->
+      <a class="cta-btn" href="https://wa.me/972546969891?text=היי,%20אשמח%20להזמין%20שיעור" onclick="launchConfetti()">
+        <span class="cta-icon">💬</span>
+        לפרטים והזמנה בוואטסאפ
+      </a>
+
+    </div>
+
+    <!-- Footer -->
+    <div class="ad-footer">
+      תשלום בסוף השיעור · <span>מזומן או ביט</span> · גילאי יסודי, חטיבה ותיכון
+    </div>
+
+  </div>
+
+  <script>
+    /* ── Pop animation on feature click ── */
+    function pop(el) {
+      el.style.transform = 'scale(1.12)';
+      setTimeout(() => el.style.transform = '', 180);
+      launchConfetti(8);
+    }
+
+    /* ── Confetti ── */
+    const canvas = document.getElementById('confetti-canvas');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+
+    function resize() {
+      canvas.width  = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    const COLORS = ['#4F46E5','#A855F7','#FCD34D','#34D399','#F87171','#60A5FA','#F9A8D4'];
+
+    function launchConfetti(count = 60) {
+      for (let i = 0; i < count; i++) {
+        particles.push({
+          x: canvas.width / 2 + (Math.random() - 0.5) * canvas.width * 0.6,
+          y: canvas.height * 0.35,
+          vx: (Math.random() - 0.5) * 8,
+          vy: -(Math.random() * 8 + 3),
+          size: Math.random() * 8 + 4,
+          color: COLORS[Math.floor(Math.random() * COLORS.length)],
+          rotation: Math.random() * 360,
+          spin: (Math.random() - 0.5) * 10,
+          shape: Math.random() > 0.5 ? 'rect' : 'circle',
+          life: 1,
+        });
+      }
+      if (!animating) animate();
+    }
+
+    let animating = false;
+    function animate() {
+      animating = true;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles = particles.filter(p => p.life > 0);
+      for (const p of particles) {
+        p.vy += 0.22;
+        p.vx *= 0.99;
+        p.x += p.vx;
+        p.y += p.vy;
+        p.rotation += p.spin;
+        p.life -= 0.018;
+        ctx.save();
+        ctx.globalAlpha = Math.max(0, p.life);
+        ctx.translate(p.x, p.y);
+        ctx.rotate(p.rotation * Math.PI / 180);
+        ctx.fillStyle = p.color;
+        if (p.shape === 'rect') {
+          ctx.fillRect(-p.size / 2, -p.size / 4, p.size, p.size / 2);
+        } else {
+          ctx.beginPath();
+          ctx.arc(0, 0, p.size / 2, 0, Math.PI * 2);
+          ctx.fill();
+        }
+        ctx.restore();
+      }
+      if (particles.length > 0) requestAnimationFrame(animate);
+      else animating = false;
+    }
+
+    /* Launch a small burst on load */
+    window.addEventListener('load', () => setTimeout(() => launchConfetti(40), 600));
+  </script>
+
+</body>
+</html>

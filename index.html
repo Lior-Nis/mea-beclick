@@ -1,2040 +1,946 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
-
+<html lang="he" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>שיעורים פרטיים</title>
-    <link rel="icon" type="image/x-icon" href="./images/brainstorm.png">
-    
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" 
-    rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" 
-    crossorigin="anonymous">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>מאה בקליק</title>
+  <link rel="icon" type="image/x-icon" href="./images/brainstorm.png" />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Secular+One&display=swap" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
-    <link href="styles.css" rel="stylesheet">
-    
-    <style>
-      :root {
-        --body-bg: #ffffff;
-        --text-color: #212529;
-        --card-bg: #ffffff;
-        --card-border: rgba(37, 99, 235, 0.1);
-        --header-bg: #ffffff;
-        --hero-bg: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
-        --feature-bg: white;
-        --feature-border: rgba(37, 99, 235, 0.1);
-        --primary-color: #0d6efd;
-        --primary-hover: #0b5ed7;
-        --primary-light: #e7f1ff;
-        --section-bg: #f8f9fa;
-        --shadow-color: rgba(0, 0, 0, 0.1);
-        --border-color: #dee2e6;
-      }
-      
-      [data-theme="dark"] {
-        --body-bg: #121212;
-        --text-color: #ffffff;
-        --card-bg: #2d2d2d;
-        --card-border: rgba(255, 255, 255, 0.2);
-        --header-bg: #1e1e1e;
-        --hero-bg: linear-gradient(135deg, #121212 0%, #1e1e1e 100%);
-        --feature-bg: #383838;
-        --feature-border: rgba(255, 255, 255, 0.2);
-        --primary-color: #4d8bf8;
-        --primary-hover: #3b7deb;
-        --primary-light: #2c3e50;
-        --section-bg: #1e1e1e;
-        --shadow-color: rgba(0, 0, 0, 0.5);
-        --border-color: #494f57;
-      }
-      
-      body {
-        background-color: var(--body-bg);
-        color: var(--text-color);
-        transition: background-color 0.3s ease, color 0.3s ease;
-      }
-      
-      .theme-toggle {
-        position: fixed;
-        top: 20px;
-        left: 20px;
-        z-index: 1100;
-        background-color: var(--primary-color);
-        color: white;
-        border: none;
-        border-radius: 50%;
-        width: 45px;
-        height: 45px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 20px;
-        cursor: pointer;
-        box-shadow: 0 2px 10px var(--shadow-color);
-        transition: all 0.3s ease;
-      }
-      
-      .theme-toggle:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 4px 12px var(--shadow-color);
-      }
-      
-      #header {
-        background-color: var(--header-bg);
-        box-shadow: 0 2px 4px var(--shadow-color);
-      }
-      
-      .hero-wrapper {
-        background: var(--hero-bg) !important;
-      }
-      
-      .card, .feature-item, .accordion-item, .message-box, .bg-body-tertiary {
-        background-color: var(--card-bg) !important;
-        border-color: var(--card-border) !important;
-      }
-      
-      .feature-item {
-        background: var(--feature-bg) !important;
-        border-color: var(--feature-border) !important;
-      }
-      
-      .accordion-button {
-        background-color: var(--card-bg) !important;
-        color: var(--text-color) !important;
-      }
-      
-      .accordion-button:not(.collapsed) {
-        background-color: var(--primary-light) !important;
-      }
-      
-      .btn-outline-primary {
-        color: var(--primary-color);
-        border-color: var(--primary-color);
-      }
-      
-      .btn-outline-primary:hover {
-        background-color: var(--primary-color);
-        border-color: var(--primary-color);
-      }
-      
-      .btn-primary {
-        background-color: var(--primary-color);
-        border-color: var(--primary-color);
-      }
-      
-      .btn-primary:hover {
-        background-color: var(--primary-hover);
-        border-color: var(--primary-hover);
-      }
-      
-      .bg-body-tertiary {
-        background-color: var(--section-bg) !important;
-      }
-      
-      .text-body-emphasis {
-        color: var(--text-color) !important;
-      }
-      
-      .text-body-secondary {
-        color: var(--text-color) !important;
-        opacity: 0.75;
-      }
-      
-      .card-header {
-        border-color: var(--border-color) !important;
-      }
-      
-      [data-theme="dark"] .tutor-img {
-        border-color: var(--primary-color) !important;
-      }
-      
-      [data-theme="dark"] .mega-title {
-        color: var(--primary-color) !important;
-      }
-      
-      /* Add more specific dark mode styles */
-      [data-theme="dark"] .feature-item {
-        background-color: #383838 !important;
-        border-color: rgba(255, 255, 255, 0.2) !important;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-      }
-      
-      [data-theme="dark"] .feature-item p {
-        color: #ffffff;
-      }
-      
-      [data-theme="dark"] .message-box {
-        background-color: #2d2d2d !important;
-        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
-      }
-      
-      [data-theme="dark"] .card {
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
-      }
-      
-      [data-theme="dark"] .card-header {
-        background-color: #383838 !important;
-      }
-      
-      [data-theme="dark"] .text-bg-primary {
-        background-color: #4d8bf8 !important;
-      }
-      
-      [data-theme="dark"] .mega-title, 
-      [data-theme="dark"] .gradient-text,
-      [data-theme="dark"] .super-text {
-        color: #4d8bf8 !important;
-      }
-      
-      [data-theme="dark"] .emphasis-text {
-        color: #e9ecef !important;
-      }
-      
-      [data-theme="dark"] .btn-outline-primary {
-        color: #4d8bf8;
-        border-color: #4d8bf8;
-      }
-      
-      [data-theme="dark"] .btn-outline-primary:hover {
-        background-color: #4d8bf8;
-        color: #ffffff;
-      }
-      
-      [data-theme="dark"] .subject-item {
-        background-color: #383838 !important;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-      }
-      
-      [data-theme="dark"] .gradient-box {
-        background: linear-gradient(120deg, rgba(77, 139, 248, 0.15) 0%, rgba(44, 62, 80, 0.15) 100%) !important;
-      }
-      
-      [data-theme="dark"] .super-text {
-        background: linear-gradient(120deg, #4d8bf8 0%, #3b7deb 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-      }
-      
-      [data-theme="dark"] .accordion-button:not(.collapsed) {
-        color: #ffffff !important;
-        background-color: #2c3e50 !important;
-      }
-      
-      /* Fix FAQ section in dark mode */
-      [data-theme="dark"] .accordion-body {
-        background-color: #2d2d2d !important;
-        color: #ffffff !important;
-      }
-      
-      [data-theme="dark"] .accordion-item {
-        border-color: rgba(255, 255, 255, 0.1) !important;
-      }
-      
-      /* Fix pricing cards in dark mode */
-      [data-theme="dark"] #pricing .card {
-        background-color: #2d2d2d !important;
-        border-color: rgba(255, 255, 255, 0.1) !important;
-      }
-      
-      [data-theme="dark"] #pricing .card-header {
-        background-color: #383838 !important;
-        border-color: rgba(255, 255, 255, 0.1) !important;
-      }
-      
-      [data-theme="dark"] #pricing .card-header h4 {
-        color: #ffffff !important;
-      }
-      
-      [data-theme="dark"] #pricing .card-body h2 {
-        color: #ffffff !important;
-      }
-      
-      [data-theme="dark"] #pricing .card-header.text-bg-primary {
-        background-color: #4d8bf8 !important;
-        color: #ffffff !important;
-      }
-      
-      [data-theme="dark"] #pricing .card-header.py-3[style*="background-color: #e7f1ff"] {
-        background-color: rgba(77, 139, 248, 0.2) !important;
-        color: #4d8bf8 !important;
-      }
-      
-      [data-theme="dark"] #pricing .card.border-primary {
-        border-color: #4d8bf8 !important;
-      }
-      
-      /* Enhanced pricing card colors for dark mode */
-      [data-theme="dark"] #pricing .card-header {
-        background-color: #444444 !important;
-        color: white !important;
-      }
-      
-      /* Single pricing card (יחיד) */
-      [data-theme="dark"] #pricing .card:nth-child(1) .card-header {
-        background-color: #ff6b6b !important; /* Bright red */
-        color: white !important;
-        font-weight: 800 !important;
-        text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
-        border-bottom: 3px solid rgba(255, 255, 255, 0.4);
-        box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-      }
-      
-      /* BLUE SHADES PRICING CARDS FOR DARK MODE */
-      /* Single pricing card (יחיד) - Lightest blue */
-      [data-theme="dark"] #pricing .card:nth-child(1) .card-header {
-        background: #60a5fa !important; /* Light blue */
-        color: white !important;
-        font-weight: 800 !important;
-        text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
-        border-bottom: 3px solid rgba(255, 255, 255, 0.4);
-        box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-      }
-      
-      /* Double pricing card (כפול) - Medium blue */
-      [data-theme="dark"] #pricing .card-header[style*="background-color: #e7f1ff"] {
-        background: #3b82f6 !important; /* Medium blue */
-        color: white !important;
-        font-weight: 800 !important;
-        text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
-        border-bottom: 3px solid rgba(255, 255, 255, 0.4);
-        box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-      }
-      
-      /* Triple pricing card (משולש) - Darkest blue */
-      [data-theme="dark"] #pricing .card-header.text-bg-primary {
-        background: #1d4ed8 !important; /* Dark blue */
-        color: white !important;
-        font-weight: 800 !important;
-        text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
-        border-bottom: 3px solid rgba(255, 255, 255, 0.4);
-        box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-      }
-      
-      /* EXTREMELY DISTINCT BLUE SHADES - Override with high specificity */
-      /* First card - Very light blue (almost sky blue) */
-      [data-theme="dark"] #pricing .row .col-md-3:nth-child(1) .card .card-header {
-        background-color: #7dd3fc !important; /* Very light sky blue */
-      }
-      
-      /* Second card - Medium blue */
-      [data-theme="dark"] #pricing .row .col-md-3:nth-child(2) .card .card-header {
-        background-color: #0284c7 !important; /* Medium blue */
-      }
-      
-      /* Third card - Dark blue (navy) */
-      [data-theme="dark"] #pricing .row .col-md-3:nth-child(3) .card .card-header {
-        background-color: #1e40af !important; /* Dark navy blue */
-      }
-      
-      [data-theme="dark"] #pricing .card:nth-child(1) .card-header h4 {
-        font-size: 1.4rem !important;
-        letter-spacing: 1px;
-      }
-      
-      /* Make pricing card body text more visible too */
-      [data-theme="dark"] #pricing .card-body h2 {
-        color: #ffffff !important;
-        font-weight: 700 !important;
-        font-size: 2rem !important;
-        text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
-      }
-      
-      /* Ensure transitions are smooth when switching modes */
-      html.color-theme-in-transition,
-      html.color-theme-in-transition *,
-      html.color-theme-in-transition *:before,
-      html.color-theme-in-transition *:after {
-        transition: all 750ms !important;
-        transition-delay: 0 !important;
-      }
-      
-      /* Fix popup elements in dark mode */
-      [data-theme="dark"] .tutor-info,
-      [data-theme="dark"] .mobile-popup-content,
-      [data-theme="dark"] .popup-content {
-        background-color: #2d2d2d !important;
-        color: #ffffff !important;
-        border-color: rgba(255, 255, 255, 0.2) !important;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5) !important;
-      }
-      
-      [data-theme="dark"] .tutor-info h3,
-      [data-theme="dark"] .mobile-popup-content h3,
-      [data-theme="dark"] .popup-content h3 {
-        color: #ffffff !important;
-      }
-      
-      [data-theme="dark"] .tutor-info ul li,
-      [data-theme="dark"] .mobile-popup-content ul li,
-      [data-theme="dark"] .popup-content ul li {
-        color: #e9ecef !important;
-      }
-      
-      [data-theme="dark"] .mobile-popup {
-        background-color: rgba(0, 0, 0, 0.8) !important;
-      }
-      
-      [data-theme="dark"] .mobile-close,
-      [data-theme="dark"] .popup-close {
-        background-color: #4d8bf8 !important;
-        color: white !important;
-        border-color: #2d2d2d !important;
-      }
-      
-      [data-theme="dark"] #popup-overlay {
-        background-color: rgba(0, 0, 0, 0.7) !important;
-      }
-      
-      /* Fix all modals and dialogs */
-      [data-theme="dark"] .modal-content,
-      [data-theme="dark"] .dialog-content {
-        background-color: #2d2d2d !important;
-        color: #ffffff !important;
-        border-color: rgba(255, 255, 255, 0.2) !important;
-      }
-      
-      /* Fix any other white backgrounds that might appear */
-      [data-theme="dark"] [class*="popup"],
-      [data-theme="dark"] [class*="modal"],
-      [data-theme="dark"] [class*="dialog"],
-      [data-theme="dark"] [class*="overlay"] {
-        background-color: #2d2d2d !important;
-        color: #ffffff !important;
-      }
-      
-      /* Enhance navigation buttons in dark mode */
-      [data-theme="dark"] .btn-outline-primary {
-        color: #60a5fa !important;
-        border-color: #60a5fa !important;
-        background-color: rgba(13, 110, 253, 0.05) !important;
-      }
-      
-      [data-theme="dark"] .btn-outline-primary:hover {
-        color: #ffffff !important;
-        background-color: #4d8bf8 !important;
-        border-color: #4d8bf8 !important;
-        box-shadow: 0 0 8px rgba(77, 139, 248, 0.5) !important;
-      }
-      
-      /* Ensure the header background is dark in dark mode */
-      [data-theme="dark"] #header {
-        background-color: #121212 !important;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
-      }
-      
-      /* Make sure the toggle button is clearly visible */
-      [data-theme="dark"] .theme-toggle {
-        background-color: #4d8bf8 !important;
-        box-shadow: 0 0 10px rgba(77, 139, 248, 0.5) !important;
-      }
-      
-      /* Fix subjects section in dark mode */
-      [data-theme="dark"] #subjects h1 {
-        color: #ffffff !important;
-      }
-      
-      [data-theme="dark"] .subject-item {
-        background-color: #2d2d2d !important;
-        border: 1px solid rgba(255, 255, 255, 0.1) !important;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3) !important;
-      }
-      
-      [data-theme="dark"] .subject-item div {
-        color: #ffffff !important;
-      }
-      
-      /* Appointment button and WhatsApp button in dark mode */
-      [data-theme="dark"] .btn-primary {
-        background-color: #4d8bf8 !important;
-        border-color: #4d8bf8 !important;
-        color: white !important;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3) !important;
-      }
-      
-      [data-theme="dark"] .btn-primary:hover {
-        background-color: #3b7deb !important;
-        border-color: #3b7deb !important;
-        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4) !important;
-      }
-      
-      [data-theme="dark"] #signup-button {
-        background-color: #121212 !important;
-      }
-      
-      [data-theme="dark"] #signup-button a.text-body-secondary {
-        filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.2));
-      }
-      
-      /* Fix section headings in dark mode */
-      [data-theme="dark"] section h1 {
-        color: #ffffff !important;
-      }
-      
-      /* Fix testimonials section in dark mode */
-      [data-theme="dark"] #testimonials .section-header h1 {
-        color: #ffffff !important;
-      }
-      
-      [data-theme="dark"] .testimonial-content {
-        background-color: #2d2d2d !important;
-        color: #ffffff !important;
-        border: 1px solid rgba(255, 255, 255, 0.1) !important;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3) !important;
-      }
-      
-      [data-theme="dark"] .testimonial-content h2 {
-        color: #4d8bf8 !important;
-      }
-      
-      [data-theme="dark"] .testimonial-content p {
-        color: #e9ecef !important;
-      }
-      
-      [data-theme="dark"] .testimonial-content h5 {
-        color: #60a5fa !important;
-      }
-      
-      /* Fix carousel indicators and controls */
-      [data-theme="dark"] .carousel-indicators button {
-        background-color: #4d8bf8 !important;
-      }
-      
-      [data-theme="dark"] .carousel-control-prev-icon,
-      [data-theme="dark"] .carousel-control-next-icon {
-        filter: brightness(0) invert(1) drop-shadow(0 0 2px rgba(77, 139, 248, 0.5)) !important;
-      }
-      
-      [data-theme="dark"] .carousel-indicators {
-        filter: drop-shadow(0 0 2px rgba(77, 139, 248, 0.3));
-      }
-      
-      [data-theme="dark"] .testimonial-area {
-        background-color: #121212 !important;
-      }
-    </style>
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="styles.css" />
 </head>
+<body>
 
-<body class="container-fluid p-0">
-  <!-- Back to Top Button -->
-  <button class="back-to-top" id="backToTop" aria-label="Back to top">
-    <i class="fa fa-arrow-up"></i>
-  </button>
-  
-  <!-- Dark Mode Toggle -->
-  <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
-    <i class="fa fa-moon-o"></i>
-  </button>
+  <!-- ── BACK TO TOP ──────────────────────────────────── -->
+  <button class="back-to-top" id="backToTop" aria-label="חזרה לראש">↑</button>
 
+  <!-- ── SIDEBAR OVERLAY ──────────────────────────────── -->
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <!-- ── SIDEBAR ──────────────────────────────────────── -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <span class="sidebar-title">תפריט</span>
+      <button class="sidebar-close" id="sidebarClose" aria-label="סגירה">×</button>
+    </div>
+    <nav class="sidebar-nav">
+      <button class="sidebar-btn" onclick="closeSidebar(); scrollToSection('subjects')">📚 מקצועות</button>
+      <button class="sidebar-btn" onclick="closeSidebar(); scrollToSection('ai-advantage')">🤖 למה אנחנו?</button>
+      <button class="sidebar-btn" onclick="closeSidebar(); scrollToSection('features-showcase')">🎮 מה תקבלו</button>
+      <button class="sidebar-btn" onclick="closeSidebar(); scrollToSection('testimonials')">💬 המלצות</button>
+      <button class="sidebar-btn" onclick="closeSidebar(); scrollToSection('pricing')">💳 תעריף</button>
+      <button class="sidebar-btn" onclick="closeSidebar(); scrollToSection('about-us')">👥 עלינו</button>
+      <button class="sidebar-btn" onclick="closeSidebar(); scrollToSection('faqs')">❓ שאלות</button>
+    </nav>
+    <a href="https://wa.me/972546969891?text=היי,%20אשמח%20להזמין%20שיעור" class="sidebar-whatsapp">
+      💬 הזמינו שיעור בוואטסאפ
+    </a>
+  </aside>
+
+  <!-- ── NAV ─────────────────────────────────────────── -->
   <section id="header">
-      <header class="container d-flex justify-content-between align-items-center px-2">
-          <a href="./index.html" class="nav-link p-0" aria-current="page">
-              <img src="./images/brainstorm.png" alt="Logo" width="32" height="32" class="flex-shrink-0">
-          </a>
-          <div class="nav-container d-flex justify-content-center">
-            <ul class="nav nav-pills d-flex flex-row nowrap">
-                <li class="nav-item">
-                  <button onclick="scrollToSection('pricing')" class="btn btn-outline-primary rounded-pill mx-1">תעריף</button>
-                </li>
-                <li class="nav-item">
-                  <button onclick="scrollToSection('about-us')" class="btn btn-outline-primary rounded-pill mx-1">עלינו</button>
-                </li>
-                <li class="nav-item">
-                  <button onclick="scrollToSection('faqs')" class="btn btn-outline-primary rounded-pill mx-1">שאלות</button>
-                </li>
+    <div class="nav-inner">
+      <!-- Hamburger — right side (RTL start) -->
+      <button class="hamburger" id="hamburger" aria-label="פתיחת תפריט">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <!-- Logo — centered -->
+      <a href="#hero" class="nav-logo">
+        <svg width="26" height="26" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="לוגו">
+          <circle cx="28" cy="40" r="22" fill="var(--accent)"/>
+          <circle cx="28" cy="40" r="13" fill="var(--bg-base)"/>
+          <circle cx="60" cy="40" r="22" fill="var(--accent)"/>
+          <circle cx="60" cy="40" r="13" fill="var(--bg-base)"/>
+          <g transform="translate(50,8) rotate(18)">
+            <polygon points="0,0 0,24 6,18 9,27 13,25.5 10,17 16,17"
+                     fill="var(--accent2)" stroke="var(--bg-base)" stroke-width="1.4" stroke-linejoin="round"/>
+          </g>
+        </svg>
+        <span>מאה</span> בקליק
+      </a>
+
+      <!-- CTA — left side -->
+      <div class="nav-right">
+        <a class="nav-cta" href="https://wa.me/972546969891?text=היי,%20אשמח%20להזמין%20שיעור">הזמינו שיעור</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── HERO ─────────────────────────────────────────── -->
+  <section id="hero">
+    <div class="hero-badge">🚀 שיעורים פרטיים מהדור הבא</div>
+
+    <h1 class="hero-title">בואו <span class="accent">נלמד</span> ביחד</h1>
+
+    <div class="hero-subtitle-row">
+      <span class="hero-sub-a">שיעורים פרטיים בדרך שמתאימה לכם</span>
+      <span class="hero-sub-b">עם תוצאות שרואים! ✨</span>
+    </div>
+
+    <!-- Tutors + surrounding feature cards -->
+    <div class="tutors-showcase">
+
+      <!-- Center: Tutor photos -->
+      <div class="tutors-preview">
+
+        <div class="tutor-card tutor-nikol" id="tutor-nikol">
+          <img src="./images/nikol-modified.png" class="tutor-img" alt="ניקול" />
+          <div class="tutor-name-badge">ניקול</div>
+          <div class="tutor-info" id="info-nikol">
+            <div class="popup-close" data-close>×</div>
+            <h3>ניקול 👩‍🏫</h3>
+            <ul>
+              <li>⭐ סיימה שירות משמעותי בתפקיד בכיר</li>
+              <li>📚 סטודנטית לריפוי בעיסוק</li>
+              <li>👩‍🏫 ניסיון רב בהוראה פרטית</li>
+              <li>🎯 מתמחה במתמטיקה ופיזיקה</li>
             </ul>
           </div>
-          <div style="width: 32px"></div>
-      </header>
-  </section>
+        </div>
 
-  <section id="hero" class="fade-in" style="position: relative; z-index: 10; margin-top: 0;">
-      <div class="hero-wrapper" style="padding-top: 0;">
-          <div class="hero-content text-center">
-              <div class="main-headline">
-                  <div class="title-with-sticker">
-                      <h1 class="mega-title" style="margin: 0; color: #0d6efd; font-size: 3.5rem;">בואו נלמד ביחד</h1>
-                      <span class="headline-sticker">🚀</span>
-                  </div>
-                  <div class="sub-headline">
-                      <div class="gradient-box">
-                          <span class="gradient-text">שיעורים פרטיים</span>
-                          <span class="emphasis-text">בדרך שמתאימה לכם</span>
-                          <span class="super-text">עם תוצאות שרואים!</span>
-                      </div>
-                  </div>
-              </div>
-              
-              <div class="message-box">
-                  <div class="message-content">
-                      <div class="features-grid">
-                          <div class="feature-item">
-                              <span class="feature-icon">✨</span>
-                              <p>אווירה נעימה</p>
-                          </div>
-                          <div class="feature-item">
-                              <span class="feature-icon">📖</span>
-                              <p>הבנה מעמיקה</p>
-                          </div>
-                          <div class="feature-item">
-                              <span class="feature-icon">👋</span>
-                              <p>יחס אישי </p>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-
-              <div class="tutors-preview">
-                <div class="tutor-card tutor-nikol">
-                    <img src="./images/nikol-modified.png" class="tutor-img" alt="Nikol" width="100">
-                    <div class="tutor-glow"></div>
-                    <div class="tutor-overlay"></div>
-                    <div class="tutor-info">
-                        <h3>ניקול</h3>
-                        <ul>
-                            <li>⭐ סיימה שירות משמעותי בתפקיד בכיר</li>
-                            <li>📚 מתחילה לימודי ריפוי בעיסוק </li>
-                            <li>👩‍🏫 ניסיון רב בהוראה פרטית</li>
-                            <li>🎯 מתמחה במתמטיקה ופיזיקה</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="tutor-card tutor-lior">
-                    <img src="./images/lior-modified.png" class="tutor-img" alt="Lior" width="100">
-                    <div class="tutor-glow"></div>
-                    <div class="tutor-overlay"></div>
-                    <div class="tutor-info">
-                        <h3>ליאור</h3>
-                        <ul>
-                            <li>🎓 עתודאי בתכנית מואצת לתואר שני</li>
-                            <li>💻 עובד בחברת סטארטאפ</li>
-                            <li>👨‍🏫 מדריך בתכניות סטארטק ומגשימים</li>
-                            <li>🎯 מתמחה במתמטיקה ותכנות</li>
-                        </ul>
-                    </div>
-                </div>
-              </div>
+        <div class="tutor-card tutor-lior" id="tutor-lior">
+          <img src="./images/lior-modified.png" class="tutor-img" alt="ליאור" />
+          <div class="tutor-name-badge">ליאור</div>
+          <div class="tutor-info" id="info-lior">
+            <div class="popup-close" data-close>×</div>
+            <h3>ליאור 👨‍🏫</h3>
+            <ul>
+              <li>🎓 בעל תואר שני בהנדסת נתונית</li>
+              <li>💻 משרת בתפקיד בכיר בצבא</li>
+              <li>👨‍🏫 מדריך בתכניות סטארטק ומגשימים</li>
+              <li>🎯 מתמחה במתמטיקה ותכנות</li>
+            </ul>
           </div>
+        </div>
+
       </div>
-  </section>
 
-  <style>
-    .hero-wrapper {
-        background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
-        padding: 0 0 2rem;
-        position: relative;
-        overflow: hidden;
-        margin-top: 0;
-    }
 
-    .main-headline {
-        margin: 0;
-    }
-
-    .mega-title {
-        margin: 0;
-        padding: 0;
-        color: #0d6efd;
-        font-weight: bold;
-        font-family: 'Secular One', sans-serif;
-    }
-
-    .title-with-sticker {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 0.5rem;
-        margin: 0;
-        padding: 0;
-        width: 100%;
-        text-align: center;
-    }
-
-    .headline-sticker {
-        font-size: 3.5rem;
-        display: inline-block;
-        animation: floatingRocket 2s ease-in-out infinite;
-        margin-top: 5px;
-    }
-
-    .sub-headline {
-        margin: 0;
-        padding: 0;
-    }
-
-    .gradient-box {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 0.5rem;
-        padding: 1rem;
-        border-radius: 15px;
-        background: linear-gradient(120deg, rgba(37, 99, 235, 0.1) 0%, rgba(30, 58, 138, 0.1) 100%);
-    }
-
-    .gradient-text {
-        font-size: 2.5rem;
-        font-weight: 700;
-        color: #2563eb;
-        text-shadow: 2px 2px 4px rgba(37, 99, 235, 0.2);
-        line-height: 1.1;
-    }
-
-    .emphasis-text {
-        font-size: 2rem;
-        color: #2b2d42;
-    }
-
-    .super-text {
-        font-size: 2.8rem;
-        font-weight: 800;
-        background: linear-gradient(120deg, #1e3a8a 0%, #2563eb 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        animation: pulse 2s infinite;
-    }
-
-    .message-box {
-        background: white;
-        border-radius: 20px;
-        padding: 2rem;
-        box-shadow: 0 8px 32px rgba(37, 99, 235, 0.1);
-        margin: 2.5rem auto;
-        max-width: 800px;
-        transform: translateY(0);
-        transition: all 0.3s ease;
-    }
-
-    .message-box:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 12px 40px rgba(37, 99, 235, 0.15);
-    }
-
-    .features-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 1rem;
-        margin-top: 1rem;
-        width: 100%;
-    }
-
-    .feature-item {
-        text-align: center;
-        padding: 1.2rem;
-        border-radius: 12px;
-        transition: all 0.3s ease;
-        cursor: pointer;
-        background: white;
-        border: 2px solid rgba(37, 99, 235, 0.1);
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-    }
-
-    .feature-item:hover {
-        background: rgba(37, 99, 235, 0.05);
-        transform: translateY(-3px);
-        border-color: rgba(37, 99, 235, 0.3);
-        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-    }
-
-    .feature-icon {
-        font-size: 2rem;
-        margin-bottom: 0.5rem;
-        display: inline-block;
-        transition: transform 0.3s ease;
-    }
-
-    .feature-item p {
-        font-size: 1.2rem;
-        color: #2b2d42;
-        margin: 0;
-        font-weight: 500;
-    }
-
-    .tutors-preview {
-        display: flex;
-        justify-content: center;
-        gap: 2rem;
-        margin-top: 2rem;
-        position: relative;
-    }
-
-    .tutor-card {
-        position: relative;
-        cursor: pointer;
-        transition: transform 0.3s ease;
-        animation: subtle-bounce 2s infinite;
-    }
-
-    .tutor-img {
-        border-radius: 50%;
-        border: 4px solid white;
-        box-shadow: 0 8px 24px rgba(37, 99, 235, 0.15);
-        transition: all 0.3s ease;
-        position: relative;
-        z-index: 1;
-    }
-
-    .tutor-glow {
-        position: absolute;
-        top: -5px;
-        left: -5px;
-        right: -5px;
-        bottom: -5px;
-        background: linear-gradient(120deg, #1e3a8a, #2563eb);
-        border-radius: 50%;
-        z-index: 0;
-        opacity: 0;
-        transition: opacity 0.3s ease;
-    }
-
-    .tutor-overlay {
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: rgba(0, 0, 0, 0.5);
-        opacity: 0;
-        visibility: hidden;
-        transition: all 0.3s ease;
-        z-index: 9998;
-    }
-
-    /* Add pulsing glow effect */
-    @keyframes pulse-glow {
-        0% {
-            box-shadow: 0 8px 24px rgba(37, 99, 235, 0.15);
-        }
-        50% {
-            box-shadow: 0 8px 28px rgba(37, 99, 235, 0.3);
-        }
-        100% {
-            box-shadow: 0 8px 24px rgba(37, 99, 235, 0.15);
-        }
-    }
-
-    /* Add subtle bounce animation */
-    @keyframes subtle-bounce {
-        0%, 100% {
-            transform: translateY(0);
-        }
-        50% {
-            transform: translateY(-5px);
-        }
-    }
-
-    /* Add tap indicator for mobile */
-    .tutor-card::after {
-        content: "👆";
-        position: absolute;
-        bottom: -10px;
-        left: 50%;
-        transform: translateX(-50%);
-        font-size: 1.2rem;
-        opacity: 0;
-        transition: opacity 0.3s ease;
-    }
-
-    @media (min-width: 993px) {
-        /* Desktop hover styles */
-        .tutor-info {
-            position: absolute;
-            top: 50%;
-            width: 380px;
-            opacity: 0;
-            visibility: hidden;
-            background: white;
-            padding: 1rem;
-            border-radius: 12px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-            z-index: 9999;
-            transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
-        }
-
-        .tutor-nikol .tutor-info {
-            left: 115%;
-            transform-origin: left center;
-            transform: translateY(-50%) scale(0.95);
-        }
-
-        .tutor-lior .tutor-info {
-            right: 115%;
-            transform-origin: right center;
-            transform: translateY(-50%) scale(0.95);
-        }
-
-        .tutor-card:hover .tutor-info {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(-50%) scale(1);
-        }
-    }
-
-    @media (max-width: 992px) {
-        /* Mobile popup styles */
-        .tutor-info {
-            display: none; /* Start hidden */
-            position: fixed !important; /* Force fixed position */
-            top: 50% !important; /* Center vertically */
-            left: 50% !important; /* Center horizontally */
-            transform: translate(-50%, -50%) !important; /* Perfect centering */
-            width: 90% !important; /* Width for readability */
-            max-width: 350px !important;
-            background: white !important;
-            border-radius: 15px !important;
-            box-shadow: 0 0 0 2000px rgba(0,0,0,0.7) !important; /* Full screen dim */
-            padding: 20px !important;
-            z-index: 1000000 !important; /* Extremely high z-index */
-        }
-        
-        /* Make tutor cards obviously tappable */
-        .tutor-card {
-            cursor: pointer !important;
-        }
-        
-        /* Close button */
-        .popup-close {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            width: 30px;
-            height: 30px;
-            background: #f0f0f0;
-            border-radius: 50%;
-            font-size: 18px;
-            line-height: 30px;
-            text-align: center;
-            cursor: pointer;
-        }
-    }
-
-    @media (max-width: 768px) {
-      #header {
-        position: relative; /* Change from sticky to relative on mobile */
-        margin-bottom: 0px;
-        padding-top: 5px;
-      }
-      
-      #hero {
-        margin-top: 0 !important; /* Remove space above hero section */
-        padding-top: 0;
-      }
-      
-      .hero-wrapper {
-        padding-top: 0 !important;
-      }
-      
-      /* Adjust the main headline size on mobile */
-      .mega-title {
-        font-size: 2.5rem !important;
-        margin-top: 10px !important;
-        line-height: 1.2;
-      }
-      
-      .headline-sticker {
-        font-size: 2rem !important;
-      }
-      
-      /* Better spacing between header and content on mobile */
-      .nav-pills {
-        margin-bottom: 0;
-      }
-      
-      /* Make the "עם תוצאות שרואים!" text smaller on mobile */
-      .super-text {
-        font-size: 2rem !important;
-        white-space: nowrap;
-      }
-    }
-
-    @media (max-width: 992px) {
-        #hero {
-            position: relative;
-            z-index: 5;
-        }
-
-        .tutors-preview {
-            position: relative;
-            z-index: 20;
-            gap: 2rem;
-            padding-bottom: 0;
-        }
-
-        .tutor-card {
-            position: relative;
-        }
-
-        #subjects {
-            position: relative;
-            z-index: 1;
-        }
-    }
-
-    #subjects {
-        position: relative;
-        z-index: 1;
-    }
-
-    /* Touch indicator animation */
-    @keyframes touch-indicator {
-        0% {
-            transform: scale(1);
-            opacity: 0;
-        }
-        50% {
-            transform: scale(1.2);
-            opacity: 0.3;
-        }
-        100% {
-            transform: scale(1.4);
-            opacity: 0;
-        }
-    }
-
-    .tutor-card {
-        position: relative;
-        cursor: pointer;
-    }
-
-    /* Multiple circles animation */
-    @keyframes circle-pulse {
-        0% {
-            transform: translate(-50%, -50%) scale(1);
-            opacity: 0.4;
-        }
-        100% {
-            transform: translate(-50%, -50%) scale(1.5);
-            opacity: 0;
-        }
-    }
-
-    /* First circle */
-    .tutor-card::before {
-        content: '';
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        width: 110px;
-        height: 110px;
-        border-radius: 50%;
-        border: 2px solid #2563eb;
-        transform: translate(-50%, -50%) scale(1);
-        z-index: 0;
-        pointer-events: none;
-    }
-
-    /* Second circle */
-    .tutor-card::after {
-        content: '';
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        width: 110px;
-        height: 110px;
-        border-radius: 50%;
-        border: 2px solid #2563eb;
-        transform: translate(-50%, -50%) scale(1);
-        z-index: 0;
-        pointer-events: none;
-        animation-delay: 0.5s;
-    }
-
-    @media (max-width: 992px) {
-        .tutor-card::before,
-        .tutor-card::after {
-            animation: circle-pulse 2s infinite;
-        }
-
-        .tutor-img {
-            border: 4px solid #2563eb;
-        }
-    }
-
-    /* Enhance desktop hover effect */
-    @media (min-width: 993px) {
-        .tutor-card:hover::before,
-        .tutor-card:hover::after {
-            animation: circle-pulse 1s;
-        }
-    }
-
-    /* Remove smooth scrolling styles */
-    html {
-        scroll-behavior: auto;
-    }
-
-    /* Style for the active nav link */
-    .nav-link.active {
-        color: #2563eb !important;
-        font-weight: 500;
-    }
-
-    #header {
-        position: sticky;
-        top: 0;
-        background: white;
-        z-index: 1000;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        margin-bottom: 0;
-        padding-bottom: 0;
-    }
-
-    .nav-pills {
-        margin-bottom: 0;
-    }
-
-    .nav-item {
-        margin-bottom: 0 !important;
-    }
-
-    @keyframes floatingRocket {
-        0% {
-            transform: translateY(0);
-        }
-        50% {
-            transform: translateY(-10px);
-        }
-        100% {
-            transform: translateY(0);
-        }
-    }
-
-    .btn-outline-primary {
-        border-color: #0d6efd;
-        color: #0d6efd;
-        font-weight: 500;
-        padding: 0.4rem 1.8rem;
-        transition: all 0.3s ease;
-        line-height: 1.2;
-        border-radius: 20px;
-        font-size: 1.15rem;
-    }
-
-    .btn-outline-primary:hover {
-        background-color: #0d6efd;
-        color: white;
-        transform: translateY(-1px);
-        box-shadow: 0 2px 4px rgba(13, 110, 253, 0.2);
-    }
-
-    .accordion {
-        --bs-accordion-btn-icon: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%230c63e4'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
-        --bs-accordion-btn-active-icon: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%230c63e4'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
-    }
-
-    .accordion-button {
-        padding: 1rem 1.5rem;
-    }
-
-    .accordion-button::after {
-        margin-left: auto;
-        margin-right: 0;
-    }
-
-    .accordion-button:not(.collapsed) {
-        color: #0c63e4;
-        background-color: #e7f1ff;
-    }
-
-    .accordion-body {
-        padding: 1.5rem;
-    }
-
-    /* Fix RTL layout for accordion */
-    [dir="rtl"] .accordion-button::after {
-        margin-right: auto;
-        margin-left: 0;
-    }
-
-    [dir="rtl"] .accordion-button {
-        text-align: right;
-    }
-
-    .nav-item {
-        margin-bottom: 0 !important;
-    }
-
-    .nav-pills {
-        gap: 0.75rem;
-        height: 45px;
-        align-items: center;
-    }
-
-    #header {
-        padding: 0.5rem 0;
-    }
-
-    .mobile-popup {
-        display: none;
-        position: fixed;
-        z-index: 9999999;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0,0,0,0.7);
-        overflow-y: auto;
-    }
-    
-    .mobile-popup-content {
-        position: relative;
-        background-color: #fff;
-        margin: 15% auto;
-        padding: 20px;
-        width: 85%;
-        max-width: 500px;
-        border-radius: 10px;
-        box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-    }
-    
-    .mobile-close {
-        position: absolute;
-        top: -15px;
-        right: -15px;
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        background-color: #0d6efd;
-        color: white;
-        font-size: 28px;
-        font-weight: bold;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.3);
-        border: 2px solid white;
-    }
-
-    .subject-item {
-      width: 100px;
-      height: 90px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      background-color: #fff;
-      border-radius: 10px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      padding: 10px;
-      cursor: default;
-    }
-    
-    .subject-item:hover {
-      transform: none;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    }
-    
-    .subject-icon {
-      margin-bottom: 8px;
-    }
-
-    /* Add more compact styling for subject items */
-    @media (max-width: 576px) {
-      .subject-item {
-        width: 80px;
-        height: 75px;
-        padding: 8px;
-        margin: 0.15rem !important;
-      }
-      
-      .subject-icon {
-        width: 32px !important;
-        height: auto;
-        margin-bottom: 6px;
-      }
-      
-      .subject-item div {
-        font-size: 0.85rem !important;
-        line-height: 1.1;
-      }
-      
-      .mx-3 {
-        margin-left: 0.2rem !important;
-        margin-right: 0.2rem !important;
-      }
-      
-      .my-2 {
-        margin-top: 0.15rem !important;
-        margin-bottom: 0.15rem !important;
-      }
-    }
-
-    /* Add/modify these styles for better nav layout */
-    .nav-container {
-      flex: 1;
-      overflow-x: auto;
-      -webkit-overflow-scrolling: touch;
-      scrollbar-width: none; /* Firefox */
-    }
-    
-    .nav-container::-webkit-scrollbar {
-      display: none; /* Chrome, Safari */
-    }
-    
-    .nav-pills {
-      flex-wrap: nowrap;
-      white-space: nowrap;
-      gap: 0.25rem;
-      height: 45px;
-      align-items: center;
-      justify-content: center;
-    }
-    
-    .btn-outline-primary {
-      padding: 0.4rem 1.8rem;
-      font-size: 1.15rem;
-      white-space: nowrap;
-    }
-    
-    @media (max-width: 576px) {
-      .btn-outline-primary {
-        padding: 0.2rem 0.8rem !important;
-        font-size: 0.9rem !important;
-        border-width: 1px;
-        min-width: auto;
-        line-height: 1.1;
-      }
-      
-      .mx-1 {
-        margin-left: 0.1rem !important;
-        margin-right: 0.1rem !important;
-      }
-      
-      .nav-pills {
-        gap: 0.15rem;
-        height: 35px;
-      }
-    }
-
-    /* Add more compact styling for feature items */
-    @media (max-width: 768px) {
-        .message-box {
-            padding: 1rem;
-            margin: 1rem auto;
-        }
-        
-        .feature-item {
-            padding: 0.7rem;
-            border-width: 1px;
-        }
-        
-        .feature-icon {
-            font-size: 1.5rem;
-            margin-bottom: 0.2rem;
-        }
-        
-        .feature-item p {
-            font-size: 1rem;
-        }
-        
-        .features-grid {
-            gap: 0.5rem;
-        }
-    }
-  </style>
-
-  <section id="subjects" class="fade-in">
-    <h1 class="display-5 fw-bold text-center text-body-emphasis mt-3">מקצועות</h1>
-    <div class="container">
-      <div class="d-flex flex-row justify-content-center flex-wrap">
-        <div class="subject-item mx-3 my-2 text-center">
-          <img src="./images/book.png" alt="Hebrew" class="subject-icon mb-1" width="40">
-          <div style="font-size: 1rem;">עברית</div>
-        </div>
-        <div class="subject-item mx-3 my-2 text-center">
-          <img src="./images/math.png" alt="Math" class="subject-icon mb-1" width="40">
-          <div style="font-size: 1rem;">מתמטיקה</div>
-        </div>
-        <div class="subject-item mx-3 my-2 text-center">
-          <img src="./images/saturn.png" alt="Physics" class="subject-icon mb-1" width="40">
-          <div style="font-size: 1rem;">פיזיקה</div>
-        </div>
-        <div class="subject-item mx-3 my-2 text-center">
-          <img src="./images/english.png" alt="English" class="subject-icon mb-1" width="40">
-          <div style="font-size: 1rem;">אנגלית</div>
-        </div>
-        <div class="subject-item mx-3 my-2 text-center">
-          <img src="./images/coding.png" alt="Computer" class="subject-icon mb-1" width="40">
-          <div style="font-size: 1rem;">מחשבים</div>
-        </div>
-      </div>
-    </div>
-  </section>
-  
-  <section id="testimonials" class="fade-in">
-    <div class="testimonial-area">
-      <div class="container">
-        <div class="row">
-          <div class="col-sm-12">
-            <div class="section-header text-center">
-              <h1>מה הלקוחות אומרים עלינו 💬</h1>
+      <!-- Left of photos: Carousel -->
+      <div class="hero-mini-carousel">
+        <div class="hero-preview-title">מצגות AI</div>
+        <div class="slides-carousel-outer">
+            <div class="slides-carousel-track" id="slidesTrack">
+
+              <!-- Slide 1 — Integrals (light) -->
+              <div class="sp-card sp-light">
+                <div class="sp-grid-lines">
+                  <svg viewBox="0 0 320 180" fill="none" xmlns="http://www.w3.org/2000/svg" class="sp-svg">
+                    <!-- Grid -->
+                    <line x1="0" y1="40"  x2="320" y2="40"  stroke="#C8D8C8" stroke-width="0.8"/>
+                    <line x1="0" y1="80"  x2="320" y2="80"  stroke="#C8D8C8" stroke-width="0.8"/>
+                    <line x1="0" y1="120" x2="320" y2="120" stroke="#C8D8C8" stroke-width="0.8"/>
+                    <line x1="0" y1="160" x2="320" y2="160" stroke="#C8D8C8" stroke-width="0.8"/>
+                    <line x1="60"  y1="0" x2="60"  y2="180" stroke="#C8D8C8" stroke-width="0.8"/>
+                    <line x1="120" y1="0" x2="120" y2="180" stroke="#C8D8C8" stroke-width="0.8"/>
+                    <line x1="180" y1="0" x2="180" y2="180" stroke="#C8D8C8" stroke-width="0.8"/>
+                    <line x1="240" y1="0" x2="240" y2="180" stroke="#C8D8C8" stroke-width="0.8"/>
+                    <line x1="300" y1="0" x2="300" y2="180" stroke="#C8D8C8" stroke-width="0.8"/>
+                    <!-- Axes -->
+                    <line x1="20" y1="155" x2="310" y2="155" stroke="#3A5A3A" stroke-width="1.5"/>
+                    <line x1="40" y1="10"  x2="40"  y2="160" stroke="#3A5A3A" stroke-width="1.5"/>
+                    <!-- Area fill under curve -->
+                    <path d="M 60 155 Q 120 155 160 130 Q 200 90 240 50 L 240 155 Z" fill="#008080" opacity="0.15"/>
+                    <!-- Curve -->
+                    <path d="M 60 155 Q 120 155 160 130 Q 200 90 240 50" stroke="#008080" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+                    <!-- Integral symbol area indicator -->
+                    <line x1="60"  y1="148" x2="60"  y2="162" stroke="#3A5A3A" stroke-width="1.5"/>
+                    <line x1="240" y1="148" x2="240" y2="162" stroke="#3A5A3A" stroke-width="1.5"/>
+                    <!-- X label -->
+                    <text x="302" y="162" font-family="serif" font-size="12" fill="#3A5A3A">x</text>
+                  </svg>
+                </div>
+                <div class="sp-text-overlay sp-text-top-right">
+                  <div class="sp-title-dark">מבוא לאינטגרלים</div>
+                  <div class="sp-sub-dark">ההגדרה, טכניקות חישוב, וכלים למציאת שטחים</div>
+                </div>
+              </div>
+
+              <!-- Slide 2 — Physics (dark photo) -->
+              <div class="sp-card sp-dark-photo">
+                <svg viewBox="0 0 320 180" fill="none" xmlns="http://www.w3.org/2000/svg" class="sp-svg sp-svg-full">
+                  <!-- Dark gradient bg -->
+                  <defs>
+                    <linearGradient id="phys-bg" x1="0" y1="0" x2="1" y2="1">
+                      <stop offset="0%" stop-color="#1a1a2e"/>
+                      <stop offset="100%" stop-color="#0d1b3e"/>
+                    </linearGradient>
+                    <linearGradient id="phys-arc" x1="0" y1="0" x2="1" y2="0">
+                      <stop offset="0%" stop-color="#FF7F50"/>
+                      <stop offset="100%" stop-color="#FFD166"/>
+                    </linearGradient>
+                  </defs>
+                  <rect width="320" height="180" fill="url(#phys-bg)"/>
+                  <!-- Stylised coaster silhouette bars -->
+                  <rect x="0" y="120" width="320" height="60" fill="#0a1020"/>
+                  <rect x="20"  y="100" width="6" height="80" fill="#0f1830" opacity="0.8"/>
+                  <rect x="50"  y="80"  width="6" height="100" fill="#0f1830" opacity="0.8"/>
+                  <rect x="90"  y="60"  width="6" height="120" fill="#0f1830" opacity="0.8"/>
+                  <rect x="130" y="50"  width="6" height="130" fill="#0f1830" opacity="0.8"/>
+                  <rect x="170" y="70"  width="6" height="110" fill="#0f1830" opacity="0.8"/>
+                  <rect x="210" y="90"  width="6" height="90"  fill="#0f1830" opacity="0.8"/>
+                  <rect x="250" y="105" width="6" height="75"  fill="#0f1830" opacity="0.8"/>
+                  <rect x="290" y="115" width="6" height="65"  fill="#0f1830" opacity="0.8"/>
+                  <!-- Trajectory arc -->
+                  <path d="M 30 115 Q 100 20 170 70 Q 220 100 290 118" stroke="url(#phys-arc)" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+                  <!-- V arrow at peak -->
+                  <text x="154" y="38" font-family="serif" font-size="14" fill="white" opacity="0.9">V</text>
+                  <line x1="165" y1="36" x2="165" y2="64" stroke="white" stroke-width="1.5" opacity="0.7"/>
+                  <polygon points="161,62 165,72 169,62" fill="white" opacity="0.7"/>
+                </svg>
+                <div class="sp-text-overlay sp-text-top-right">
+                  <div class="sp-title-light">מבוא לפיזיקה:<br>הכוח לנבא את העתיד</div>
+                  <div class="sp-sub-light">קורס דיגיטלי המכניע ניוטוניות</div>
+                </div>
+                <div class="sp-badge-bottom">
+                  <span class="sp-badge">קמפוס IL · אגרסיב בר-אילן · 100 תנ"ם</span>
+                </div>
+              </div>
+
+              <!-- Slide 3 — Derivatives (dark navy) -->
+              <div class="sp-card sp-navy">
+                <svg viewBox="0 0 320 180" fill="none" xmlns="http://www.w3.org/2000/svg" class="sp-svg sp-svg-full">
+                  <defs>
+                    <linearGradient id="nav-bg" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%" stop-color="#081820"/>
+                      <stop offset="100%" stop-color="#0d2b2b"/>
+                    </linearGradient>
+                  </defs>
+                  <rect width="320" height="180" fill="url(#nav-bg)"/>
+                  <!-- Horizontal axis line -->
+                  <line x1="20" y1="128" x2="300" y2="128" stroke="#2AA8A8" stroke-width="1.2" opacity="0.6"/>
+                  <!-- Bell curve -->
+                  <path d="M 20 128 Q 60 126 100 120 Q 140 110 160 72 Q 180 110 200 120 Q 240 126 280 128 L 300 128" stroke="white" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+                </svg>
+                <div class="sp-text-overlay sp-text-top-right">
+                  <div class="sp-title-xl">נגזרות</div>
+                  <div class="sp-sub-light">התוכנית הדינמית של השינוי</div>
+                </div>
+                <div class="sp-badge-bottom">
+                  <span class="sp-badge sp-badge-teal">ממושגי גיאומטרים לשליטה אלגברית מלאה</span>
+                </div>
+              </div>
+
+              <!-- Slide 4 — Linear Algebra (teal) -->
+              <div class="sp-card sp-teal-slide">
+                <svg viewBox="0 0 320 180" fill="none" xmlns="http://www.w3.org/2000/svg" class="sp-svg sp-svg-full">
+                  <rect width="320" height="180" fill="#005858"/>
+                  <!-- Grid -->
+                  <line x1="0" y1="45"  x2="320" y2="45"  stroke="#007070" stroke-width="0.8"/>
+                  <line x1="0" y1="90"  x2="320" y2="90"  stroke="#007070" stroke-width="0.8"/>
+                  <line x1="0" y1="135" x2="320" y2="135" stroke="#007070" stroke-width="0.8"/>
+                  <line x1="80"  y1="0" x2="80"  y2="180" stroke="#007070" stroke-width="0.8"/>
+                  <line x1="160" y1="0" x2="160" y2="180" stroke="#007070" stroke-width="0.8"/>
+                  <line x1="240" y1="0" x2="240" y2="180" stroke="#007070" stroke-width="0.8"/>
+                  <!-- Axes -->
+                  <line x1="30" y1="150" x2="300" y2="150" stroke="white" stroke-width="1.5" opacity="0.5"/>
+                  <line x1="60" y1="10"  x2="60"  y2="165" stroke="white" stroke-width="1.5" opacity="0.5"/>
+                  <!-- Line 1 -->
+                  <line x1="30" y1="130" x2="290" y2="40" stroke="#FF7F50" stroke-width="2.5"/>
+                  <!-- Line 2 -->
+                  <line x1="30" y1="30" x2="290" y2="140" stroke="#FFD166" stroke-width="2.5"/>
+                  <!-- Intersection point -->
+                  <circle cx="160" cy="85" r="6" fill="white"/>
+                  <circle cx="160" cy="85" r="3" fill="#FF7F50"/>
+                </svg>
+                <div class="sp-text-overlay sp-text-top-right">
+                  <div class="sp-title-light">אלגברה לינארית</div>
+                  <div class="sp-sub-light">מערכות משוואות וגרפים</div>
+                </div>
+              </div>
+
+              <!-- Slide 5 — Geometry (warm light) -->
+              <div class="sp-card sp-warm">
+                <svg viewBox="0 0 320 180" fill="none" xmlns="http://www.w3.org/2000/svg" class="sp-svg sp-svg-full">
+                  <rect width="320" height="180" fill="#FFF8E8"/>
+                  <!-- Grid -->
+                  <line x1="0" y1="60"  x2="320" y2="60"  stroke="#E8D8B0" stroke-width="0.8"/>
+                  <line x1="0" y1="120" x2="320" y2="120" stroke="#E8D8B0" stroke-width="0.8"/>
+                  <line x1="80"  y1="0" x2="80"  y2="180" stroke="#E8D8B0" stroke-width="0.8"/>
+                  <line x1="160" y1="0" x2="160" y2="180" stroke="#E8D8B0" stroke-width="0.8"/>
+                  <line x1="240" y1="0" x2="240" y2="180" stroke="#E8D8B0" stroke-width="0.8"/>
+                  <!-- Triangle -->
+                  <polygon points="80,150 240,150 160,40" fill="#FF7F50" opacity="0.12"/>
+                  <polygon points="80,150 240,150 160,40" fill="none" stroke="#FF7F50" stroke-width="2.5"/>
+                  <!-- Altitude line -->
+                  <line x1="160" y1="40" x2="160" y2="150" stroke="#008080" stroke-width="1.8" stroke-dasharray="5,4"/>
+                  <!-- Right angle mark -->
+                  <rect x="153" y="143" width="10" height="10" fill="none" stroke="#008080" stroke-width="1.5"/>
+                  <!-- Circle circumscribed -->
+                  <circle cx="160" cy="110" r="68" fill="none" stroke="#2AA8A8" stroke-width="1.2" opacity="0.5" stroke-dasharray="6,4"/>
+                </svg>
+                <div class="sp-text-overlay sp-text-top-right">
+                  <div class="sp-title-dark">גיאומטריה אנליטית</div>
+                  <div class="sp-sub-dark">משולשים, מעגלים ומשפט פיתגורס</div>
+                </div>
+              </div>
+
+              <!-- Duplicate for seamless loop -->
+              <div class="sp-card sp-light">
+                <div class="sp-grid-lines">
+                  <svg viewBox="0 0 320 180" fill="none" xmlns="http://www.w3.org/2000/svg" class="sp-svg">
+                    <line x1="0" y1="40"  x2="320" y2="40"  stroke="#C8D8C8" stroke-width="0.8"/>
+                    <line x1="0" y1="80"  x2="320" y2="80"  stroke="#C8D8C8" stroke-width="0.8"/>
+                    <line x1="0" y1="120" x2="320" y2="120" stroke="#C8D8C8" stroke-width="0.8"/>
+                    <line x1="0" y1="160" x2="320" y2="160" stroke="#C8D8C8" stroke-width="0.8"/>
+                    <line x1="60"  y1="0" x2="60"  y2="180" stroke="#C8D8C8" stroke-width="0.8"/>
+                    <line x1="120" y1="0" x2="120" y2="180" stroke="#C8D8C8" stroke-width="0.8"/>
+                    <line x1="180" y1="0" x2="180" y2="180" stroke="#C8D8C8" stroke-width="0.8"/>
+                    <line x1="240" y1="0" x2="240" y2="180" stroke="#C8D8C8" stroke-width="0.8"/>
+                    <line x1="300" y1="0" x2="300" y2="180" stroke="#C8D8C8" stroke-width="0.8"/>
+                    <line x1="20" y1="155" x2="310" y2="155" stroke="#3A5A3A" stroke-width="1.5"/>
+                    <line x1="40" y1="10"  x2="40"  y2="160" stroke="#3A5A3A" stroke-width="1.5"/>
+                    <path d="M 60 155 Q 120 155 160 130 Q 200 90 240 50 L 240 155 Z" fill="#008080" opacity="0.15"/>
+                    <path d="M 60 155 Q 120 155 160 130 Q 200 90 240 50" stroke="#008080" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+                    <line x1="60"  y1="148" x2="60"  y2="162" stroke="#3A5A3A" stroke-width="1.5"/>
+                    <line x1="240" y1="148" x2="240" y2="162" stroke="#3A5A3A" stroke-width="1.5"/>
+                    <text x="302" y="162" font-family="serif" font-size="12" fill="#3A5A3A">x</text>
+                  </svg>
+                </div>
+                <div class="sp-text-overlay sp-text-top-right">
+                  <div class="sp-title-dark">מבוא לאינטגרלים</div>
+                  <div class="sp-sub-dark">ההגדרה, טכניקות חישוב, וכלים למציאת שטחים</div>
+                </div>
+              </div>
+              <div class="sp-card sp-dark-photo">
+                <svg viewBox="0 0 320 180" fill="none" xmlns="http://www.w3.org/2000/svg" class="sp-svg sp-svg-full">
+                  <defs>
+                    <linearGradient id="phys-bg2" x1="0" y1="0" x2="1" y2="1">
+                      <stop offset="0%" stop-color="#1a1a2e"/>
+                      <stop offset="100%" stop-color="#0d1b3e"/>
+                    </linearGradient>
+                  </defs>
+                  <rect width="320" height="180" fill="url(#phys-bg2)"/>
+                  <rect x="0" y="120" width="320" height="60" fill="#0a1020"/>
+                  <rect x="20"  y="100" width="6" height="80" fill="#0f1830" opacity="0.8"/>
+                  <rect x="50"  y="80"  width="6" height="100" fill="#0f1830" opacity="0.8"/>
+                  <rect x="90"  y="60"  width="6" height="120" fill="#0f1830" opacity="0.8"/>
+                  <rect x="130" y="50"  width="6" height="130" fill="#0f1830" opacity="0.8"/>
+                  <rect x="170" y="70"  width="6" height="110" fill="#0f1830" opacity="0.8"/>
+                  <rect x="210" y="90"  width="6" height="90"  fill="#0f1830" opacity="0.8"/>
+                  <rect x="250" y="105" width="6" height="75"  fill="#0f1830" opacity="0.8"/>
+                  <rect x="290" y="115" width="6" height="65"  fill="#0f1830" opacity="0.8"/>
+                  <path d="M 30 115 Q 100 20 170 70 Q 220 100 290 118" stroke="#FF7F50" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+                  <text x="154" y="38" font-family="serif" font-size="14" fill="white" opacity="0.9">V</text>
+                  <line x1="165" y1="36" x2="165" y2="64" stroke="white" stroke-width="1.5" opacity="0.7"/>
+                  <polygon points="161,62 165,72 169,62" fill="white" opacity="0.7"/>
+                </svg>
+                <div class="sp-text-overlay sp-text-top-right">
+                  <div class="sp-title-light">מבוא לפיזיקה:<br>הכוח לנבא את העתיד</div>
+                  <div class="sp-sub-light">קורס דיגיטלי המכניע ניוטוניות</div>
+                </div>
+              </div>
+              <div class="sp-card sp-navy">
+                <svg viewBox="0 0 320 180" fill="none" xmlns="http://www.w3.org/2000/svg" class="sp-svg sp-svg-full">
+                  <defs>
+                    <linearGradient id="nav-bg2" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%" stop-color="#081820"/>
+                      <stop offset="100%" stop-color="#0d2b2b"/>
+                    </linearGradient>
+                  </defs>
+                  <rect width="320" height="180" fill="url(#nav-bg2)"/>
+                  <line x1="20" y1="128" x2="300" y2="128" stroke="#2AA8A8" stroke-width="1.2" opacity="0.6"/>
+                  <path d="M 20 128 Q 60 126 100 120 Q 140 110 160 72 Q 180 110 200 120 Q 240 126 280 128 L 300 128" stroke="white" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+                </svg>
+                <div class="sp-text-overlay sp-text-top-right">
+                  <div class="sp-title-xl">נגזרות</div>
+                  <div class="sp-sub-light">התוכנית הדינמית של השינוי</div>
+                </div>
+              </div>
+              <div class="sp-card sp-teal-slide">
+                <svg viewBox="0 0 320 180" fill="none" xmlns="http://www.w3.org/2000/svg" class="sp-svg sp-svg-full">
+                  <rect width="320" height="180" fill="#005858"/>
+                  <line x1="0" y1="45"  x2="320" y2="45"  stroke="#007070" stroke-width="0.8"/>
+                  <line x1="0" y1="90"  x2="320" y2="90"  stroke="#007070" stroke-width="0.8"/>
+                  <line x1="0" y1="135" x2="320" y2="135" stroke="#007070" stroke-width="0.8"/>
+                  <line x1="80"  y1="0" x2="80"  y2="180" stroke="#007070" stroke-width="0.8"/>
+                  <line x1="160" y1="0" x2="160" y2="180" stroke="#007070" stroke-width="0.8"/>
+                  <line x1="240" y1="0" x2="240" y2="180" stroke="#007070" stroke-width="0.8"/>
+                  <line x1="30" y1="150" x2="300" y2="150" stroke="white" stroke-width="1.5" opacity="0.5"/>
+                  <line x1="60" y1="10"  x2="60"  y2="165" stroke="white" stroke-width="1.5" opacity="0.5"/>
+                  <line x1="30" y1="130" x2="290" y2="40" stroke="#FF7F50" stroke-width="2.5"/>
+                  <line x1="30" y1="30" x2="290" y2="140" stroke="#FFD166" stroke-width="2.5"/>
+                  <circle cx="160" cy="85" r="6" fill="white"/>
+                  <circle cx="160" cy="85" r="3" fill="#FF7F50"/>
+                </svg>
+                <div class="sp-text-overlay sp-text-top-right">
+                  <div class="sp-title-light">אלגברה לינארית</div>
+                  <div class="sp-sub-light">מערכות משוואות וגרפים</div>
+                </div>
+              </div>
+              <div class="sp-card sp-warm">
+                <svg viewBox="0 0 320 180" fill="none" xmlns="http://www.w3.org/2000/svg" class="sp-svg sp-svg-full">
+                  <rect width="320" height="180" fill="#FFF8E8"/>
+                  <line x1="0" y1="60"  x2="320" y2="60"  stroke="#E8D8B0" stroke-width="0.8"/>
+                  <line x1="0" y1="120" x2="320" y2="120" stroke="#E8D8B0" stroke-width="0.8"/>
+                  <line x1="80"  y1="0" x2="80"  y2="180" stroke="#E8D8B0" stroke-width="0.8"/>
+                  <line x1="160" y1="0" x2="160" y2="180" stroke="#E8D8B0" stroke-width="0.8"/>
+                  <line x1="240" y1="0" x2="240" y2="180" stroke="#E8D8B0" stroke-width="0.8"/>
+                  <polygon points="80,150 240,150 160,40" fill="#FF7F50" opacity="0.12"/>
+                  <polygon points="80,150 240,150 160,40" fill="none" stroke="#FF7F50" stroke-width="2.5"/>
+                  <line x1="160" y1="40" x2="160" y2="150" stroke="#008080" stroke-width="1.8" stroke-dasharray="5,4"/>
+                  <rect x="153" y="143" width="10" height="10" fill="none" stroke="#008080" stroke-width="1.5"/>
+                  <circle cx="160" cy="110" r="68" fill="none" stroke="#2AA8A8" stroke-width="1.2" opacity="0.5" stroke-dasharray="6,4"/>
+                </svg>
+                <div class="sp-text-overlay sp-text-top-right">
+                  <div class="sp-title-dark">גיאומטריה אנליטית</div>
+                  <div class="sp-sub-dark">משולשים, מעגלים ומשפט פיתגורס</div>
+                </div>
+              </div>
+
+            </div><!-- /track -->
+          </div><!-- /outer -->
+        </div><!-- /hero-mini-carousel -->
+
+      <!-- Right of photos: Games collage -->
+        <div class="hero-games-mini">
+          <div class="hero-preview-title">כלי למידה אינטראקטיביים</div>
+          <div class="games-collage">
+
+            <!-- Flashcards card -->
+            <div class="gc-card gc-flashcard">
+              <svg viewBox="0 0 130 95" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- bg -->
+                <rect width="130" height="95" fill="#0f1923"/>
+                <!-- back card (shifted) -->
+                <rect x="18" y="14" width="76" height="52" rx="6" fill="#1e3a4a" stroke="#2AA8A8" stroke-width="1"/>
+                <!-- front card -->
+                <rect x="26" y="20" width="76" height="52" rx="6" fill="#162b38" stroke="#2AA8A8" stroke-width="1.5"/>
+                <!-- card lines -->
+                <line x1="36" y1="38" x2="92" y2="38" stroke="#2AA8A8" stroke-width="1.2" opacity="0.6"/>
+                <line x1="36" y1="48" x2="80" y2="48" stroke="#2AA8A8" stroke-width="1.2" opacity="0.35"/>
+                <line x1="36" y1="57" x2="74" y2="57" stroke="#2AA8A8" stroke-width="1.2" opacity="0.2"/>
+                <!-- question mark -->
+                <text x="54" y="33" font-size="10" fill="#2AA8A8" font-weight="bold" font-family="sans-serif">?</text>
+                <!-- label -->
+                <text x="65" y="86" font-size="7.5" fill="#2AA8A8" font-family="sans-serif" text-anchor="middle" font-weight="600">פלאשקארדים</text>
+              </svg>
             </div>
+
+            <!-- Quiz card -->
+            <div class="gc-card gc-quiz">
+              <svg viewBox="0 0 130 95" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="130" height="95" fill="#1a0f23"/>
+                <!-- Question bubble -->
+                <rect x="10" y="10" width="90" height="22" rx="8" fill="#2d1a4a" stroke="#A855F7" stroke-width="1.2"/>
+                <text x="55" y="25" font-size="8" fill="#e0c8ff" font-family="sans-serif" text-anchor="middle">מה הנגזרת של x²?</text>
+                <!-- options -->
+                <rect x="10" y="38" width="50" height="14" rx="5" fill="#3b1f5e" stroke="#A855F7" stroke-width="0.8" opacity="0.7"/>
+                <text x="35" y="49" font-size="7" fill="#c4a0ff" font-family="sans-serif" text-anchor="middle">א. x</text>
+                <rect x="68" y="38" width="50" height="14" rx="5" fill="#1e3a1a" stroke="#3fb950" stroke-width="1.2"/>
+                <text x="93" y="49" font-size="7" fill="#3fb950" font-family="sans-serif" text-anchor="middle">ב. 2x ✓</text>
+                <rect x="10" y="58" width="50" height="14" rx="5" fill="#3b1f5e" stroke="#A855F7" stroke-width="0.8" opacity="0.7"/>
+                <text x="35" y="69" font-size="7" fill="#c4a0ff" font-family="sans-serif" text-anchor="middle">ג. 2</text>
+                <rect x="68" y="58" width="50" height="14" rx="5" fill="#3b1f5e" stroke="#A855F7" stroke-width="0.8" opacity="0.7"/>
+                <text x="93" y="69" font-size="7" fill="#c4a0ff" font-family="sans-serif" text-anchor="middle">ד. x²</text>
+                <text x="65" y="86" font-size="7.5" fill="#A855F7" font-family="sans-serif" text-anchor="middle" font-weight="600">קווינים</text>
+              </svg>
+            </div>
+
+            <!-- Audio card -->
+            <div class="gc-card gc-audio">
+              <svg viewBox="0 0 130 95" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="130" height="95" fill="#0f1a12"/>
+                <!-- Waveform bars -->
+                <rect x="12" y="42" width="5" height="14" rx="2.5" fill="#3fb950" opacity="0.7"/>
+                <rect x="20" y="34" width="5" height="30" rx="2.5" fill="#3fb950" opacity="0.85"/>
+                <rect x="28" y="28" width="5" height="42" rx="2.5" fill="#3fb950"/>
+                <rect x="36" y="22" width="5" height="54" rx="2.5" fill="#3fb950"/>
+                <rect x="44" y="30" width="5" height="38" rx="2.5" fill="#3fb950" opacity="0.9"/>
+                <rect x="52" y="38" width="5" height="22" rx="2.5" fill="#3fb950" opacity="0.75"/>
+                <rect x="60" y="42" width="5" height="14" rx="2.5" fill="#3fb950" opacity="0.6"/>
+                <rect x="68" y="36" width="5" height="26" rx="2.5" fill="#3fb950" opacity="0.8"/>
+                <rect x="76" y="26" width="5" height="46" rx="2.5" fill="#3fb950"/>
+                <rect x="84" y="32" width="5" height="34" rx="2.5" fill="#3fb950" opacity="0.85"/>
+                <rect x="92" y="40" width="5" height="18" rx="2.5" fill="#3fb950" opacity="0.65"/>
+                <rect x="100" y="44" width="5" height="10" rx="2.5" fill="#3fb950" opacity="0.5"/>
+                <!-- play button -->
+                <circle cx="113" cy="20" r="9" fill="#3fb950" opacity="0.9"/>
+                <polygon points="110,16 110,24 118,20" fill="white"/>
+                <text x="65" y="86" font-size="7.5" fill="#3fb950" font-family="sans-serif" text-anchor="middle" font-weight="600">הסברי אודיו</text>
+              </svg>
+            </div>
+
+            <!-- Songs card -->
+            <div class="gc-card gc-songs">
+              <svg viewBox="0 0 130 95" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <linearGradient id="song-bg" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0%" stop-color="#1a1230"/>
+                    <stop offset="100%" stop-color="#0f1a2a"/>
+                  </linearGradient>
+                </defs>
+                <rect width="130" height="95" fill="url(#song-bg)"/>
+                <!-- Music staff lines -->
+                <line x1="10" y1="25" x2="120" y2="25" stroke="#FF7F50" stroke-width="0.7" opacity="0.4"/>
+                <line x1="10" y1="33" x2="120" y2="33" stroke="#FF7F50" stroke-width="0.7" opacity="0.4"/>
+                <line x1="10" y1="41" x2="120" y2="41" stroke="#FF7F50" stroke-width="0.7" opacity="0.4"/>
+                <line x1="10" y1="49" x2="120" y2="49" stroke="#FF7F50" stroke-width="0.7" opacity="0.4"/>
+                <line x1="10" y1="57" x2="120" y2="57" stroke="#FF7F50" stroke-width="0.7" opacity="0.4"/>
+                <!-- Treble clef rough shape -->
+                <text x="12" y="58" font-size="38" fill="#FF7F50" opacity="0.7" font-family="serif">𝄞</text>
+                <!-- Notes -->
+                <ellipse cx="60" cy="56" rx="6" ry="4.5" fill="#FFD166" transform="rotate(-15 60 56)"/>
+                <line x1="66" y1="56" x2="66" y2="30" stroke="#FFD166" stroke-width="1.5"/>
+                <ellipse cx="82" cy="48" rx="6" ry="4.5" fill="#FF7F50" transform="rotate(-15 82 48)"/>
+                <line x1="88" y1="48" x2="88" y2="22" stroke="#FF7F50" stroke-width="1.5"/>
+                <ellipse cx="104" cy="40" rx="6" ry="4.5" fill="#FFD166" transform="rotate(-15 104 40)"/>
+                <line x1="110" y1="40" x2="110" y2="14" stroke="#FFD166" stroke-width="1.5"/>
+                <!-- Beaming line -->
+                <line x1="66" y1="30" x2="110" y2="14" stroke="#FFD166" stroke-width="2.5"/>
+                <text x="65" y="86" font-size="7.5" fill="#FF7F50" font-family="sans-serif" text-anchor="middle" font-weight="600">שירי לימוד</text>
+              </svg>
+            </div>
+
+          </div><!-- /games-collage -->
+        </div><!-- /hero-games-mini -->
+
+      <!-- Dashboard — center bottom, below tutor photos -->
+      <div class="hero-dashboard-mini">
+        <div class="hero-preview-title">שקיפות מלאה לכל הורה 👨‍👩‍👧</div>
+        <div class="dashboard-mockup-mini">
+          <div class="mockup-chrome">
+            <div class="mockup-dots"><span></span><span></span><span></span></div>
+            <div class="mockup-url">פורטל הורים</div>
           </div>
-          <div class="col-sm-12">
-            <div class="carousel slide" data-bs-ride="carousel" id="carouselExampleIndicators">
-              <div class="carousel-indicators">
-                <button aria-label="Slide 1" class="active" data-bs-slide-to="0" data-bs-target="#carouselExampleIndicators" type="button"></button> 
-                <button aria-label="Slide 2" data-bs-slide-to="1" data-bs-target="#carouselExampleIndicators" type="button"></button> 
-                <button aria-label="Slide 3" data-bs-slide-to="2" data-bs-target="#carouselExampleIndicators" type="button"></button>
-              </div>
-              <div class="carousel-inner">
-                <div class="carousel-item active">
-                  <div class="testimonial-content text-center">
-                    <h2 style="text-align: right;">"</h2>
-                    <p>תודה רבה על ההכוונה וההסבר המעולה. <br> הציונים שלי השתפרו מאוד בזכותך :)</p>
-                    <h2 style="text-align: left;">"</h2>
-                    <h5>זיו כהן</h5>
-                  </div>
-                </div>
-                <div class="carousel-item">
-                  <div class="testimonial-content text-center">
-                    <h2 style="text-align: right;">"</h2>
-                    <p>שיעור מעניין ומורה מעולה! <br> בזכותו הבנתי את כל החומר.</p>
-                    <h2 style="text-align: left;">"</h2>
-                    <h5>מיכל ניאזוב</h5>
-                  </div>
-                </div>
-                <div class="carousel-item">
-                  <div class="testimonial-content text-center">
-                    <h2 style="text-align: right;">"</h2>
-                    <p>השיעורים היום טובים ומובנים, <br> תודה!</p>
-                    <h2 style="text-align: left;">"</h2>
-                    <h5>לימור ישראל</h5>
-                  </div>
-                </div>
-              </div>
-              <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-              </button>
-              <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-              </button>
-            </div>
+          <div class="mockup-screen-mini">
+            <iframe
+              src="./parent-dashboard.html?demo"
+              title="פורטל הורים"
+              scrolling="no"
+              loading="lazy"
+            ></iframe>
           </div>
         </div>
       </div>
-    </div>             		
+
+    </div><!-- /tutors-showcase -->
+
   </section>
-     
-  <section id="pricing" class="fade-in">
-    <h1 class="my-5 text-center">מחירים לשיעור</h1>
-    <div class="container">
-      <div class="row justify-content-center">
-        <div class="col-md-3">
-            <div class="card mb-4 shadow-sm">
-                <div class="card-header py-3" style="background-color: #e7f1ff; color: #0d6efd;">
-                    <h4 class="my-0 fw-bold text-center">יחיד</h4>
-                </div>
-                <div class="card-body">
-                    <h2 class="card-title pricing-card-title text-center">₪100</h2>
-                </div>
-            </div>
+
+  <!-- ── FEATURES SHOWCASE ─────────────────────────────── -->
+  <section id="features-showcase">
+    <div class="container section-center">
+      <div class="section-label">מה תקבלו</div>
+      <h2 class="section-title">הלמידה שלנו נראית כך 👇</h2>
+      <p class="section-sub">כלים אמיתיים שעובדים — לא דפי עבודה מצולמים מהספר</p>
+
+      <div class="showcase-grid">
+
+        <!-- Slides -->
+        <div class="showcase-card reveal reveal-delay-1">
+          <div class="showcase-icon-wrap teal">📊</div>
+          <h3>מצגות חכמות</h3>
+          <p>חומר לימוד מותאם אישית — מצגות ברורות שנבנות בדיוק לפי הנושאים שהתלמיד צריך.</p>
+          <div class="mini-slides">
+            <div class="mini-slide"></div>
+            <div class="mini-slide"></div>
+            <div class="mini-slide"></div>
+          </div>
         </div>
-        <div class="col-md-3">
-          <div class="card mb-4 shadow-sm">
-            <div class="card-header py-3" style="background-color: #e7f1ff; color: #0d6efd;">
-              <h4 class="my-0 fw-bold text-center">כפול</h4>
+
+        <!-- Dashboard -->
+        <div class="showcase-card reveal reveal-delay-2">
+          <div class="showcase-icon-wrap coral">📈</div>
+          <h3>לוח התקדמות</h3>
+          <p>כל שיעור מתועד. הורים רואים בדיוק מה נלמד, מה השתפר, ומה הצעד הבא.</p>
+          <div class="mini-dashboard">
+            <div class="dash-bar-row">
+              <span>מתמטיקה</span>
+              <div class="dash-bar"><div class="dash-fill" style="width:82%"></div></div>
             </div>
-            <div class="card-body">
-              <h2 class="card-title pricing-card-title text-center">₪180</h2>
+            <div class="dash-bar-row">
+              <span>פיזיקה</span>
+              <div class="dash-bar"><div class="dash-fill" style="width:65%"></div></div>
+            </div>
+            <div class="dash-bar-row">
+              <span>אנגלית</span>
+              <div class="dash-bar"><div class="dash-fill" style="width:90%"></div></div>
             </div>
           </div>
         </div>
-        <div class="col-md-3">
-          <div class="card mb-4 shadow-sm">
-            <div class="card-header py-3" style="background-color: #e7f1ff; color: #0d6efd;">
-              <h4 class="my-0 fw-bold text-center">משולש</h4>
-            </div>
-            <div class="card-body">
-              <h2 class="card-title pricing-card-title text-center">₪250</h2>
-            </div>
-            </div>
+
+        <!-- Games -->
+        <div class="showcase-card reveal reveal-delay-3">
+          <div class="showcase-icon-wrap green">🎮</div>
+          <h3>משחקי לימוד</h3>
+          <p>פלאשקארדים, קווינים ומשחקי ידע — כי תלמיד שנהנה לומד פי כמה יותר טוב.</p>
+          <div class="mini-game-grid">
+            <div class="mini-game-card">🃏 פלאשקארדים</div>
+            <div class="mini-game-card">🎯 קוויז</div>
+            <div class="mini-game-card">🏆 Kahoot</div>
+            <div class="mini-game-card">🧩 Quizlet</div>
           </div>
+        </div>
+
+        <!-- Examples -->
+        <div class="showcase-card reveal reveal-delay-1">
+          <div class="showcase-icon-wrap purple">💡</div>
+          <h3>דוגמאות ותרגילים</h3>
+          <p>AI מזהה איפה התלמיד נתקע ומייצר תרגילים ממוקדים — בדיוק ברמה הנכונה.</p>
+          <div class="mini-game-grid">
+            <div class="mini-game-card">📝 דוגמה פתורה</div>
+            <div class="mini-game-card">✏️ תרגיל מודרג</div>
+            <div class="mini-game-card">🔁 חזרה חכמה</div>
+            <div class="mini-game-card">🎓 מבחן ניסיון</div>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
 
-  <section id="about-us" class="fade-in">
-      <div class="container my-5">
-          <div class="text-center bg-body-tertiary rounded-3 p-4">
-              <h1 class="text-body-emphasis mb-4">קצת עלינו</h1>
-              
-              <!-- Introduction -->
-              <div class="mb-4">
-                <p class="lead">
-                  היי כאן ליאור וניקול, תלמידים מצטיינים לשעבר עם תעודת הצטיינות ממשרד החינוך ומנכ"ל אורט. עם אהבה אמיתית ללמידה ולהוראה, ונסיון בליווי אישי של עשרות תלמידים מכל הרמות.
-                </p>
-                <p class="lead">
-                  אנחנו מאמינים שלכל אחד יש דרך אחרת להבין – והתפקיד שלנו הוא למצוא אותה ולהפוך את הלמידה לחוויה פשוטה, ברורה ומעצימה.
-                </p>
-              </div>
-
-              <div class="container px-5">
-                <img src="./images/lior_acc.jpeg" class="img-fluid rounded-3 mb-4" alt="Lior" width="200" loading="lazy">
-              </div>
-          </div>
-      </div>
-  </section>
-
-  <section id="signup-button" class="fade-in">
-    <div class="d-flex justify-content-between align-items-center px-3 my-2">
-      <div style="width: 40px"></div> <!-- Spacer to balance the layout -->
-      <a href="https://wa.me/972546969891?text=היי,%20אשמח%20להזמין%20שיעור" class="btn btn-primary btn-lg px-4 rounded-pill text-center">הזמנת שיעור 🗓️</a>
-      <div style="width: 40px"></div> <!-- Replaced WhatsApp link with a spacer -->
-    </div>
-  </section>
-  
-  <section id="faqs" class="fade-in">
-    <div class="container my-5">
-      <div class="text-center bg-body-tertiary rounded-3 p-4">
-        <h1 class="text-body-emphasis mb-4">שאלות נפוצות</h1>
-        
-        <div class="accordion" id="faqAccordion" dir="rtl">
-          <!-- Question 1 -->
-          <div class="accordion-item">
-            <h2 class="accordion-header">
-              <button class="accordion-button text-end" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
-                איך מתבצע תהליך ההרשמה לשיעור?
-              </button>
-            </h2>
-            <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
-              <div class="accordion-body text-end">
-                ניתן להירשם בקלות דרך כפתור "הזמנת שיעור" באתר, או ליצור קשר ישירות דרך הוואטסאפ. נחזור אליכם בהקדם לתיאום השיעור הראשון.
-              </div>
-            </div>
-          </div>
-          
-          <!-- Question 2 -->
-          <div class="accordion-item">
-            <h2 class="accordion-header">
-              <button class="accordion-button collapsed text-end" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
-                האם השיעורים מתקיימים פנים מול פנים או אונליין?
-              </button>
-            </h2>
-            <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-              <div class="accordion-body text-end">
-                אנחנו מציעים גם שיעורים פרונטליים וגם שיעורים אונליין, בהתאם להעדפת התלמיד/ה. שני הפורמטים יעילים ומותאמים לצרכים השונים.
-              </div>
-            </div>
-          </div>
-          
-          <!-- Question 3 -->
-          <div class="accordion-item">
-            <h2 class="accordion-header">
-              <button class="accordion-button collapsed text-end" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
-                מה משך השיעור?
-              </button>
-            </h2>
-            <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-              <div class="accordion-body text-end">
-                קיימת אפשרות להזמין שלושה סוגים של שיעורים: שיעור יחיד שאורכו 45 דקות, שיעור כפול שנמשך שעה וחצי ושיעור משולש שנמשך שעתיים ורבע.
-              </div>
-            </div>
-          </div>
-          
-          <!-- Question 5 -->
-          <div class="accordion-item">
-            <h2 class="accordion-header">
-              <button class="accordion-button collapsed text-end" type="button" data-bs-toggle="collapse" data-bs-target="#faq5">
-                איך מתבצע התשלום?
-              </button>
-            </h2>
-            <div id="faq5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-              <div class="accordion-body text-end">
-                התשלום מתבצע בסוף כל שיעור, ניתן לשלם במזומן או בביט.
-              </div>
-            </div>
-          </div>
-
-          <!-- Question 6 -->
-          <div class="accordion-item">
-            <h2 class="accordion-header">
-              <button class="accordion-button collapsed text-end" type="button" data-bs-toggle="collapse" data-bs-target="#faq6">
-                לאיזה גילאים השיעורים מתאימים?
-              </button>
-            </h2>
-            <div id="faq6" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-              <div class="accordion-body text-end">
-                השיעורים מתאימים לתלמידי בית ספר יסודי, חטיבת ביניים ותיכון.
-              </div>
-            </div>
-          </div>
-
-          <!-- Question 7 -->
-          <div class="accordion-item">
-            <h2 class="accordion-header">
-              <button class="accordion-button collapsed text-end" type="button" data-bs-toggle="collapse" data-bs-target="#faq7">
-                באילו מקצועות אתם מלמדים?
-              </button>
-            </h2>
-            <div id="faq7" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-              <div class="accordion-body text-end">
-                אנחנו מלמדים מתמטיקה, פיזיקה, אנגלית, עברית ומחשבים.
-              </div>
-            </div>
-          </div>
-
-          <!-- Question 8 -->
-          <div class="accordion-item">
-            <h2 class="accordion-header">
-              <button class="accordion-button collapsed text-end" type="button" data-bs-toggle="collapse" data-bs-target="#faq8">
-                מתי מזמינים שיעור?
-              </button>
-            </h2>
-            <div id="faq8" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-              <div class="accordion-body text-end">
-                בכל יום רביעי מתפרסמים תאריכים ושעות אפשריות לשיעור בשבוע שלאחר מכן, לכן ניתן לקבוע שיעור רק בימי רביעי אחר הצהריים
-              </div>
-            </div>
-          </div>
+  <!-- ── SUBJECTS ──────────────────────────────────────────── -->
+  <section id="subjects">
+    <div class="container section-center">
+      <div class="section-label">מקצועות</div>
+      <h2 class="section-title">במה אנחנו מלמדים?</h2>
+      <div class="subjects-grid reveal">
+        <div class="subject-item">
+          <span class="subject-icon">✏️</span>
+          <span>עברית</span>
+        </div>
+        <div class="subject-item">
+          <span class="subject-icon">📐</span>
+          <span>מתמטיקה</span>
+        </div>
+        <div class="subject-item">
+          <span class="subject-icon">⚛️</span>
+          <span>פיזיקה</span>
+        </div>
+        <div class="subject-item">
+          <span class="subject-icon">🌍</span>
+          <span>אנגלית</span>
+        </div>
+        <div class="subject-item">
+          <span class="subject-icon">💻</span>
+          <span>מחשבים</span>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- ── AI ADVANTAGE ─────────────────────────────────────── -->
+  <section id="ai-advantage">
+    <div class="container section-center">
+      <div class="section-label">חדשנות</div>
+      <h2 class="section-title">למה אנחנו שונים?</h2>
+      <p class="section-sub">לא עוד דפי עבודה מצולמים. כל שיעור מגובה בטכנולוגיה שעובדת בשבילך.</p>
+
+      <div class="ai-grid">
+
+        <div class="ai-card reveal reveal-delay-1">
+          <div class="ai-card-icon">🤖</div>
+          <h3>חומר מותאם אישית</h3>
+          <p>בינה מלאכותית בונה עבור כל תלמיד חומרי לימוד וסיכום שיעור — בדיוק לפי הרמה והצרכים שלו.</p>
+        </div>
+
+        <div class="ai-card reveal reveal-delay-2">
+          <div class="ai-card-icon">🎮</div>
+          <h3>שיעורי בית מהנים</h3>
+          <p>במקום דפי עבודה — כרטיסיות לימוד, מבחוני ידע ומשחקי תרגול. כי תלמיד שנהנה, לומד יותר.</p>
+        </div>
+
+        <div class="ai-card reveal reveal-delay-3">
+          <div class="ai-card-icon">📊</div>
+          <h3>מעקב התקדמות</h3>
+          <p>כל תלמיד מקבל תיק אישי עם יומן שיעורים ומעקב התקדמות. הורים רואים הכל, בזמן אמת.</p>
+        </div>
+
+        <div class="ai-card reveal reveal-delay-1">
+          <div class="ai-card-icon">📅</div>
+          <h3>הכל מנוהל אוטומטית</h3>
+          <p>תזמון, תזכורות ומעקב תשלומים — עובדים לבד. אין בלבולים, הכל שקוף ומסודר.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── TESTIMONIALS ───────────────────────────────────── -->
+  <section id="testimonials">
+    <div class="container section-center">
+      <div class="section-label">המלצות</div>
+      <h2 class="section-title">מה הלקוחות אומרים עלינו 💬</h2>
+      <div class="testimonials-grid">
+        <div class="testimonial-card reveal reveal-delay-1">
+          <div class="testimonial-quote">"</div>
+          <p>תודה רבה על ההכוונה וההסבר המעולה.<br />הציונים שלי השתפרו מאוד בזכותך :)</p>
+          <div class="testimonial-name">— זיו כהן</div>
+        </div>
+        <div class="testimonial-card reveal reveal-delay-2">
+          <div class="testimonial-quote">"</div>
+          <p>שיעור מעניין ומורה מעולה!<br />בזכותו הבנתי את כל החומר.</p>
+          <div class="testimonial-name">— מיכל ניאזוב</div>
+        </div>
+        <div class="testimonial-card reveal reveal-delay-3">
+          <div class="testimonial-quote">"</div>
+          <p>השיעורים תמיד ברורים ומובנים,<br />תודה רבה!</p>
+          <div class="testimonial-name">— לימור ישראל</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── PRICING ────────────────────────────────────────── -->
+  <section id="pricing">
+    <div class="container section-center">
+      <div class="section-label">תעריף</div>
+      <h2 class="section-title">מחירים לשיעור</h2>
+      <p class="section-sub">תשלום בסוף כל שיעור — במזומן או בביט</p>
+      <div class="pricing-grid">
+
+        <div class="pricing-card reveal reveal-delay-1">
+          <div class="pricing-card-name">יחיד</div>
+          <div class="pricing-card-price">₪120</div>
+          <div class="pricing-card-duration">45 דקות</div>
+          <a href="https://wa.me/972546969891?text=היי,%20אשמח%20להזמין%20שיעור" class="pricing-book-btn">הזמינו עכשיו</a>
+        </div>
+
+        <div class="pricing-card featured reveal reveal-delay-2">
+          <div class="pricing-card-name">כפול</div>
+          <div class="pricing-card-price">₪215</div>
+          <div class="pricing-card-duration">שעה וחצי</div>
+          <a href="https://wa.me/972546969891?text=היי,%20אשמח%20להזמין%20שיעור" class="pricing-book-btn">הזמינו עכשיו</a>
+        </div>
+
+        <div class="pricing-card reveal reveal-delay-3">
+          <div class="pricing-card-name">משולש</div>
+          <div class="pricing-card-price">₪300</div>
+          <div class="pricing-card-duration">שעתיים ורבע</div>
+          <a href="https://wa.me/972546969891?text=היי,%20אשמח%20להזמין%20שיעור" class="pricing-book-btn">הזמינו עכשיו</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── ABOUT ───────────────────────────────────────────── -->
+  <section id="about-us">
+    <div class="container section-center">
+      <div class="section-label">עלינו</div>
+      <h2 class="section-title">קצת עלינו</h2>
+      <div class="about-inner reveal">
+        <p>
+          היי כאן ליאור וניקול, תלמידים מצטיינים לשעבר עם תעודת הצטיינות ממשרד החינוך ומנכ"ל אורט. עם אהבה אמיתית ללמידה ולהוראה, ונסיון בליווי אישי של עשרות תלמידים מכל הרמות.
+        </p>
+        <p>
+          אנחנו מאמינים שלכל אחד יש דרך אחרת להבין — והתפקיד שלנו הוא למצוא אותה ולהפוך את הלמידה לחוויה פשוטה, ברורה ומעצימה.
+        </p>
+        <img src="./images/lior_acc.jpeg" class="about-img" alt="ליאור" loading="lazy" />
+      </div>
+    </div>
+  </section>
+
+  <!-- ── STICKY BOOKING BUTTON ───────────────────────────── -->
+  <section id="signup-button">
+    <a href="https://wa.me/972546969891?text=היי,%20אשמח%20להזמין%20שיעור" class="book-cta">
+      🗓️ הזמנת שיעור
+    </a>
+  </section>
+
+  <!-- ── FAQs ───────────────────────────────────────────── -->
+  <section id="faqs">
+    <div class="container section-center">
+      <div class="section-label">שאלות</div>
+      <h2 class="section-title">שאלות נפוצות</h2>
+
+      <div class="faq-list reveal">
+
+        <div class="faq-item open">
+          <div class="faq-question">
+            <span>איך מתבצע תהליך ההרשמה לשיעור?</span>
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              ניתן להירשם בקלות דרך כפתור "הזמנת שיעור" באתר, או ליצור קשר ישירות דרך הוואטסאפ. נחזור אליכם בהקדם לתיאום השיעור הראשון.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>האם השיעורים מתקיימים פנים מול פנים או אונליין?</span>
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              אנחנו מציעים גם שיעורים פרונטליים וגם שיעורים אונליין, בהתאם להעדפת התלמיד/ה. שני הפורמטים יעילים ומותאמים לצרכים השונים.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>מה משך השיעור?</span>
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              קיימת אפשרות להזמין שלושה סוגים של שיעורים: שיעור יחיד שאורכו 45 דקות, שיעור כפול שנמשך שעה וחצי ושיעור משולש שנמשך שעתיים ורבע.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>איך מתבצע התשלום?</span>
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              התשלום מתבצע בסוף כל שיעור, ניתן לשלם במזומן או בביט.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>לאיזה גילאים השיעורים מתאימים?</span>
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              השיעורים מתאימים לתלמידי בית ספר יסודי, חטיבת ביניים ותיכון.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>באילו מקצועות אתם מלמדים?</span>
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              אנחנו מלמדים מתמטיקה, פיזיקה, אנגלית, עברית ומחשבים.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>מתי מזמינים שיעור?</span>
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              בכל יום רביעי מתפרסמים תאריכים ושעות אפשריות לשיעור בשבוע שלאחר מכן. ניתן לקבוע שיעור רק בימי רביעי אחר הצהריים.
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ─────────────────────────────────────────── -->
   <section id="footer">
-      <div class="container">
-          <footer class="d-flex flex-wrap justify-content-between align-items-center py-4 border-top">
-            <div class="col-md-4 d-flex align-items-center">
-              <a href="/" class="mb-3 me-2 mb-md-0 text-body-secondary text-decoration-none lh-1">
-                <img src="./images/brainstorm.png" alt="Logo" width="30" height="30">
-              </a>
-              <span class="mb-3 mb-md-0 text-body-secondary">שיעורים פרטיים</span>
-            </div>
-          </footer>
-      </div>
+    <div class="footer-inner">
+      <svg width="24" height="24" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="לוגו">
+        <circle cx="28" cy="40" r="22" fill="var(--accent)"/>
+        <circle cx="28" cy="40" r="13" fill="var(--bg-base)"/>
+        <circle cx="60" cy="40" r="22" fill="var(--accent)"/>
+        <circle cx="60" cy="40" r="13" fill="var(--bg-base)"/>
+        <g transform="translate(50,8) rotate(18)">
+          <polygon points="0,0 0,24 6,18 9,27 13,25.5 10,17 16,17"
+                   fill="var(--accent2)" stroke="var(--bg-base)" stroke-width="1.4" stroke-linejoin="round"/>
+        </g>
+      </svg>
+      <span class="footer-text">מאה בקליק © 2026</span>
+    </div>
   </section>
 
-  <div id="popup-overlay" onclick="hideTutorInfos()"></div>
+  <!-- ── POPUP OVERLAY ──────────────────────────────────── -->
+  <div id="popup-overlay"></div>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
-  
+  <!-- ── SCRIPTS ────────────────────────────────────────── -->
   <script>
-    function scrollToSection(sectionId) {
-      const section = document.getElementById(sectionId);
-      if (section) {
-        section.scrollIntoView({ 
-          behavior: 'smooth',
-          block: 'start'
-        });
-      }
+    /* ── Smooth scroll ───────────────────────── */
+    function scrollToSection(id) {
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
-    // Back to Top Button
-    const backToTopButton = document.getElementById('backToTop');
-    
+    /* ── Sidebar ─────────────────────────────── */
+    const sidebar        = document.getElementById('sidebar');
+    const sidebarOverlay = document.getElementById('sidebarOverlay');
+    const hamburger      = document.getElementById('hamburger');
+    const sidebarClose   = document.getElementById('sidebarClose');
+
+    function openSidebar() {
+      sidebar.classList.add('open');
+      sidebarOverlay.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeSidebar() {
+      sidebar.classList.remove('open');
+      sidebarOverlay.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    hamburger.addEventListener('click', openSidebar);
+    sidebarClose.addEventListener('click', closeSidebar);
+    sidebarOverlay.addEventListener('click', closeSidebar);
+
+    /* ── Back to top ─────────────────────────── */
+    const btt = document.getElementById('backToTop');
     window.addEventListener('scroll', () => {
-      if (window.pageYOffset > 300) {
-        backToTopButton.classList.add('visible');
-      } else {
-        backToTopButton.classList.remove('visible');
-      }
-      // Hide all tutor info popups when scrolling on mobile only
-      if (window.innerWidth <= 992) {
-        document.querySelectorAll('.tutor-info').forEach(popup => {
-          popup.style.opacity = '0';
-          popup.style.visibility = 'hidden';
-        });
-      }
+      btt.classList.toggle('visible', window.scrollY > 320);
     });
+    btt.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
-    backToTopButton.addEventListener('click', () => {
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
-    });
+    /* ── Tutor popups (mobile) ───────────────── */
+    const overlay = document.getElementById('popup-overlay');
 
-    // Dark Mode Functionality
-    const themeToggle = document.getElementById('themeToggle');
-    const htmlElement = document.documentElement;
-    const themeIcon = themeToggle.querySelector('i');
-    
-    // Check for saved theme preference or use device preference
-    const getCurrentTheme = () => {
-      const savedTheme = localStorage.getItem('theme');
-      if (savedTheme) {
-        return savedTheme;
-      }
-      
-      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-    };
-    
-    // Apply the current theme
-    const applyTheme = (theme) => {
-      htmlElement.setAttribute('data-theme', theme);
-      
-      // Update button icon
-      if (theme === 'dark') {
-        themeIcon.classList.remove('fa-moon-o');
-        themeIcon.classList.add('fa-sun-o');
-      } else {
-        themeIcon.classList.remove('fa-sun-o');
-        themeIcon.classList.add('fa-moon-o');
-      }
-      
-      localStorage.setItem('theme', theme);
-    };
-    
-    // Initialize theme
-    applyTheme(getCurrentTheme());
-    
-    // Toggle theme
-    themeToggle.addEventListener('click', () => {
-      const currentTheme = htmlElement.getAttribute('data-theme');
-      const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-      applyTheme(newTheme);
-    });
+    function closeAllPopups() {
+      document.querySelectorAll('.tutor-info').forEach(p => p.classList.remove('active'));
+      overlay.classList.remove('active');
+    }
 
-    // Add fade-in animation to elements when they come into view
-    const observerOptions = {
-      root: null,
-      rootMargin: '0px',
-      threshold: 0.1
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('fade-in');
-        }
-      });
-    }, observerOptions);
-
-    document.querySelectorAll('section').forEach(section => {
-      observer.observe(section);
-    });
-
-    // Remove any existing tutor card click handlers
     document.querySelectorAll('.tutor-card').forEach(card => {
-      const newCard = card.cloneNode(true);
-      card.parentNode.replaceChild(newCard, card);
-    });
-    
-    // Add overlay to page
-    const overlay = document.createElement('div');
-    overlay.className = 'tutor-overlay';
-    document.body.appendChild(overlay);
-    
-    // Add close buttons to popups
-    document.querySelectorAll('.tutor-info').forEach(popup => {
-      const closeBtn = document.createElement('div');
-      closeBtn.className = 'close-popup';
-      closeBtn.innerHTML = '×';
-      popup.appendChild(closeBtn);
-    });
-    
-    // Mobile popup handler
-    function setupMobilePopups() {
-      console.log('Setting up mobile popups');
-      
-      // Setup popup handlers
-      document.querySelectorAll('.tutor-card').forEach(card => {
-        card.addEventListener('click', function(e) {
-          console.log('Tutor card clicked');
-          if (window.innerWidth <= 992) {
-            e.preventDefault();
-            e.stopPropagation();
-            
-            // Get popup
-            const popup = this.querySelector('.tutor-info');
-            if (popup) {
-              console.log('Showing popup');
-              
-              // Hide any other popups
-              document.querySelectorAll('.tutor-info').forEach(p => {
-                p.style.display = 'none';
-              });
-              
-              // Show this popup
-              popup.style.display = 'block';
-              overlay.style.display = 'block';
-            }
-          }
-        });
-      });
-      
-      // Setup close handlers
-      document.querySelectorAll('.close-popup').forEach(btn => {
-        btn.addEventListener('click', function(e) {
-          console.log('Close button clicked');
-          e.stopPropagation();
-          closeAllPopups();
-        });
-      });
-      
-      // Close popups when overlay is clicked
-      overlay.addEventListener('click', function() {
-        console.log('Overlay clicked');
+      card.addEventListener('click', () => {
+        if (window.innerWidth > 992) return;
+        const popup = card.querySelector('.tutor-info');
+        const isOpen = popup.classList.contains('active');
         closeAllPopups();
+        if (!isOpen) {
+          popup.classList.add('active');
+          overlay.classList.add('active');
+        }
       });
-      
-      function closeAllPopups() {
-        console.log('Closing all popups');
-        document.querySelectorAll('.tutor-info').forEach(popup => {
-          popup.style.display = 'none';
-        });
-        overlay.style.display = 'none';
-      }
-    }
-    
-    // Setup on load and resize
-    window.addEventListener('DOMContentLoaded', setupMobilePopups);
-    window.addEventListener('resize', setupMobilePopups);
-    
-    // Make sure it gets set up
-    if (document.readyState === 'complete' || document.readyState === 'interactive') {
-      setTimeout(setupMobilePopups, 1);
-    }
-
-    document.addEventListener('DOMContentLoaded', function() {
-        // Smooth scroll functionality
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const targetId = this.getAttribute('href');
-                const targetElement = document.querySelector(targetId);
-                
-                if (targetElement) {
-                    // Remove active class from all links
-                    document.querySelectorAll('.nav-link').forEach(link => {
-                        link.classList.remove('active');
-                    });
-                    
-                    // Add active class to clicked link
-                    this.classList.add('active');
-                    
-                    // Scroll to target
-                    targetElement.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-
-        // Update active state based on scroll position
-        window.addEventListener('scroll', function() {
-            const scrollPosition = window.scrollY;
-            
-            document.querySelectorAll('section').forEach(section => {
-                const sectionTop = section.offsetTop - 100;
-                const sectionBottom = sectionTop + section.offsetHeight;
-                
-                if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
-                    const correspondingLink = document.querySelector(`a[href="#${section.id}"]`);
-                    if (correspondingLink) {
-                        document.querySelectorAll('.nav-link').forEach(link => {
-                            link.classList.remove('active');
-                        });
-                        correspondingLink.classList.add('active');
-                    }
-                }
-            });
-        });
     });
 
-    // Handle smooth scrolling for navigation links
-    document.addEventListener('DOMContentLoaded', function() {
-        document.querySelectorAll('.scroll-link').forEach(link => {
-            link.addEventListener('click', function(e) {
-                e.preventDefault();
-                const targetId = this.getAttribute('href');
-                const targetSection = document.querySelector(targetId);
-                
-                if (targetSection) {
-                    targetSection.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                    
-                    // Update active state
-                    document.querySelectorAll('.nav-link').forEach(navLink => {
-                        navLink.classList.remove('active');
-                    });
-                    this.classList.add('active');
-                }
-            });
-        });
+    document.querySelectorAll('[data-close]').forEach(btn => {
+      btn.addEventListener('click', e => { e.stopPropagation(); closeAllPopups(); });
     });
+    overlay.addEventListener('click', closeAllPopups);
 
-    function toggleTutorInfo(id) {
-        if (window.innerWidth <= 992) {
-            console.log('Toggling info for: ' + id);
-            
-            // Make sure overlay exists
-            let overlay = document.getElementById('popup-overlay');
-            if (!overlay) {
-                overlay = document.createElement('div');
-                overlay.id = 'popup-overlay';
-                overlay.onclick = hideTutorInfos;
-                document.body.appendChild(overlay);
-            }
-            
-            // Hide all popups first
-            hideTutorInfos();
-            
-            // Show selected popup
-            const popup = document.getElementById(id + '-info');
-            if (popup) {
-                console.log('Showing popup');
-                popup.style.display = 'block';
-                overlay.style.display = 'block';
-            } else {
-                console.error('Popup not found: ' + id + '-info');
-            }
-        }
-    }
-    
-    function hideTutorInfos() {
-        console.log('Hiding all popups');
-        document.querySelectorAll('.tutor-info').forEach(popup => {
-            popup.style.display = 'none';
-        });
-        
-        const overlay = document.getElementById('popup-overlay');
-        if (overlay) {
-            overlay.style.display = 'none';
-        }
-    }
-    
-    // Close popups when clicking outside
-    document.addEventListener('click', function(e) {
-        if (window.innerWidth <= 992) {
-            if (!e.target.closest('.tutor-card') && !e.target.closest('.tutor-info')) {
-                hideTutorInfos();
-            }
-        }
-    });
+    /* ── Scroll reveal ───────────────────────── */
+    const revealObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.1 });
 
-    // Simple mobile popup functionality
-    document.addEventListener('DOMContentLoaded', function() {
-        // Only run on mobile devices
-        if (window.innerWidth <= 992) {
-            console.log('Mobile device detected');
-            
-            // Add close buttons to popups
-            document.querySelectorAll('.tutor-info').forEach(function(popup) {
-                var closeBtn = document.createElement('div');
-                closeBtn.className = 'popup-close';
-                closeBtn.innerHTML = '✕';
-                closeBtn.addEventListener('click', function(e) {
-                    e.stopPropagation();
-                    popup.style.display = 'none';
-                });
-                popup.appendChild(closeBtn);
-            });
-            
-            // Add click handlers to tutor cards
-            document.querySelectorAll('.tutor-card').forEach(function(card) {
-                card.addEventListener('click', function() {
-                    console.log('Card clicked');
-                    // Hide all popups first
-                    document.querySelectorAll('.tutor-info').forEach(function(p) {
-                        p.style.display = 'none';
-                    });
-                    
-                    // Then show this popup
-                    var popup = this.querySelector('.tutor-info');
-                    if (popup) {
-                        console.log('Showing popup');
-                        popup.style.display = 'block';
-                    }
-                });
-            });
-            
-            // Close popups when clicking outside
-            document.addEventListener('click', function(e) {
-                if (!e.target.closest('.tutor-card') && !e.target.closest('.tutor-info')) {
-                    document.querySelectorAll('.tutor-info').forEach(function(popup) {
-                        popup.style.display = 'none';
-                    });
-                }
-            });
-        }
-    });
+    document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
 
-    // Global popup functions
-    function showPopup(popupId) {
-      console.log('Showing popup: ' + popupId);
-      document.getElementById(popupId).style.display = 'block';
-      document.body.style.overflow = 'hidden'; // Prevent scrolling
-    }
-    
-    function closePopup(popupId) {
-      console.log('Closing popup: ' + popupId);
-      document.getElementById(popupId).style.display = 'none';
-      document.body.style.overflow = ''; // Re-enable scrolling
-    }
-    
-    // Mobile detection and setup
-    document.addEventListener('DOMContentLoaded', function() {
-      console.log('DOM loaded');
-      
-      // Add click handlers only on mobile
-      if (window.innerWidth <= 992) {
-        console.log('Setting up mobile handlers');
-        
-        // Nikol card
-        var nikolCard = document.querySelector('.tutor-nikol');
-        if (nikolCard) {
-          console.log('Found Nikol card');
-          nikolCard.addEventListener('click', function() {
-            console.log('Nikol card clicked');
-            showPopup('nikolPopup');
-          });
-        }
-        
-        // Lior card
-        var liorCard = document.querySelector('.tutor-lior');
-        if (liorCard) {
-          console.log('Found Lior card');
-          liorCard.addEventListener('click', function() {
-            console.log('Lior card clicked');
-            showPopup('liorPopup');
-          });
-        }
-      }
+    /* ── FAQ accordion ───────────────────────── */
+    document.querySelectorAll('.faq-question').forEach(q => {
+      q.addEventListener('click', () => {
+        const item = q.closest('.faq-item');
+        const isOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+        if (!isOpen) item.classList.add('open');
+      });
     });
-    
-    // Same for touch start events
-    document.addEventListener('touchstart', function() {
-      console.log('Touch event detected');
-    }, {once: true}); // Only log once
   </script>
 
-  <!-- Add these at the end of your body, before any scripts -->
-  <div id="nikolPopup" class="mobile-popup">
-    <div class="mobile-popup-content">
-      <span class="mobile-close" onclick="closePopup('nikolPopup')">&times;</span>
-      <h3>ניקול</h3>
-      <ul>
-        <li>⭐ סיימה שירות משמעותי בתפקיד פיקודי</li>
-        <li>📚 מתחילה לימודי ריפוי בעיסוק </li>
-        <li>👩‍🏫 ניסיון רב בהוראה פרטית</li>
-        <li>🎯 מתמחה במתמטיקה עברית ופיזיקה </li>
-      </ul>
-    </div>
-  </div>
-  
-  <div id="liorPopup" class="mobile-popup">
-    <div class="mobile-popup-content">
-      <span class="mobile-close" onclick="closePopup('liorPopup')">&times;</span>
-      <h3>ליאור</h3>
-      <ul>
-        <li>🎓 עתודאי בתכנית מואצת לתואר שני</li>
-        <li>💻 עובד בחברת סטארטאפ</li>
-        <li>👨‍🏫 מדריך בתכניות סטארטק ומגשימים</li>
-        <li>🎯 מתמחה במתמטיקה אנגלית ותכנות</li>
-      </ul>
-    </div>
-  </div>
 </body>
 </html>

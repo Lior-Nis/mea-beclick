@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>פורטל הורים — שיעורים פרטיים</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;600;700;800;900&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg:           #F4FAF9;
+      --surface:      #ffffff;
+      --card:         #ffffff;
+      --accent:       #008080;
+      --accent-soft:  #2AA8A8;
+      --accent-dim:   rgba(0,128,128,0.08);
+      --accent-glow:  rgba(0,128,128,0.18);
+      --coral:        #FF7F50;
+      --coral-dim:    rgba(255,127,80,0.10);
+      --coral-border: rgba(255,127,80,0.35);
+      --text:         #1A3333;
+      --muted:        #4A7878;
+      --faint:        #C5DFDF;
+      --green:        #16a34a;
+      --green-dim:    rgba(22,163,74,0.10);
+      --green-border: rgba(22,163,74,0.30);
+      --red:          #dc2626;
+      --red-dim:      rgba(220,38,38,0.08);
+      --red-border:   rgba(220,38,38,0.28);
+      --yellow:       #d97706;
+      --yellow-dim:   rgba(217,119,6,0.10);
+      --yellow-border:rgba(217,119,6,0.30);
+      --nav-bg:       rgba(244,250,249,0.94);
+      --shadow:       rgba(0,80,80,0.07);
+      --shadow-md:    rgba(0,80,80,0.13);
+      --r-sm:10px; --r-md:16px; --r-lg:22px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      direction: rtl; font-family: 'Heebo', sans-serif;
+      background: var(--bg); color: var(--text);
+      line-height: 1.7; overflow-x: hidden; min-height: 100vh;
+    }
+    body::before {
+      content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 0;
+      background-image: radial-gradient(rgba(0,128,128,0.12) 1.5px, transparent 1.5px);
+      background-size: 28px 28px; opacity: 0.3;
+    }
+    * { position: relative; }
+
+    /* ── LOCK ── */
+    #lock-screen {
+      position: fixed; inset: 0;
+      background: linear-gradient(160deg, #e6f7f7 0%, #f4faf9 60%, #fef9e7 100%);
+      display: flex; align-items: center; justify-content: center;
+      z-index: 9999; flex-direction: column; gap: 18px; padding: 2rem;
+    }
+    .lock-logo { font-size: 3rem; }
+    .lock-title { font-size: 2rem; font-weight: 900; color: var(--accent); text-align: center; }
+    .lock-sub { color: var(--muted); font-size: 0.9rem; text-align: center; }
+    .lock-card {
+      background: var(--card); border: 1px solid var(--faint);
+      border-radius: var(--r-lg); padding: 28px 32px;
+      width: min(380px, 95vw); box-shadow: 0 8px 40px var(--shadow-md);
+      display: flex; flex-direction: column; gap: 14px;
+    }
+    .lock-card label { font-size: 0.78rem; font-weight: 700; color: var(--muted); letter-spacing: 0.06em; text-transform: uppercase; }
+    .lock-card input {
+      font-family: 'Heebo', sans-serif; background: var(--bg);
+      border: 1.5px solid var(--faint); color: var(--text);
+      border-radius: var(--r-sm); padding: 11px 16px; font-size: 1rem;
+      width: 100%; outline: none; transition: border-color 0.2s;
+      text-align: center; letter-spacing: 0.15em;
+    }
+    .lock-card input:focus { border-color: var(--accent); }
+    .lock-btn {
+      background: var(--accent); color: #fff; font-family: 'Heebo', sans-serif;
+      font-weight: 800; font-size: 1rem; border: none;
+      border-radius: var(--r-sm); padding: 12px; cursor: pointer;
+      transition: opacity 0.2s, transform 0.15s;
+    }
+    .lock-btn:hover { opacity: 0.88; transform: translateY(-1px); }
+    #lock-error { color: var(--red); font-size: 0.85rem; text-align: center; min-height: 18px; }
+    .lock-back { color: var(--muted); font-size: 0.82rem; text-align: center; cursor: pointer; text-decoration: underline; }
+    .lock-back:hover { color: var(--accent); }
+    .student-btns { display: flex; flex-direction: column; gap: 10px; }
+    .student-btn {
+      background: var(--bg); border: 1.5px solid var(--faint);
+      border-radius: var(--r-sm); padding: 13px 16px; cursor: pointer;
+      font-family: 'Heebo', sans-serif; font-size: 0.95rem; font-weight: 700;
+      color: var(--text); transition: border-color 0.2s, background 0.2s;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .student-btn:hover { border-color: var(--accent); background: var(--accent-dim); }
+    .sb-emoji { font-size: 1.4rem; }
+    .sb-info small { display: block; font-weight: 400; font-size: 0.78rem; color: var(--muted); }
+    .no-students { text-align: center; color: var(--muted); font-size: 0.9rem; padding: 8px 0; }
+
+    /* ── NAV ── */
+    #top-nav {
+      position: sticky; top: 0; z-index: 100;
+      background: var(--nav-bg); backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--faint); padding: 0 2rem; height: 60px;
+      display: none; align-items: center; justify-content: space-between;
+    }
+    .nav-brand { font-size: 1rem; font-weight: 800; color: var(--accent); }
+    .nav-brand span { color: var(--muted); font-weight: 400; font-size: 0.85rem; margin-right: 8px; }
+    .nav-logout {
+      font-family: 'Heebo', sans-serif; font-size: 0.82rem; font-weight: 700;
+      color: var(--muted); background: none; border: 1px solid var(--faint);
+      border-radius: var(--r-sm); padding: 6px 16px; cursor: pointer;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .nav-logout:hover { color: var(--accent); border-color: var(--accent-soft); }
+
+    /* ── MAIN ── */
+    #main { display: none; }
+    .page { max-width: 1100px; margin: 0 auto; padding: 2.5rem 1.5rem 6rem; }
+
+    /* Student Header */
+    .student-header {
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent-soft) 100%);
+      border-radius: var(--r-lg); padding: 26px 30px;
+      display: flex; align-items: center; gap: 18px; margin-bottom: 1.8rem;
+      box-shadow: 0 6px 30px var(--accent-glow);
+    }
+    .sh-avatar {
+      width: 60px; height: 60px; border-radius: 50%;
+      background: rgba(255,255,255,0.2); border: 2px solid rgba(255,255,255,0.4);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.9rem; flex-shrink: 0;
+    }
+    .sh-name { font-size: 1.6rem; font-weight: 900; color: #fff; line-height: 1.2; }
+    .sh-meta { font-size: 0.85rem; color: rgba(255,255,255,0.75); margin-top: 3px; }
+    .sh-badges { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
+    .sh-badge {
+      font-size: 0.72rem; font-weight: 700; padding: 3px 11px; border-radius: 20px;
+      background: rgba(255,255,255,0.18); color: #fff; border: 1px solid rgba(255,255,255,0.3);
+    }
+
+    /* Stats */
+    .stats-bar { display: grid; grid-template-columns: repeat(auto-fit,minmax(160px,1fr)); gap: 14px; margin-bottom: 2rem; }
+    .stat-card { background: var(--card); border: 1px solid var(--faint); border-radius: var(--r-md); padding: 18px 20px; box-shadow: 0 2px 12px var(--shadow); }
+    .stat-card .s-label { font-size: 0.72rem; font-weight: 700; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 6px; }
+    .stat-card .s-value { font-size: 1.9rem; font-weight: 900; color: var(--text); line-height: 1.1; }
+    .stat-card .s-value.accent  { color: var(--accent); }
+    .stat-card .s-value.green   { color: var(--green); }
+    .stat-card .s-value.coral   { color: var(--coral); }
+    .stat-card .s-sub { font-size: 0.76rem; color: var(--muted); margin-top: 4px; }
+
+    /* Section */
+    .section { margin-bottom: 2.2rem; }
+    .sec-header { display: flex; align-items: center; gap: 10px; margin-bottom: 1rem; padding-bottom: 10px; border-bottom: 2px solid var(--faint); }
+    .sec-icon { font-size: 1.2rem; }
+    .sec-title { font-size: 1.1rem; font-weight: 800; color: var(--text); }
+    .sec-badge { margin-right: auto; font-size: 0.72rem; font-weight: 700; padding: 3px 10px; border-radius: 20px; background: var(--accent-dim); color: var(--accent); border: 1px solid rgba(0,128,128,0.25); }
+
+    /* Next lesson */
+    .next-lesson-box {
+      background: linear-gradient(135deg, var(--accent-dim), rgba(255,127,80,0.04));
+      border: 1.5px solid rgba(0,128,128,0.22); border-radius: var(--r-md);
+      padding: 18px 22px; display: flex; align-items: center; gap: 18px;
+    }
+    .nl-icon { font-size: 2.2rem; flex-shrink: 0; }
+    .nl-label { font-size: 0.72rem; font-weight: 700; color: var(--accent); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 4px; }
+    .nl-date { font-size: 1.45rem; font-weight: 900; color: var(--text); }
+    .nl-meta { font-size: 0.85rem; color: var(--muted); margin-top: 2px; }
+    .no-upcoming { color: var(--muted); font-size: 0.9rem; text-align: center; padding: 20px; background: var(--surface); border: 1px dashed var(--faint); border-radius: var(--r-md); }
+
+    /* Lessons table */
+    .table-wrap { overflow-x: auto; border-radius: var(--r-md); box-shadow: 0 2px 12px var(--shadow); }
+    .data-table { width: 100%; border-collapse: collapse; font-size: 0.88rem; background: var(--card); border-radius: var(--r-md); overflow: hidden; }
+    .data-table thead { background: var(--accent-dim); }
+    .data-table th { text-align: right; padding: 11px 15px; color: var(--accent); font-size: 0.72rem; font-weight: 800; letter-spacing: 0.07em; text-transform: uppercase; border-bottom: 1.5px solid rgba(0,128,128,0.18); }
+    .data-table td { padding: 11px 15px; border-bottom: 1px solid var(--faint); color: var(--text); vertical-align: top; }
+    .data-table tr:last-child td { border-bottom: none; }
+    .data-table tr:hover td { background: var(--accent-dim); }
+    .pill { display: inline-block; font-size: 0.72rem; font-weight: 700; padding: 3px 9px; border-radius: 20px; background: var(--accent-dim); color: var(--accent); border: 1px solid rgba(0,128,128,0.2); }
+    .lesson-topic { font-weight: 700; }
+    .lesson-notes { font-size: 0.8rem; color: var(--muted); margin-top: 2px; }
+    .empty-row { text-align: center; color: var(--muted); padding: 24px; font-size: 0.9rem; }
+
+    /* Homework */
+    .hw-list { display: flex; flex-direction: column; gap: 10px; }
+    .hw-item { background: var(--card); border: 1px solid var(--faint); border-radius: var(--r-md); padding: 13px 16px; display: flex; align-items: flex-start; gap: 12px; box-shadow: 0 2px 8px var(--shadow); }
+    .hw-status-icon { font-size: 1.2rem; flex-shrink: 0; margin-top: 2px; }
+    .hw-content { flex: 1; }
+    .hw-task { font-size: 0.9rem; font-weight: 700; color: var(--text); }
+    .hw-task.done { text-decoration: line-through; color: var(--muted); font-weight: 400; }
+    .hw-meta { font-size: 0.76rem; color: var(--muted); margin-top: 2px; }
+    .hw-badge { flex-shrink: 0; font-size: 0.72rem; font-weight: 700; padding: 3px 10px; border-radius: 20px; align-self: flex-start; margin-top: 2px; }
+    .hw-badge.done  { background: var(--green-dim);  border: 1px solid var(--green-border);  color: var(--green); }
+    .hw-badge.open  { background: var(--yellow-dim); border: 1px solid var(--yellow-border); color: var(--yellow); }
+
+    /* Progress */
+    .progress-overall { background: var(--card); border: 1px solid var(--faint); border-radius: var(--r-md); padding: 20px 22px; box-shadow: 0 2px 10px var(--shadow); margin-bottom: 14px; }
+    .po-top { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 10px; }
+    .po-label { font-size: 0.9rem; font-weight: 700; color: var(--text); }
+    .po-pct { font-size: 1.4rem; font-weight: 900; color: var(--accent); }
+    .bar-bg { height: 10px; background: var(--faint); border-radius: 6px; overflow: hidden; }
+    .bar-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent-soft)); border-radius: 6px; transition: width 0.7s cubic-bezier(.4,0,.2,1); }
+    .notes-card { background: var(--card); border: 1px solid var(--faint); border-radius: var(--r-md); padding: 18px 20px; box-shadow: 0 2px 10px var(--shadow); font-size: 0.9rem; color: var(--muted); line-height: 1.8; }
+    .notes-card strong { color: var(--text); }
+
+    /* Payments */
+    .payments-summary { display: grid; grid-template-columns: repeat(auto-fit,minmax(150px,1fr)); gap: 12px; margin-bottom: 1.2rem; }
+    .pay-sum-card { border-radius: var(--r-md); padding: 15px 18px; text-align: center; }
+    .pay-sum-card.paid    { background: var(--green-dim);  border: 1px solid var(--green-border); }
+    .pay-sum-card.pending { background: var(--yellow-dim); border: 1px solid var(--yellow-border); }
+    .pay-sum-card.total   { background: var(--accent-dim); border: 1px solid rgba(0,128,128,0.22); }
+    .psc-amount { font-size: 1.5rem; font-weight: 900; }
+    .pay-sum-card.paid    .psc-amount { color: var(--green); }
+    .pay-sum-card.pending .psc-amount { color: var(--yellow); }
+    .pay-sum-card.total   .psc-amount { color: var(--accent); }
+    .psc-label { font-size: 0.72rem; font-weight: 700; color: var(--muted); letter-spacing: 0.06em; text-transform: uppercase; margin-top: 4px; }
+    .pay-badge { font-size: 0.75rem; font-weight: 700; padding: 3px 10px; border-radius: 20px; }
+    .pay-badge.paid    { background: var(--green-dim);  border: 1px solid var(--green-border);  color: var(--green); }
+    .pay-badge.pending { background: var(--yellow-dim); border: 1px solid var(--yellow-border); color: var(--yellow); }
+
+    /* Footer */
+    .footer { text-align: center; padding: 3rem 1rem 2rem; font-size: 0.8rem; color: var(--muted); }
+
+    @media (max-width: 600px) {
+      .student-header { flex-direction: column; text-align: center; gap: 12px; }
+      .sh-badges { justify-content: center; }
+      .stats-bar { grid-template-columns: 1fr 1fr; }
+      .next-lesson-box { flex-direction: column; gap: 10px; }
+      #top-nav { padding: 0 1rem; }
+      .page { padding: 1.5rem 1rem 5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════
+     LOCK SCREEN
+══════════════════════════════════ -->
+<div id="lock-screen">
+  <div class="lock-logo">🎓</div>
+  <div class="lock-title">פורטל הורים</div>
+  <div class="lock-sub">ניקול וליאור · שיעורים פרטיים</div>
+
+  <!-- Step 1: choose student -->
+  <div id="step-choose" class="lock-card">
+    <div style="font-size:0.85rem;font-weight:700;color:var(--muted);text-align:center;letter-spacing:0.04em">בחרו את שם התלמיד/ה</div>
+    <div class="student-btns" id="student-btns"></div>
+  </div>
+
+  <!-- Step 2: enter PIN -->
+  <div id="step-pin" class="lock-card" style="display:none">
+    <div id="pin-student-name" style="font-size:1rem;font-weight:800;color:var(--accent);text-align:center"></div>
+    <label for="pin-input">קוד גישה אישי</label>
+    <input type="password" id="pin-input" placeholder="••••" maxlength="6"
+           onkeydown="if(event.key==='Enter')checkPin()"/>
+    <button class="lock-btn" onclick="checkPin()">כניסה לפורטל</button>
+    <div id="lock-error"></div>
+    <div class="lock-back" onclick="backToChoose()">← חזרה לבחירת תלמיד</div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════
+     NAV
+══════════════════════════════════ -->
+<nav id="top-nav">
+  <div class="nav-brand">פורטל הורים <span id="nav-student-name"></span></div>
+  <button class="nav-logout" onclick="logout()">יציאה</button>
+</nav>
+
+
+<!-- ══════════════════════════════════
+     MAIN DASHBOARD
+══════════════════════════════════ -->
+<div id="main">
+  <div class="page">
+
+    <div class="student-header">
+      <div class="sh-avatar" id="sh-avatar">👩‍🎓</div>
+      <div>
+        <div class="sh-name" id="sh-name"></div>
+        <div class="sh-meta" id="sh-meta"></div>
+        <div class="sh-badges" id="sh-badges"></div>
+      </div>
+    </div>
+
+    <div class="stats-bar" id="stats-bar"></div>
+
+    <div class="section">
+      <div class="sec-header"><span class="sec-icon">📅</span><span class="sec-title">השיעור הבא</span></div>
+      <div id="next-lesson-area"></div>
+    </div>
+
+    <div class="section">
+      <div class="sec-header">
+        <span class="sec-icon">📚</span><span class="sec-title">יומן שיעורים</span>
+        <span class="sec-badge" id="lessons-count-badge"></span>
+      </div>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead><tr><th>תאריך</th><th>סוג / משך</th><th>נושא / הערות</th></tr></thead>
+          <tbody id="lessons-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="sec-header">
+        <span class="sec-icon">✏️</span><span class="sec-title">שיעורי בית</span>
+        <span class="sec-badge" id="hw-count-badge"></span>
+      </div>
+      <div class="hw-list" id="hw-list"></div>
+    </div>
+
+    <div class="section">
+      <div class="sec-header"><span class="sec-icon">📈</span><span class="sec-title">התקדמות</span></div>
+      <div class="progress-overall">
+        <div class="po-top">
+          <span class="po-label">רמת התקדמות כללית</span>
+          <span class="po-pct" id="progress-pct">0%</span>
+        </div>
+        <div class="bar-bg"><div class="bar-fill" id="progress-bar" style="width:0%"></div></div>
+      </div>
+      <div class="notes-card" id="progress-notes">אין הערות כרגע.</div>
+    </div>
+
+    <div class="section">
+      <div class="sec-header"><span class="sec-icon">💳</span><span class="sec-title">תשלומים</span></div>
+      <div class="payments-summary" id="payments-summary"></div>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead><tr><th>תאריך</th><th>תיאור</th><th>סכום</th><th>סטטוס</th></tr></thead>
+          <tbody id="payments-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer">
+    <p>פורטל הורים · ניקול וליאור שיעורים פרטיים</p>
+  </div>
+</div>
+
+
+<script>
+/* ═══════════════════════════════════════════════════════
+   DATA — reads from the same localStorage as dashboard.html
+   ═══════════════════════════════════════════════════════ */
+const LS_DATA = 'tutor_dashboard_v2';
+const LS_PINS = 'parent_pins';       // { studentId: "1234" }
+
+function getStudents() {
+  try {
+    const raw = localStorage.getItem(LS_DATA);
+    return raw ? JSON.parse(raw).students || [] : [];
+  } catch(e) { return []; }
+}
+
+function getPins() {
+  try {
+    const raw = localStorage.getItem(LS_PINS);
+    return raw ? JSON.parse(raw) : {};
+  } catch(e) { return {}; }
+}
+
+/* ═══════════════════════════════════
+   AUTH
+═══════════════════════════════════ */
+let currentId = null;
+
+function buildChooser() {
+  const students = getStudents();
+  const wrap = document.getElementById('student-btns');
+  wrap.innerHTML = '';
+  if (!students.length) {
+    wrap.innerHTML = '<div class="no-students">אין תלמידים רשומים עדיין</div>';
+    return;
+  }
+  students.forEach(s => {
+    const btn = document.createElement('button');
+    btn.className = 'student-btn';
+    btn.innerHTML = `<span class="sb-emoji">${s.emoji||'🎓'}</span>
+      <div class="sb-info">${s.name}<small>${s.subject}${s.level?' · '+s.level:''}</small></div>`;
+    btn.onclick = () => selectStudent(s.id);
+    wrap.appendChild(btn);
+  });
+}
+
+function selectStudent(id) {
+  currentId = id;
+  const students = getStudents();
+  const s = students.find(x => x.id === id);
+  if (!s) return;
+  document.getElementById('step-choose').style.display = 'none';
+  document.getElementById('step-pin').style.display    = 'flex';
+  document.getElementById('step-pin').style.flexDirection = 'column';
+  document.getElementById('pin-student-name').textContent = `${s.emoji||'🎓'} ${s.name}`;
+  document.getElementById('pin-input').value = '';
+  document.getElementById('lock-error').textContent = '';
+  document.getElementById('pin-input').focus();
+}
+
+function backToChoose() {
+  currentId = null;
+  document.getElementById('step-pin').style.display   = 'none';
+  document.getElementById('step-choose').style.display = 'flex';
+  document.getElementById('lock-error').textContent = '';
+  buildChooser();
+}
+
+function checkPin() {
+  if (!currentId) return;
+  const pins = getPins();
+  const val  = document.getElementById('pin-input').value.trim();
+  const expected = pins[currentId];
+
+  if (!expected) {
+    document.getElementById('lock-error').textContent = 'קוד לא הוגדר עדיין. פנו למורה.';
+    return;
+  }
+  if (val === expected) {
+    document.getElementById('lock-screen').style.display = 'none';
+    document.getElementById('top-nav').style.display    = 'flex';
+    document.getElementById('main').style.display       = 'block';
+    renderDashboard(currentId);
+  } else {
+    const err = document.getElementById('lock-error');
+    err.textContent = 'קוד שגוי. נסו שוב.';
+    document.getElementById('pin-input').value = '';
+    document.getElementById('pin-input').focus();
+    setTimeout(() => err.textContent = '', 3000);
+  }
+}
+
+function logout() {
+  currentId = null;
+  document.getElementById('lock-screen').style.display = 'flex';
+  document.getElementById('top-nav').style.display    = 'none';
+  document.getElementById('main').style.display       = 'none';
+  // reset inner html for re-render
+  document.getElementById('sh-badges').innerHTML = '';
+  document.getElementById('stats-bar').innerHTML = '';
+  document.getElementById('lessons-tbody').innerHTML = '';
+  document.getElementById('hw-list').innerHTML = '';
+  document.getElementById('payments-tbody').innerHTML = '';
+  document.getElementById('payments-summary').innerHTML = '';
+  backToChoose();
+}
+
+/* ═══════════════════════════════════
+   RENDER
+═══════════════════════════════════ */
+function renderDashboard(id) {
+  const students = getStudents();
+  const s = students.find(x => x.id === id);
+  if (!s) return;
+
+  document.title = `פורטל הורים — ${s.name}`;
+  document.getElementById('nav-student-name').textContent = s.name;
+
+  // Header
+  document.getElementById('sh-avatar').textContent = s.emoji || '🎓';
+  document.getElementById('sh-name').textContent   = s.name;
+  document.getElementById('sh-meta').textContent   =
+    [s.subject, s.level, s.tutor ? 'מורה: '+s.tutor : ''].filter(Boolean).join(' · ');
+  const badgesEl = document.getElementById('sh-badges');
+  badgesEl.innerHTML = '';
+  [s.subject, s.level, s.style ? 'סגנון: '+s.style : ''].filter(Boolean).forEach(t => {
+    const b = document.createElement('span');
+    b.className = 'sh-badge'; b.textContent = t;
+    badgesEl.appendChild(b);
+  });
+
+  // Stats
+  const sessions     = s.sessions || [];
+  const totalSessions= sessions.length;
+  const totalAmount  = sessions.reduce((a, x) => a + (x.amount||0), 0);
+  const paidAmount   = sessions.reduce((a, x) => a + (x.paid ? x.amount : 0), 0);
+  const pendingAmount= totalAmount - paidAmount;
+  const hwPending    = (s.homework||[]).filter(h => !h.done).length;
+
+  document.getElementById('stats-bar').innerHTML = `
+    <div class="stat-card">
+      <div class="s-label">שיעורים שנעשו</div>
+      <div class="s-value accent">${totalSessions}</div>
+      <div class="s-sub">שיעורים סה"כ</div>
+    </div>
+    <div class="stat-card">
+      <div class="s-label">שיעורי בית פתוחים</div>
+      <div class="s-value ${hwPending>0?'coral':'green'}">${hwPending}</div>
+      <div class="s-sub">${hwPending>0?'ממתינים לביצוע':'הכל הוגש ✓'}</div>
+    </div>
+    <div class="stat-card">
+      <div class="s-label">שולם</div>
+      <div class="s-value green">${paidAmount}₪</div>
+      <div class="s-sub">מתוך ${totalAmount}₪</div>
+    </div>
+    <div class="stat-card">
+      <div class="s-label">יתרה לתשלום</div>
+      <div class="s-value ${pendingAmount>0?'coral':'green'}">${pendingAmount}₪</div>
+      <div class="s-sub">${pendingAmount>0?'ממתין לתשלום':'מעודכן ✓'}</div>
+    </div>`;
+
+  // Next lesson
+  const nlArea = document.getElementById('next-lesson-area');
+  if (s.nextLesson && s.nextLesson.date) {
+    const nl = s.nextLesson;
+    nlArea.innerHTML = `
+      <div class="next-lesson-box">
+        <div class="nl-icon">📅</div>
+        <div>
+          <div class="nl-label">שיעור הבא</div>
+          <div class="nl-date">${formatDateHe(nl.date)}</div>
+          <div class="nl-meta">${nl.time ? 'שעה '+nl.time : ''} ${nl.type ? '· '+nl.type : ''}</div>
+        </div>
+      </div>`;
+  } else {
+    nlArea.innerHTML = `<div class="no-upcoming">אין שיעור קבוע — ניצור קשר לתאום 🗓️</div>`;
+  }
+
+  // Lessons table (from sessions, newest first)
+  document.getElementById('lessons-count-badge').textContent = `${totalSessions} שיעורים`;
+  const tbody = document.getElementById('lessons-tbody');
+  tbody.innerHTML = '';
+  if (!sessions.length) {
+    tbody.innerHTML = `<tr><td colspan="3" class="empty-row">עדיין לא נרשמו שיעורים</td></tr>`;
+  } else {
+    [...sessions].sort((a,b) => b.date.localeCompare(a.date)).forEach(sess => {
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td>${formatDateHe(sess.date)}</td>
+        <td><span class="pill">${sess.type||'שיעור'}</span></td>
+        <td>
+          <div class="lesson-topic">${sess.notes||'—'}</div>
+        </td>`;
+      tbody.appendChild(tr);
+    });
+  }
+
+  // Homework
+  const homework = s.homework || [];
+  const hwOpen   = homework.filter(h => !h.done).length;
+  document.getElementById('hw-count-badge').textContent = `${hwOpen} פתוח${hwOpen!==1?'ים':''}`;
+  const hwList = document.getElementById('hw-list');
+  hwList.innerHTML = '';
+  if (!homework.length) {
+    hwList.innerHTML = `<div style="text-align:center;color:var(--muted);padding:22px;font-size:.9rem">אין שיעורי בית כרגע 🎉</div>`;
+  } else {
+    [...homework].reverse().forEach(h => {
+      const icon  = h.done ? '✅' : '📝';
+      const cls   = h.done ? 'done' : 'open';
+      const label = h.done ? 'הושלם' : 'פתוח';
+      const div = document.createElement('div');
+      div.className = 'hw-item';
+      div.innerHTML = `
+        <div class="hw-status-icon">${icon}</div>
+        <div class="hw-content">
+          <div class="hw-task${h.done?' done':''}">${h.task}</div>
+          <div class="hw-meta">ניתן: ${formatDateHe(h.date)}</div>
+        </div>
+        <span class="hw-badge ${cls}">${label}</span>`;
+      hwList.appendChild(div);
+    });
+  }
+
+  // Progress
+  const pct = s.progress || 0;
+  document.getElementById('progress-pct').textContent = pct + '%';
+  requestAnimationFrame(() => {
+    document.getElementById('progress-bar').style.width = pct + '%';
+  });
+  document.getElementById('progress-notes').innerHTML =
+    s.progressNote ? s.progressNote : '<em style="color:var(--faint)">אין הערות עדיין.</em>';
+
+  // Payments
+  document.getElementById('payments-summary').innerHTML = `
+    <div class="pay-sum-card total">
+      <div class="psc-amount">${totalAmount}₪</div><div class="psc-label">סה"כ</div>
+    </div>
+    <div class="pay-sum-card paid">
+      <div class="psc-amount">${paidAmount}₪</div><div class="psc-label">שולם</div>
+    </div>
+    <div class="pay-sum-card pending">
+      <div class="psc-amount">${pendingAmount}₪</div><div class="psc-label">לתשלום</div>
+    </div>`;
+
+  const ptbody = document.getElementById('payments-tbody');
+  ptbody.innerHTML = '';
+  if (!sessions.length) {
+    ptbody.innerHTML = `<tr><td colspan="4" class="empty-row">אין רשומות תשלום</td></tr>`;
+  } else {
+    [...sessions].sort((a,b) => b.date.localeCompare(a.date)).forEach(p => {
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td>${formatDateHe(p.date)}</td>
+        <td>${p.type||'שיעור'}</td>
+        <td style="font-weight:700">${p.amount}₪</td>
+        <td><span class="pay-badge ${p.paid?'paid':'pending'}">${p.paid?'שולם':'ממתין'}</span></td>`;
+      ptbody.appendChild(tr);
+    });
+  }
+}
+
+/* ═══════════════════════════════════
+   UTILS
+═══════════════════════════════════ */
+const MONTHS_HE = ['ינואר','פברואר','מרץ','אפריל','מאי','יוני','יולי','אוגוסט','ספטמבר','אוקטובר','נובמבר','דצמבר'];
+const DAYS_HE   = ['ראשון','שני','שלישי','רביעי','חמישי','שישי','שבת'];
+
+function formatDateHe(dateStr) {
+  if (!dateStr) return '—';
+  const [y, m, d] = dateStr.split('-').map(Number);
+  const date = new Date(y, m-1, d);
+  return `${d} ${MONTHS_HE[m-1]} ${y} (${DAYS_HE[date.getDay()]})`;
+}
+
+// Init
+const isDemo = new URLSearchParams(location.search).has('demo');
+if (isDemo) {
+  // Demo based on real student data
+  const demoStudent = {
+    id: 'demo',
+    name: 'ליזה',
+    emoji: '👩‍🎓',
+    subject: 'מתמטיקה',
+    level: 'מתחילה',
+    tutor: 'ניקול',
+    style: 'ויזואלי',
+    nextLesson: { date: '2026-04-13', time: '18:00', type: 'פנים אל פנים' },
+    progress: 38,
+    progressNote: '<strong>אינטגרלים:</strong> ליזה מגיעה עם נחישות ומוטיבציה גבוהה! בשיעור הראשון הנחנו בסיס מצוין — הגדרת האינטגרל, קשר לשטחים ונוסחאות בסיס. בשיעור השני המשכנו לטכניקות חישוב וליזה פתרה תרגילים בעצמה 💪<br><strong>הצעד הבא:</strong> תרגול עצמאי עם הפלאשקארדים ומעבר לאינטגרציה בחלקים.',
+    sessions: [
+      { date: '2026-04-09', type: 'מתמטיקה', amount: 100, paid: false, notes: 'אינטגרלים — המשך: טכניקות חישוב, תרגילים עצמאיים' },
+      { date: '2026-04-06', type: 'מתמטיקה', amount: 100, paid: true,  notes: 'מבוא לאינטגרלים — הגדרה, שטחים, נוסחאות בסיס' },
+    ],
+    homework: [
+      { task: 'פלאשקארדים — אינטגרלים בסיסיים (PDF)', date: '2026-04-09', done: false },
+      { task: 'קווין — בחינת הבנה: אינטגרלים (PDF)',   date: '2026-04-06', done: true  },
+    ]
+  };
+  localStorage.setItem('tutor_dashboard_v2', JSON.stringify({ students: [demoStudent] }));
+  localStorage.setItem('parent_pins', JSON.stringify({ demo: '0000' }));
+  currentId = 'demo';
+  document.getElementById('lock-screen').style.display = 'none';
+  document.getElementById('top-nav').style.display = 'flex';
+  document.getElementById('main').style.display = 'block';
+  renderDashboard('demo');
+} else {
+  buildChooser();
+}
+</script>
+</body>
+</html>
