@@ -481,6 +481,7 @@ function renderDashboard(id) {
   const pendingAmount= totalAmount - paidAmount;
   const hwPending    = (s.homework||[]).filter(h => !h.done).length;
 
+  const hasPayments = sessions.some(x => x.amount);
   document.getElementById('stats-bar').innerHTML = `
     <div class="stat-card">
       <div class="s-label">שיעורים שנעשו</div>
@@ -492,6 +493,7 @@ function renderDashboard(id) {
       <div class="s-value ${hwPending>0?'coral':'green'}">${hwPending}</div>
       <div class="s-sub">${hwPending>0?'ממתינים לביצוע':'הכל הוגש ✓'}</div>
     </div>
+    ${hasPayments ? `
     <div class="stat-card">
       <div class="s-label">שולם</div>
       <div class="s-value green">${paidAmount}₪</div>
@@ -501,7 +503,7 @@ function renderDashboard(id) {
       <div class="s-label">יתרה לתשלום</div>
       <div class="s-value ${pendingAmount>0?'coral':'green'}">${pendingAmount}₪</div>
       <div class="s-sub">${pendingAmount>0?'ממתין לתשלום':'מעודכן ✓'}</div>
-    </div>`;
+    </div>` : ''}`;
 
   // Next lesson
   const nlArea = document.getElementById('next-lesson-area');
@@ -619,25 +621,26 @@ function formatDateHe(dateStr) {
 // Init
 const isDemo = new URLSearchParams(location.search).has('demo');
 if (isDemo) {
-  // Demo based on real student data
   const demoStudent = {
     id: 'demo',
-    name: 'ליזה',
-    emoji: '👩‍🎓',
+    name: 'תלמיד לדוגמה',
+    emoji: '🎓',
     subject: 'מתמטיקה',
-    level: 'מתחילה',
+    level: 'בינוני',
     tutor: 'ניקול',
     style: 'ויזואלי',
-    nextLesson: { date: '2026-04-13', time: '18:00', type: 'פנים אל פנים' },
-    progress: 38,
-    progressNote: '<strong>אינטגרלים:</strong> ליזה מגיעה עם נחישות ומוטיבציה גבוהה! בשיעור הראשון הנחנו בסיס מצוין — הגדרת האינטגרל, קשר לשטחים ונוסחאות בסיס. בשיעור השני המשכנו לטכניקות חישוב וליזה פתרה תרגילים בעצמה 💪<br><strong>הצעד הבא:</strong> תרגול עצמאי עם הפלאשקארדים ומעבר לאינטגרציה בחלקים.',
+    nextLesson: { date: '2026-04-20', time: '17:00', type: 'פנים אל פנים' },
+    progress: 72,
+    progressNote: '<strong>נגזרות ואינטגרלים:</strong> התקדמות מצוינת! הבנת המושגים הבסיסיים חזקה, פותרים תרגילים בצורה עצמאית. 💪<br><strong>הצעד הבא:</strong> המשך תרגול עם פלאשקארדים ועבר לשאלות מורכבות יותר.',
     sessions: [
-      { date: '2026-04-09', type: 'מתמטיקה', amount: 100, paid: false, notes: 'אינטגרלים — המשך: טכניקות חישוב, תרגילים עצמאיים' },
-      { date: '2026-04-06', type: 'מתמטיקה', amount: 100, paid: true,  notes: 'מבוא לאינטגרלים — הגדרה, שטחים, נוסחאות בסיס' },
+      { date: '2026-04-13', type: 'מתמטיקה', notes: 'נגזרות — כלל השרשרת, תרגילים עצמאיים' },
+      { date: '2026-04-06', type: 'מתמטיקה', notes: 'מבוא לאינטגרלים — הגדרה ונוסחאות בסיס' },
+      { date: '2026-03-30', type: 'מתמטיקה', notes: 'נגזרות — חזרה וחיזוק הבנה' },
     ],
     homework: [
-      { task: 'פלאשקארדים — אינטגרלים בסיסיים (PDF)', date: '2026-04-09', done: false },
-      { task: 'קווין — בחינת הבנה: אינטגרלים (PDF)',   date: '2026-04-06', done: true  },
+      { task: 'פלאשקארדים — נגזרות מתקדמות', date: '2026-04-13', done: false },
+      { task: 'קווין — בחינת הבנה: אינטגרלים', date: '2026-04-06', done: true  },
+      { task: 'דף תרגול — כלל השרשרת',         date: '2026-03-30', done: true  },
     ]
   };
   localStorage.setItem('tutor_dashboard_v2', JSON.stringify({ students: [demoStudent] }));
@@ -646,6 +649,12 @@ if (isDemo) {
   document.getElementById('lock-screen').style.display = 'none';
   document.getElementById('top-nav').style.display = 'flex';
   document.getElementById('main').style.display = 'block';
+  // Hide payments section in demo
+  document.querySelectorAll('.section').forEach(sec => {
+    if (sec.querySelector('.sec-title') && sec.querySelector('.sec-title').textContent.includes('תשלום')) {
+      sec.style.display = 'none';
+    }
+  });
   renderDashboard('demo');
 } else {
   buildChooser();
