@@ -1241,14 +1241,18 @@ h1, h2, h3, h4 {
 .dash-preview {
   width: 100%;
   border-radius: 10px;
-  overflow: hidden;
+  overflow-y: auto;
+  overflow-x: hidden;
   border: 1px solid var(--border-card);
   box-shadow: 0 4px 16px var(--shadow);
   display: flex;
   flex-direction: column;
   background: #fff;
   direction: rtl;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
 }
+.dash-preview::-webkit-scrollbar { display: none; }
 
 .dp-header {
   background: var(--accent);
@@ -1703,13 +1707,6 @@ h1, h2, h3, h4 {
   .dash-preview {
     width: 100%;
     height: 180px;
-    border-radius: 10px;
-    overflow: hidden;
-    border: 1px solid var(--border-card);
-    box-shadow: 0 4px 16px var(--shadow);
-    display: flex;
-    flex-direction: column;
-    background: #fff;
   }
 
   /* Labels below each panel */
