@@ -1558,7 +1558,7 @@ h1, h2, h3, h4 {
 
   /* Dashboard spans full width, same height */
   .dashboard-mockup-mini {
-    width: 260px !important;
+    width: 100% !important;
     height: 130px !important;
     overflow: hidden;
     border-radius: 8px;
@@ -1567,12 +1567,14 @@ h1, h2, h3, h4 {
   .mockup-chrome { padding: 3px 6px !important; }
 
   .mockup-screen-mini {
-    width: 260px !important;
+    width: 100% !important;
     height: 112px !important;
   }
 
   .mockup-screen-mini iframe {
-    transform: scale(0.22) !important;
+    width: 700px;
+    height: 900px;
+    transform: scale(0.54) !important;
     transform-origin: top left;
   }
 
