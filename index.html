@@ -470,52 +470,105 @@
               <!-- Flashcards card -->
               <div class="gmc-card">
                 <svg viewBox="0 0 160 90" fill="none" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
-                  <rect width="160" height="90" fill="#0f1923"/>
-                  <rect x="22" y="12" width="90" height="52" rx="6" fill="#1e3a4a" stroke="#2AA8A8" stroke-width="1"/>
-                  <rect x="32" y="18" width="90" height="52" rx="6" fill="#162b38" stroke="#2AA8A8" stroke-width="1.5"/>
-                  <line x1="44" y1="35" x2="112" y2="35" stroke="#2AA8A8" stroke-width="1.2" opacity="0.6"/>
-                  <line x1="44" y1="46" x2="98" y2="46" stroke="#2AA8A8" stroke-width="1.2" opacity="0.35"/>
-                  <line x1="44" y1="56" x2="90" y2="56" stroke="#2AA8A8" stroke-width="1.2" opacity="0.2"/>
-                  <text x="66" y="31" font-size="11" fill="#2AA8A8" font-weight="bold" font-family="sans-serif">?</text>
-                  <text x="138" y="82" font-size="8" fill="#2AA8A8" font-family="sans-serif" text-anchor="middle" font-weight="600">פלאשקארדים 🃏</text>
+                  <defs>
+                    <linearGradient id="fc-bg" x1="0" y1="0" x2="1" y2="1">
+                      <stop offset="0%" stop-color="#0d2137"/>
+                      <stop offset="100%" stop-color="#0a1c2e"/>
+                    </linearGradient>
+                  </defs>
+                  <rect width="160" height="90" rx="12" fill="url(#fc-bg)"/>
+                  <!-- Shadow card -->
+                  <rect x="15" y="18" width="88" height="54" rx="8" fill="#1a3a52" opacity="0.7" transform="rotate(-6 59 45)"/>
+                  <!-- Main card -->
+                  <rect x="20" y="14" width="88" height="54" rx="8" fill="#1e4060" stroke="#2AA8A8" stroke-width="1.5"/>
+                  <!-- Card content -->
+                  <text x="64" y="38" font-size="18" fill="#2AA8A8" font-weight="900" font-family="sans-serif" text-anchor="middle" opacity="0.9">x²</text>
+                  <line x1="30" y1="46" x2="98" y2="46" stroke="#2AA8A8" stroke-width="0.8" opacity="0.3"/>
+                  <text x="64" y="60" font-size="9" fill="#7ecece" font-family="sans-serif" text-anchor="middle" opacity="0.7">הפוך לתשובה ↩</text>
+                  <!-- Flip icon -->
+                  <circle cx="136" cy="28" r="14" fill="#2AA8A8" opacity="0.15"/>
+                  <text x="136" y="33" font-size="16" text-anchor="middle" fill="#2AA8A8">🃏</text>
+                  <!-- Label -->
+                  <rect x="110" y="70" width="42" height="14" rx="7" fill="#2AA8A8" opacity="0.18"/>
+                  <text x="131" y="80" font-size="7.5" fill="#2AA8A8" font-family="sans-serif" text-anchor="middle" font-weight="700">פלאשקארדים</text>
                 </svg>
               </div>
 
               <!-- Quiz card -->
               <div class="gmc-card">
                 <svg viewBox="0 0 160 90" fill="none" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
-                  <rect width="160" height="90" fill="#1a0f23"/>
-                  <rect x="10" y="8" width="110" height="20" rx="7" fill="#2d1a4a" stroke="#A855F7" stroke-width="1.2"/>
-                  <text x="65" y="21" font-size="8" fill="#e0c8ff" font-family="sans-serif" text-anchor="middle">מה הנגזרת של x²?</text>
-                  <rect x="10" y="34" width="60" height="13" rx="5" fill="#3b1f5e" stroke="#A855F7" stroke-width="0.8" opacity="0.7"/>
-                  <text x="40" y="44" font-size="7" fill="#c4a0ff" font-family="sans-serif" text-anchor="middle">א. x</text>
-                  <rect x="78" y="34" width="60" height="13" rx="5" fill="#1e3a1a" stroke="#3fb950" stroke-width="1.2"/>
-                  <text x="108" y="44" font-size="7" fill="#3fb950" font-family="sans-serif" text-anchor="middle">ב. 2x ✓</text>
-                  <rect x="10" y="53" width="60" height="13" rx="5" fill="#3b1f5e" stroke="#A855F7" stroke-width="0.8" opacity="0.7"/>
-                  <text x="40" y="63" font-size="7" fill="#c4a0ff" font-family="sans-serif" text-anchor="middle">ג. 2</text>
-                  <rect x="78" y="53" width="60" height="13" rx="5" fill="#3b1f5e" stroke="#A855F7" stroke-width="0.8" opacity="0.7"/>
-                  <text x="108" y="63" font-size="7" fill="#c4a0ff" font-family="sans-serif" text-anchor="middle">ד. x²</text>
-                  <text x="138" y="82" font-size="8" fill="#A855F7" font-family="sans-serif" text-anchor="middle" font-weight="600">קווינים 🎯</text>
+                  <defs>
+                    <linearGradient id="qz-bg" x1="0" y1="0" x2="1" y2="1">
+                      <stop offset="0%" stop-color="#140d24"/>
+                      <stop offset="100%" stop-color="#1a0f2e"/>
+                    </linearGradient>
+                  </defs>
+                  <rect width="160" height="90" rx="12" fill="url(#qz-bg)"/>
+                  <!-- Progress dots -->
+                  <circle cx="12" cy="10" r="3" fill="#A855F7" opacity="0.9"/>
+                  <circle cx="22" cy="10" r="3" fill="#A855F7" opacity="0.5"/>
+                  <circle cx="32" cy="10" r="3" fill="#A855F7" opacity="0.3"/>
+                  <text x="140" y="13" font-size="7.5" fill="#A855F7" font-family="sans-serif" text-anchor="end" opacity="0.7">3/10</text>
+                  <!-- Question -->
+                  <rect x="8" y="18" width="144" height="18" rx="6" fill="#2d1a4a"/>
+                  <text x="80" y="30" font-size="8.5" fill="#e0c8ff" font-family="sans-serif" text-anchor="middle" font-weight="700">מה הנגזרת של x²?</text>
+                  <!-- Options -->
+                  <rect x="8" y="42" width="68" height="14" rx="6" fill="#3b1f5e" stroke="#A855F7" stroke-width="0.8"/>
+                  <text x="42" y="52" font-size="7.5" fill="#c4a0ff" font-family="sans-serif" text-anchor="middle">א. x</text>
+                  <rect x="84" y="42" width="68" height="14" rx="6" fill="#133320" stroke="#3fb950" stroke-width="1.5"/>
+                  <text x="118" y="52" font-size="7.5" fill="#3fb950" font-family="sans-serif" text-anchor="middle" font-weight="700">ב. 2x ✓</text>
+                  <rect x="8" y="62" width="68" height="14" rx="6" fill="#3b1f5e" stroke="#A855F7" stroke-width="0.8"/>
+                  <text x="42" y="72" font-size="7.5" fill="#c4a0ff" font-family="sans-serif" text-anchor="middle">ג. 2x²</text>
+                  <rect x="84" y="62" width="68" height="14" rx="6" fill="#3b1f5e" stroke="#A855F7" stroke-width="0.8"/>
+                  <text x="118" y="72" font-size="7.5" fill="#c4a0ff" font-family="sans-serif" text-anchor="middle">ד. x³</text>
+                  <!-- Label -->
+                  <rect x="6" y="78" width="36" height="10" rx="5" fill="#A855F7" opacity="0.18"/>
+                  <text x="24" y="86" font-size="6.5" fill="#A855F7" font-family="sans-serif" text-anchor="middle" font-weight="700">קוויז 🎯</text>
                 </svg>
               </div>
 
               <!-- Audio card -->
               <div class="gmc-card">
                 <svg viewBox="0 0 160 90" fill="none" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
-                  <rect width="160" height="90" fill="#0f1a12"/>
-                  <rect x="14" y="40" width="6" height="13" rx="3" fill="#3fb950" opacity="0.7"/>
-                  <rect x="24" y="32" width="6" height="29" rx="3" fill="#3fb950" opacity="0.85"/>
-                  <rect x="34" y="25" width="6" height="42" rx="3" fill="#3fb950"/>
-                  <rect x="44" y="20" width="6" height="53" rx="3" fill="#3fb950"/>
-                  <rect x="54" y="28" width="6" height="37" rx="3" fill="#3fb950" opacity="0.9"/>
-                  <rect x="64" y="36" width="6" height="21" rx="3" fill="#3fb950" opacity="0.75"/>
-                  <rect x="74" y="40" width="6" height="13" rx="3" fill="#3fb950" opacity="0.6"/>
-                  <rect x="84" y="34" width="6" height="25" rx="3" fill="#3fb950" opacity="0.8"/>
-                  <rect x="94" y="24" width="6" height="45" rx="3" fill="#3fb950"/>
-                  <rect x="104" y="30" width="6" height="33" rx="3" fill="#3fb950" opacity="0.85"/>
-                  <circle cx="140" cy="20" r="10" fill="#3fb950" opacity="0.9"/>
-                  <polygon points="136,15 136,25 146,20" fill="white"/>
-                  <text x="138" y="82" font-size="8" fill="#3fb950" font-family="sans-serif" text-anchor="middle" font-weight="600">הסברי אודיו 🎧</text>
+                  <defs>
+                    <linearGradient id="au-bg" x1="0" y1="1" x2="1" y2="0">
+                      <stop offset="0%" stop-color="#071a0f"/>
+                      <stop offset="100%" stop-color="#0d2818"/>
+                    </linearGradient>
+                    <linearGradient id="au-wave" x1="0" y1="0" x2="1" y2="0">
+                      <stop offset="0%" stop-color="#3fb950" stop-opacity="0.4"/>
+                      <stop offset="50%" stop-color="#3fb950"/>
+                      <stop offset="100%" stop-color="#3fb950" stop-opacity="0.4"/>
+                    </linearGradient>
+                  </defs>
+                  <rect width="160" height="90" rx="12" fill="url(#au-bg)"/>
+                  <!-- Topic label -->
+                  <rect x="8" y="8" width="100" height="16" rx="8" fill="#3fb950" opacity="0.15"/>
+                  <text x="58" y="19" font-size="7.5" fill="#3fb950" font-family="sans-serif" text-anchor="middle" font-weight="700">מבוא לאינטגרלים 📖</text>
+                  <!-- Headphones icon area -->
+                  <circle cx="130" cy="16" r="12" fill="#3fb950" opacity="0.12"/>
+                  <text x="130" y="21" font-size="14" text-anchor="middle">🎧</text>
+                  <!-- Waveform bars -->
+                  <rect x="10" y="46" width="5" height="10" rx="2.5" fill="url(#au-wave)" opacity="0.6"/>
+                  <rect x="18" y="38" width="5" height="26" rx="2.5" fill="url(#au-wave)" opacity="0.8"/>
+                  <rect x="26" y="32" width="5" height="38" rx="2.5" fill="url(#au-wave)"/>
+                  <rect x="34" y="28" width="5" height="46" rx="2.5" fill="url(#au-wave)"/>
+                  <rect x="42" y="36" width="5" height="30" rx="2.5" fill="url(#au-wave)" opacity="0.85"/>
+                  <rect x="50" y="42" width="5" height="18" rx="2.5" fill="url(#au-wave)" opacity="0.65"/>
+                  <rect x="58" y="38" width="5" height="26" rx="2.5" fill="url(#au-wave)" opacity="0.75"/>
+                  <rect x="66" y="30" width="5" height="42" rx="2.5" fill="url(#au-wave)"/>
+                  <rect x="74" y="36" width="5" height="30" rx="2.5" fill="url(#au-wave)" opacity="0.8"/>
+                  <rect x="82" y="44" width="5" height="14" rx="2.5" fill="url(#au-wave)" opacity="0.55"/>
+                  <!-- Progress bar -->
+                  <rect x="10" y="76" width="120" height="4" rx="2" fill="#3fb950" opacity="0.2"/>
+                  <rect x="10" y="76" width="58" height="4" rx="2" fill="#3fb950" opacity="0.9"/>
+                  <!-- Play/pause -->
+                  <circle cx="140" cy="55" r="16" fill="#3fb950" opacity="0.2"/>
+                  <circle cx="140" cy="55" r="11" fill="#3fb950"/>
+                  <polygon points="137,50 137,60 147,55" fill="white"/>
+                  <!-- Label -->
+                  <rect x="6" y="78" width="40" height="10" rx="5" fill="#3fb950" opacity="0.18"/>
+                  <text x="26" y="86" font-size="6.5" fill="#3fb950" font-family="sans-serif" text-anchor="middle" font-weight="700">אודיו 🎧</text>
                 </svg>
               </div>
 
@@ -523,95 +576,128 @@
               <div class="gmc-card">
                 <svg viewBox="0 0 160 90" fill="none" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
                   <defs>
-                    <linearGradient id="song-bg2" x1="0" y1="0" x2="1" y2="1">
-                      <stop offset="0%" stop-color="#1a1230"/>
-                      <stop offset="100%" stop-color="#0f1a2a"/>
+                    <linearGradient id="sg-bg" x1="0" y1="0" x2="1" y2="1">
+                      <stop offset="0%" stop-color="#1f0e00"/>
+                      <stop offset="100%" stop-color="#2a1200"/>
                     </linearGradient>
                   </defs>
-                  <rect width="160" height="90" fill="url(#song-bg2)"/>
-                  <line x1="12" y1="22" x2="148" y2="22" stroke="#FF7F50" stroke-width="0.7" opacity="0.4"/>
-                  <line x1="12" y1="30" x2="148" y2="30" stroke="#FF7F50" stroke-width="0.7" opacity="0.4"/>
-                  <line x1="12" y1="38" x2="148" y2="38" stroke="#FF7F50" stroke-width="0.7" opacity="0.4"/>
-                  <line x1="12" y1="46" x2="148" y2="46" stroke="#FF7F50" stroke-width="0.7" opacity="0.4"/>
-                  <line x1="12" y1="54" x2="148" y2="54" stroke="#FF7F50" stroke-width="0.7" opacity="0.4"/>
-                  <text x="12" y="56" font-size="38" fill="#FF7F50" opacity="0.7" font-family="serif">𝄞</text>
-                  <ellipse cx="78" cy="53" rx="7" ry="5" fill="#FFD166" transform="rotate(-15 78 53)"/>
-                  <line x1="85" y1="53" x2="85" y2="26" stroke="#FFD166" stroke-width="1.5"/>
-                  <ellipse cx="104" cy="44" rx="7" ry="5" fill="#FF7F50" transform="rotate(-15 104 44)"/>
-                  <line x1="111" y1="44" x2="111" y2="17" stroke="#FF7F50" stroke-width="1.5"/>
-                  <line x1="85" y1="26" x2="111" y2="17" stroke="#FFD166" stroke-width="2.5"/>
-                  <text x="138" y="82" font-size="8" fill="#FF7F50" font-family="sans-serif" text-anchor="middle" font-weight="600">שירי לימוד 🎵</text>
+                  <rect width="160" height="90" rx="12" fill="url(#sg-bg)"/>
+                  <!-- Glow circles -->
+                  <circle cx="30" cy="45" r="30" fill="#FF7F50" opacity="0.06"/>
+                  <circle cx="130" cy="45" r="25" fill="#FFD166" opacity="0.07"/>
+                  <!-- Staff lines -->
+                  <line x1="8" y1="28" x2="152" y2="28" stroke="#FF7F50" stroke-width="0.9" opacity="0.35"/>
+                  <line x1="8" y1="36" x2="152" y2="36" stroke="#FF7F50" stroke-width="0.9" opacity="0.35"/>
+                  <line x1="8" y1="44" x2="152" y2="44" stroke="#FF7F50" stroke-width="0.9" opacity="0.35"/>
+                  <line x1="8" y1="52" x2="152" y2="52" stroke="#FF7F50" stroke-width="0.9" opacity="0.35"/>
+                  <line x1="8" y1="60" x2="152" y2="60" stroke="#FF7F50" stroke-width="0.9" opacity="0.35"/>
+                  <!-- Treble clef -->
+                  <text x="8" y="62" font-size="42" fill="#FF7F50" opacity="0.6" font-family="serif">𝄞</text>
+                  <!-- Note 1 with math -->
+                  <ellipse cx="76" cy="57" rx="7" ry="5" fill="#FFD166" transform="rotate(-15 76 57)"/>
+                  <line x1="83" y1="57" x2="83" y2="24" stroke="#FFD166" stroke-width="1.8"/>
+                  <text x="88" y="28" font-size="7" fill="#FFD166" font-family="sans-serif" font-weight="700">∫x dx</text>
+                  <!-- Note 2 -->
+                  <ellipse cx="108" cy="48" rx="7" ry="5" fill="#FF7F50" transform="rotate(-15 108 48)"/>
+                  <line x1="115" y1="48" x2="115" y2="16" stroke="#FF7F50" stroke-width="1.8"/>
+                  <text x="118" y="20" font-size="7" fill="#FF7F50" font-family="sans-serif" font-weight="700">x²/2</text>
+                  <!-- Beam -->
+                  <line x1="83" y1="24" x2="115" y2="16" stroke="#FFD166" stroke-width="2.5"/>
+                  <!-- Label -->
+                  <rect x="6" y="76" width="50" height="12" rx="6" fill="#FF7F50" opacity="0.15"/>
+                  <text x="31" y="85" font-size="7" fill="#FF7F50" font-family="sans-serif" text-anchor="middle" font-weight="700">שירי לימוד 🎵</text>
                 </svg>
               </div>
 
               <!-- Duplicates for seamless loop -->
               <div class="gmc-card">
                 <svg viewBox="0 0 160 90" fill="none" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
-                  <rect width="160" height="90" fill="#0f1923"/>
-                  <rect x="22" y="12" width="90" height="52" rx="6" fill="#1e3a4a" stroke="#2AA8A8" stroke-width="1"/>
-                  <rect x="32" y="18" width="90" height="52" rx="6" fill="#162b38" stroke="#2AA8A8" stroke-width="1.5"/>
-                  <line x1="44" y1="35" x2="112" y2="35" stroke="#2AA8A8" stroke-width="1.2" opacity="0.6"/>
-                  <line x1="44" y1="46" x2="98" y2="46" stroke="#2AA8A8" stroke-width="1.2" opacity="0.35"/>
-                  <line x1="44" y1="56" x2="90" y2="56" stroke="#2AA8A8" stroke-width="1.2" opacity="0.2"/>
-                  <text x="66" y="31" font-size="11" fill="#2AA8A8" font-weight="bold" font-family="sans-serif">?</text>
-                  <text x="138" y="82" font-size="8" fill="#2AA8A8" font-family="sans-serif" text-anchor="middle" font-weight="600">פלאשקארדים 🃏</text>
+                  <defs><linearGradient id="fc-bg2" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#0d2137"/><stop offset="100%" stop-color="#0a1c2e"/></linearGradient></defs>
+                  <rect width="160" height="90" rx="12" fill="url(#fc-bg2)"/>
+                  <rect x="15" y="18" width="88" height="54" rx="8" fill="#1a3a52" opacity="0.7" transform="rotate(-6 59 45)"/>
+                  <rect x="20" y="14" width="88" height="54" rx="8" fill="#1e4060" stroke="#2AA8A8" stroke-width="1.5"/>
+                  <text x="64" y="38" font-size="18" fill="#2AA8A8" font-weight="900" font-family="sans-serif" text-anchor="middle" opacity="0.9">x²</text>
+                  <line x1="30" y1="46" x2="98" y2="46" stroke="#2AA8A8" stroke-width="0.8" opacity="0.3"/>
+                  <text x="64" y="60" font-size="9" fill="#7ecece" font-family="sans-serif" text-anchor="middle" opacity="0.7">הפוך לתשובה ↩</text>
+                  <circle cx="136" cy="28" r="14" fill="#2AA8A8" opacity="0.15"/>
+                  <text x="136" y="33" font-size="16" text-anchor="middle" fill="#2AA8A8">🃏</text>
+                  <rect x="110" y="70" width="42" height="14" rx="7" fill="#2AA8A8" opacity="0.18"/>
+                  <text x="131" y="80" font-size="7.5" fill="#2AA8A8" font-family="sans-serif" text-anchor="middle" font-weight="700">פלאשקארדים</text>
                 </svg>
               </div>
               <div class="gmc-card">
                 <svg viewBox="0 0 160 90" fill="none" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
-                  <rect width="160" height="90" fill="#1a0f23"/>
-                  <rect x="10" y="8" width="110" height="20" rx="7" fill="#2d1a4a" stroke="#A855F7" stroke-width="1.2"/>
-                  <text x="65" y="21" font-size="8" fill="#e0c8ff" font-family="sans-serif" text-anchor="middle">מה הנגזרת של x²?</text>
-                  <rect x="10" y="34" width="60" height="13" rx="5" fill="#3b1f5e" stroke="#A855F7" stroke-width="0.8" opacity="0.7"/>
-                  <text x="40" y="44" font-size="7" fill="#c4a0ff" font-family="sans-serif" text-anchor="middle">א. x</text>
-                  <rect x="78" y="34" width="60" height="13" rx="5" fill="#1e3a1a" stroke="#3fb950" stroke-width="1.2"/>
-                  <text x="108" y="44" font-size="7" fill="#3fb950" font-family="sans-serif" text-anchor="middle">ב. 2x ✓</text>
-                  <rect x="10" y="53" width="60" height="13" rx="5" fill="#3b1f5e" stroke="#A855F7" stroke-width="0.8" opacity="0.7"/>
-                  <text x="40" y="63" font-size="7" fill="#c4a0ff" font-family="sans-serif" text-anchor="middle">ג. 2</text>
-                  <rect x="78" y="53" width="60" height="13" rx="5" fill="#3b1f5e" stroke="#A855F7" stroke-width="0.8" opacity="0.7"/>
-                  <text x="108" y="63" font-size="7" fill="#c4a0ff" font-family="sans-serif" text-anchor="middle">ד. x²</text>
-                  <text x="138" y="82" font-size="8" fill="#A855F7" font-family="sans-serif" text-anchor="middle" font-weight="600">קווינים 🎯</text>
-                </svg>
-              </div>
-              <div class="gmc-card">
-                <svg viewBox="0 0 160 90" fill="none" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
-                  <rect width="160" height="90" fill="#0f1a12"/>
-                  <rect x="14" y="40" width="6" height="13" rx="3" fill="#3fb950" opacity="0.7"/>
-                  <rect x="24" y="32" width="6" height="29" rx="3" fill="#3fb950" opacity="0.85"/>
-                  <rect x="34" y="25" width="6" height="42" rx="3" fill="#3fb950"/>
-                  <rect x="44" y="20" width="6" height="53" rx="3" fill="#3fb950"/>
-                  <rect x="54" y="28" width="6" height="37" rx="3" fill="#3fb950" opacity="0.9"/>
-                  <rect x="64" y="36" width="6" height="21" rx="3" fill="#3fb950" opacity="0.75"/>
-                  <rect x="74" y="40" width="6" height="13" rx="3" fill="#3fb950" opacity="0.6"/>
-                  <rect x="84" y="34" width="6" height="25" rx="3" fill="#3fb950" opacity="0.8"/>
-                  <rect x="94" y="24" width="6" height="45" rx="3" fill="#3fb950"/>
-                  <rect x="104" y="30" width="6" height="33" rx="3" fill="#3fb950" opacity="0.85"/>
-                  <circle cx="140" cy="20" r="10" fill="#3fb950" opacity="0.9"/>
-                  <polygon points="136,15 136,25 146,20" fill="white"/>
-                  <text x="138" y="82" font-size="8" fill="#3fb950" font-family="sans-serif" text-anchor="middle" font-weight="600">הסברי אודיו 🎧</text>
+                  <defs><linearGradient id="qz-bg2" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#140d24"/><stop offset="100%" stop-color="#1a0f2e"/></linearGradient></defs>
+                  <rect width="160" height="90" rx="12" fill="url(#qz-bg2)"/>
+                  <circle cx="12" cy="10" r="3" fill="#A855F7" opacity="0.9"/>
+                  <circle cx="22" cy="10" r="3" fill="#A855F7" opacity="0.5"/>
+                  <circle cx="32" cy="10" r="3" fill="#A855F7" opacity="0.3"/>
+                  <text x="140" y="13" font-size="7.5" fill="#A855F7" font-family="sans-serif" text-anchor="end" opacity="0.7">3/10</text>
+                  <rect x="8" y="18" width="144" height="18" rx="6" fill="#2d1a4a"/>
+                  <text x="80" y="30" font-size="8.5" fill="#e0c8ff" font-family="sans-serif" text-anchor="middle" font-weight="700">מה הנגזרת של x²?</text>
+                  <rect x="8" y="42" width="68" height="14" rx="6" fill="#3b1f5e" stroke="#A855F7" stroke-width="0.8"/>
+                  <text x="42" y="52" font-size="7.5" fill="#c4a0ff" font-family="sans-serif" text-anchor="middle">א. x</text>
+                  <rect x="84" y="42" width="68" height="14" rx="6" fill="#133320" stroke="#3fb950" stroke-width="1.5"/>
+                  <text x="118" y="52" font-size="7.5" fill="#3fb950" font-family="sans-serif" text-anchor="middle" font-weight="700">ב. 2x ✓</text>
+                  <rect x="8" y="62" width="68" height="14" rx="6" fill="#3b1f5e" stroke="#A855F7" stroke-width="0.8"/>
+                  <text x="42" y="72" font-size="7.5" fill="#c4a0ff" font-family="sans-serif" text-anchor="middle">ג. 2x²</text>
+                  <rect x="84" y="62" width="68" height="14" rx="6" fill="#3b1f5e" stroke="#A855F7" stroke-width="0.8"/>
+                  <text x="118" y="72" font-size="7.5" fill="#c4a0ff" font-family="sans-serif" text-anchor="middle">ד. x³</text>
+                  <rect x="6" y="78" width="36" height="10" rx="5" fill="#A855F7" opacity="0.18"/>
+                  <text x="24" y="86" font-size="6.5" fill="#A855F7" font-family="sans-serif" text-anchor="middle" font-weight="700">קוויז 🎯</text>
                 </svg>
               </div>
               <div class="gmc-card">
                 <svg viewBox="0 0 160 90" fill="none" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
                   <defs>
-                    <linearGradient id="song-bg3" x1="0" y1="0" x2="1" y2="1">
-                      <stop offset="0%" stop-color="#1a1230"/>
-                      <stop offset="100%" stop-color="#0f1a2a"/>
-                    </linearGradient>
+                    <linearGradient id="au-bg2" x1="0" y1="1" x2="1" y2="0"><stop offset="0%" stop-color="#071a0f"/><stop offset="100%" stop-color="#0d2818"/></linearGradient>
+                    <linearGradient id="au-wave2" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#3fb950" stop-opacity="0.4"/><stop offset="50%" stop-color="#3fb950"/><stop offset="100%" stop-color="#3fb950" stop-opacity="0.4"/></linearGradient>
                   </defs>
-                  <rect width="160" height="90" fill="url(#song-bg3)"/>
-                  <line x1="12" y1="22" x2="148" y2="22" stroke="#FF7F50" stroke-width="0.7" opacity="0.4"/>
-                  <line x1="12" y1="30" x2="148" y2="30" stroke="#FF7F50" stroke-width="0.7" opacity="0.4"/>
-                  <line x1="12" y1="38" x2="148" y2="38" stroke="#FF7F50" stroke-width="0.7" opacity="0.4"/>
-                  <line x1="12" y1="46" x2="148" y2="46" stroke="#FF7F50" stroke-width="0.7" opacity="0.4"/>
-                  <line x1="12" y1="54" x2="148" y2="54" stroke="#FF7F50" stroke-width="0.7" opacity="0.4"/>
-                  <text x="12" y="56" font-size="38" fill="#FF7F50" opacity="0.7" font-family="serif">𝄞</text>
-                  <ellipse cx="78" cy="53" rx="7" ry="5" fill="#FFD166" transform="rotate(-15 78 53)"/>
-                  <line x1="85" y1="53" x2="85" y2="26" stroke="#FFD166" stroke-width="1.5"/>
-                  <ellipse cx="104" cy="44" rx="7" ry="5" fill="#FF7F50" transform="rotate(-15 104 44)"/>
-                  <line x1="111" y1="44" x2="111" y2="17" stroke="#FF7F50" stroke-width="1.5"/>
-                  <line x1="85" y1="26" x2="111" y2="17" stroke="#FFD166" stroke-width="2.5"/>
-                  <text x="138" y="82" font-size="8" fill="#FF7F50" font-family="sans-serif" text-anchor="middle" font-weight="600">שירי לימוד 🎵</text>
+                  <rect width="160" height="90" rx="12" fill="url(#au-bg2)"/>
+                  <rect x="8" y="8" width="100" height="16" rx="8" fill="#3fb950" opacity="0.15"/>
+                  <text x="58" y="19" font-size="7.5" fill="#3fb950" font-family="sans-serif" text-anchor="middle" font-weight="700">מבוא לאינטגרלים 📖</text>
+                  <circle cx="130" cy="16" r="12" fill="#3fb950" opacity="0.12"/>
+                  <text x="130" y="21" font-size="14" text-anchor="middle">🎧</text>
+                  <rect x="10" y="46" width="5" height="10" rx="2.5" fill="url(#au-wave2)" opacity="0.6"/>
+                  <rect x="18" y="38" width="5" height="26" rx="2.5" fill="url(#au-wave2)" opacity="0.8"/>
+                  <rect x="26" y="32" width="5" height="38" rx="2.5" fill="url(#au-wave2)"/>
+                  <rect x="34" y="28" width="5" height="46" rx="2.5" fill="url(#au-wave2)"/>
+                  <rect x="42" y="36" width="5" height="30" rx="2.5" fill="url(#au-wave2)" opacity="0.85"/>
+                  <rect x="50" y="42" width="5" height="18" rx="2.5" fill="url(#au-wave2)" opacity="0.65"/>
+                  <rect x="58" y="38" width="5" height="26" rx="2.5" fill="url(#au-wave2)" opacity="0.75"/>
+                  <rect x="66" y="30" width="5" height="42" rx="2.5" fill="url(#au-wave2)"/>
+                  <rect x="74" y="36" width="5" height="30" rx="2.5" fill="url(#au-wave2)" opacity="0.8"/>
+                  <rect x="82" y="44" width="5" height="14" rx="2.5" fill="url(#au-wave2)" opacity="0.55"/>
+                  <rect x="10" y="76" width="120" height="4" rx="2" fill="#3fb950" opacity="0.2"/>
+                  <rect x="10" y="76" width="58" height="4" rx="2" fill="#3fb950" opacity="0.9"/>
+                  <circle cx="140" cy="55" r="16" fill="#3fb950" opacity="0.2"/>
+                  <circle cx="140" cy="55" r="11" fill="#3fb950"/>
+                  <polygon points="137,50 137,60 147,55" fill="white"/>
+                  <rect x="6" y="78" width="40" height="10" rx="5" fill="#3fb950" opacity="0.18"/>
+                  <text x="26" y="86" font-size="6.5" fill="#3fb950" font-family="sans-serif" text-anchor="middle" font-weight="700">אודיו 🎧</text>
+                </svg>
+              </div>
+              <div class="gmc-card">
+                <svg viewBox="0 0 160 90" fill="none" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+                  <defs><linearGradient id="sg-bg2" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#1f0e00"/><stop offset="100%" stop-color="#2a1200"/></linearGradient></defs>
+                  <rect width="160" height="90" rx="12" fill="url(#sg-bg2)"/>
+                  <circle cx="30" cy="45" r="30" fill="#FF7F50" opacity="0.06"/>
+                  <circle cx="130" cy="45" r="25" fill="#FFD166" opacity="0.07"/>
+                  <line x1="8" y1="28" x2="152" y2="28" stroke="#FF7F50" stroke-width="0.9" opacity="0.35"/>
+                  <line x1="8" y1="36" x2="152" y2="36" stroke="#FF7F50" stroke-width="0.9" opacity="0.35"/>
+                  <line x1="8" y1="44" x2="152" y2="44" stroke="#FF7F50" stroke-width="0.9" opacity="0.35"/>
+                  <line x1="8" y1="52" x2="152" y2="52" stroke="#FF7F50" stroke-width="0.9" opacity="0.35"/>
+                  <line x1="8" y1="60" x2="152" y2="60" stroke="#FF7F50" stroke-width="0.9" opacity="0.35"/>
+                  <text x="8" y="62" font-size="42" fill="#FF7F50" opacity="0.6" font-family="serif">𝄞</text>
+                  <ellipse cx="76" cy="57" rx="7" ry="5" fill="#FFD166" transform="rotate(-15 76 57)"/>
+                  <line x1="83" y1="57" x2="83" y2="24" stroke="#FFD166" stroke-width="1.8"/>
+                  <text x="88" y="28" font-size="7" fill="#FFD166" font-family="sans-serif" font-weight="700">∫x dx</text>
+                  <ellipse cx="108" cy="48" rx="7" ry="5" fill="#FF7F50" transform="rotate(-15 108 48)"/>
+                  <line x1="115" y1="48" x2="115" y2="16" stroke="#FF7F50" stroke-width="1.8"/>
+                  <text x="118" y="20" font-size="7" fill="#FF7F50" font-family="sans-serif" font-weight="700">x²/2</text>
+                  <line x1="83" y1="24" x2="115" y2="16" stroke="#FFD166" stroke-width="2.5"/>
+                  <rect x="6" y="76" width="50" height="12" rx="6" fill="#FF7F50" opacity="0.15"/>
+                  <text x="31" y="85" font-size="7" fill="#FF7F50" font-family="sans-serif" text-anchor="middle" font-weight="700">שירי לימוד 🎵</text>
                 </svg>
               </div>
 
