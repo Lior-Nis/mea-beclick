@@ -1652,7 +1652,7 @@ h1, h2, h3, h4 {
   /* Dashboard static preview */
   .dash-preview {
     width: 100%;
-    height: 130px;
+    height: 180px;
     border-radius: 10px;
     overflow: hidden;
     border: 1px solid var(--border-card);
