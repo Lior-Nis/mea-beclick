@@ -752,39 +752,62 @@ h1, h2, h3, h4 {
   border-top: 1px solid var(--border-card);
 }
 
-.subjects-grid {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 1rem;
-  margin-top: 2rem;
+/* ── Subjects Horizontal Carousel ──────────────────────── */
+.subjects-carousel-outer {
+  width: 100%;
+  overflow: hidden;
+  margin-top: 2.5rem;
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
 }
 
-.subject-item {
+.subjects-carousel-track {
+  display: flex;
+  flex-direction: row;
+  gap: 1.4rem;
+  padding: 1rem 0;
+  width: max-content;
+  animation: scroll-left 18s linear infinite;
+}
+
+.subjects-carousel-track:hover {
+  animation-play-state: paused;
+}
+
+@keyframes scroll-left {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.subj-card {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 0.55rem;
-  width: 110px;
-  height: 106px;
+  gap: 0.8rem;
+  width: 160px;
+  height: 160px;
   background: var(--bg-card);
-  border: 1.5px solid var(--border-card);
-  border-radius: var(--r-md);
-  font-size: 0.88rem;
+  border: 2px solid var(--accent);
+  border-radius: 20px;
+  box-shadow: 0 4px 16px var(--shadow);
+  flex-shrink: 0;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: default;
+}
+
+.subj-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 28px var(--shadow-md);
+}
+
+.subj-icon { font-size: 3.2rem; line-height: 1; }
+
+.subj-label {
+  font-size: 1.05rem;
   font-weight: 700;
   color: var(--text-primary);
-  cursor: default;
-  box-shadow: 0 2px 8px var(--shadow);
-  transition: all 0.25s ease;
 }
-.subject-item:hover {
-  border-color: var(--border);
-  transform: translateY(-4px);
-  box-shadow: 0 8px 24px var(--shadow-md);
-  background: var(--accent-dim);
-}
-.subject-icon { font-size: 2rem; line-height: 1; }
 
 /* ── AI ADVANTAGE ─────────────────────────────────────────── */
 #ai-advantage {
