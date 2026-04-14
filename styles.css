@@ -757,6 +757,7 @@ h1, h2, h3, h4 {
   width: 100%;
   overflow: hidden;
   margin-top: 2.5rem;
+  direction: ltr;
   -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
   mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
 }
@@ -808,6 +809,7 @@ h1, h2, h3, h4 {
   font-size: 1.05rem;
   font-weight: 700;
   color: var(--text-primary);
+  direction: rtl;
 }
 
 /* ── AI ADVANTAGE ─────────────────────────────────────────── */
