@@ -1607,6 +1607,16 @@ h1, h2, h3, h4 {
 .sp-teal-slide { background: #008080; }
 .sp-warm       { background: #FFF8EE; }
 
+/* Image fills the card */
+.sp-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
 /* SVG fills the card */
 .sp-svg,
 .sp-svg-full {
