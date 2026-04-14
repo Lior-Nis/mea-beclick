@@ -1533,7 +1533,7 @@ h1, h2, h3, h4 {
 .gmc-card {
   flex-shrink: 0;
   width: 100%;
-  height: 130px;
+  height: 105px;
   border-radius: 10px;
   border: 2px solid var(--border-card);
   overflow: hidden;
@@ -1733,7 +1733,7 @@ h1, h2, h3, h4 {
   .slides-carousel-outer,
   .games-carousel-outer {
     width: 100%;
-    height: 130px;
+    height: 105px;
   }
 
   /* Dashboard static preview */
