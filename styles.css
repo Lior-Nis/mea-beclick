@@ -1117,6 +1117,18 @@ h1, h2, h3, h4 {
   text-align: right;
 }
 
+/* ── PRICING CTA ───────────────────────────────────────────── */
+.pricing-cta-row {
+  display: flex;
+  justify-content: center;
+  margin-top: 1.8rem;
+}
+
+.pricing-cta {
+  width: auto !important;
+  padding: 0.85rem 2.4rem !important;
+}
+
 /* ── STICKY BOOKING BUTTON ─────────────────────────────────── */
 #signup-button {
   position: fixed;
