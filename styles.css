@@ -924,8 +924,7 @@ h1, h2, h3, h4 {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-end;
-  padding-bottom: 1.6rem;
+  justify-content: center;
 }
 .pricing-card:hover {
   transform: translateY(-5px);
@@ -978,7 +977,7 @@ h1, h2, h3, h4 {
 .pricing-card-duration {
   font-size: 0.83rem;
   color: var(--text-muted);
-  margin-bottom: 1.8rem;
+  margin-bottom: 0;
 }
 
 .pricing-book-btn {
