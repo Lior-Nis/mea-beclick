@@ -748,7 +748,7 @@ h1, h2, h3, h4 {
 
 /* ── SUBJECTS ──────────────────────────────────────────────── */
 #subjects {
-  padding: 5rem 1.5rem;
+  padding: 2.5rem 1.5rem;
   border-top: 1px solid var(--border-card);
 }
 
@@ -756,7 +756,7 @@ h1, h2, h3, h4 {
 .subjects-carousel-outer {
   width: 100%;
   overflow: hidden;
-  margin-top: 2.5rem;
+  margin-top: 1.2rem;
   direction: ltr;
   -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
   mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
