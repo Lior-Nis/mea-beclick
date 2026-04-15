@@ -51,15 +51,22 @@
 
       <!-- Logo — centered -->
       <a href="#hero" class="nav-logo">
-        <svg width="26" height="26" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="לוגו">
-          <circle cx="28" cy="40" r="22" fill="var(--accent)"/>
-          <circle cx="28" cy="40" r="13" fill="var(--bg-base)"/>
-          <circle cx="60" cy="40" r="22" fill="var(--accent)"/>
-          <circle cx="60" cy="40" r="13" fill="var(--bg-base)"/>
-          <g transform="translate(50,8) rotate(18)">
-            <polygon points="0,0 0,24 6,18 9,27 13,25.5 10,17 16,17"
-                     fill="var(--accent2)" stroke="var(--bg-base)" stroke-width="1.4" stroke-linejoin="round"/>
-          </g>
+        <svg width="72" height="30" viewBox="0 0 130 56" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="לוגו">
+          <!-- "1" with serif cap -->
+          <line x1="12" y1="10" x2="12" y2="48" stroke="var(--accent)" stroke-width="7" stroke-linecap="round"/>
+          <line x1="8" y1="10" x2="16" y2="10" stroke="var(--accent)" stroke-width="5" stroke-linecap="round"/>
+          <line x1="7" y1="6" x2="17" y2="6" stroke="var(--accent)" stroke-width="3.5" stroke-linecap="round"/>
+          <!-- left "0" -->
+          <circle cx="43" cy="29" r="17" stroke="var(--accent)" stroke-width="7" fill="none"/>
+          <!-- right "0" -->
+          <circle cx="83" cy="29" r="17" stroke="var(--accent)" stroke-width="7" fill="none"/>
+          <!-- cursor arrow on right 0 -->
+          <polygon points="95,14 95,34 99.5,30 102,38 106,36.5 103.5,29 108,29"
+                   fill="var(--accent2)" stroke="var(--bg-base)" stroke-width="1.5" stroke-linejoin="round"/>
+          <!-- click ripple arcs -->
+          <path d="M 110,22 A 10,10 0 0 1 110,36" stroke="var(--accent2)" stroke-width="1.8" fill="none" stroke-linecap="round" opacity="0.7"/>
+          <path d="M 115,17 A 16,16 0 0 1 115,41" stroke="var(--accent2)" stroke-width="1.4" fill="none" stroke-linecap="round" opacity="0.45"/>
+          <path d="M 120,13 A 22,22 0 0 1 120,45" stroke="var(--accent2)" stroke-width="1" fill="none" stroke-linecap="round" opacity="0.25"/>
         </svg>
         <span>מאה</span> בקליק
       </a>
