@@ -921,6 +921,10 @@ h1, h2, h3, h4 {
   text-align: center;
   box-shadow: 0 2px 12px var(--shadow);
   transition: all 0.25s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 .pricing-card:hover {
   transform: translateY(-5px);
