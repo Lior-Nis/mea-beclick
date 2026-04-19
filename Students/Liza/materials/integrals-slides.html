@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>אינטגרלים — ליזה</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;400;700;900&family=Secular+One&display=swap" rel="stylesheet">
+<script>
+MathJax = {
+  tex: { inlineMath: [['$','$']], displayMath: [['$$','$$']] },
+  options: { skipHtmlTags: ['script','noscript','style','textarea'] },
+  startup: { typeset: true }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+
+<style>
+  :root {
+    --navy:   #0d1b2a;
+    --teal:   #1b4965;
+    --coral:  #e05c4b;
+    --gold:   #f4c430;
+    --mint:   #52b788;
+    --lilac:  #a78bdb;
+    --cream:  #fdf6e3;
+    --white:  #ffffff;
+
+    --c1: #e05c4b;   /* coral  */
+    --c2: #f4c430;   /* gold   */
+    --c3: #52b788;   /* mint   */
+    --c4: #a78bdb;   /* lilac  */
+    --c5: #5aa9e6;   /* sky    */
+    --c6: #ff9f1c;   /* orange */
+    --c7: #e88fc8;   /* pink   */
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    width: 100%; height: 100%;
+    background: var(--navy);
+    font-family: 'Frank Ruhl Libre', serif;
+    color: var(--cream);
+    overflow: hidden;
+    direction: rtl;
+  }
+
+  /* ── DECK ── */
+  #deck {
+    position: relative;
+    width: 100vw; height: 100vh;
+  }
+
+  .slide {
+    position: absolute; inset: 0;
+    display: flex; flex-direction: column;
+    padding: 0;
+    opacity: 0;
+    transform: translateX(-60px);
+    transition: opacity .5s ease, transform .5s cubic-bezier(.22,1,.36,1);
+    pointer-events: none;
+  }
+  .slide.active {
+    opacity: 1; transform: translateX(0);
+    pointer-events: all;
+  }
+  .slide.exit {
+    opacity: 0; transform: translateX(60px);
+    transition: opacity .35s ease, transform .35s ease;
+  }
+
+  /* ── HEADER BAR ── */
+  .slide-header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 40px;
+    background: rgba(27,73,101,.55);
+    backdrop-filter: blur(6px);
+    border-bottom: 2px solid rgba(244,196,48,.25);
+    flex-shrink: 0;
+  }
+  .slide-header .topic {
+    font-family: 'Secular One', sans-serif;
+    font-size: 1rem; letter-spacing: .12em;
+    color: var(--gold); text-transform: uppercase;
+  }
+  .slide-header .counter {
+    font-size: .85rem; color: rgba(255,255,255,.45);
+    font-family: monospace;
+  }
+
+  /* ── BODY ── */
+  .slide-body {
+    flex: 1; display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    padding: 40px 60px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* ── DECORATIVE BG CIRCLES ── */
+  .deco {
+    position: absolute; border-radius: 50%;
+    opacity: .06; pointer-events: none;
+  }
+
+  /* ── TYPOGRAPHY ── */
+  h1.main-title {
+    font-family: 'Secular One', sans-serif;
+    font-size: clamp(4rem, 11vw, 9rem);
+    line-height: 1;
+    color: var(--cream);
+    text-align: center;
+  }
+  h1.main-title span { color: var(--gold); }
+
+  .subtitle {
+    font-size: clamp(1.2rem, 3vw, 2rem);
+    color: rgba(253,246,227,.6);
+    text-align: center;
+    margin-top: 18px;
+    font-weight: 300;
+  }
+
+  h2.slide-title {
+    font-family: 'Secular One', sans-serif;
+    font-size: clamp(1.8rem, 4vw, 3rem);
+    color: var(--gold);
+    text-align: center;
+    margin-bottom: 32px;
+  }
+
+  /* ── DEFINITION BOX ── */
+  .def-box {
+    background: rgba(255,255,255,.06);
+    border: 1.5px solid rgba(244,196,48,.3);
+    border-radius: 18px;
+    padding: 32px 48px;
+    text-align: center;
+    font-size: clamp(1.3rem, 2.8vw, 2rem);
+    max-width: 820px;
+    line-height: 1.6;
+  }
+  .def-box strong { color: var(--coral); }
+
+  /* ── CYCLE DIAGRAM ── */
+  .cycle-wrap {
+    margin-top: 36px;
+    display: flex; align-items: center; gap: 0;
+  }
+  .cycle-box {
+    padding: 18px 32px;
+    border-radius: 14px;
+    font-size: 1.3rem;
+    font-family: 'Secular One', sans-serif;
+    text-align: center;
+  }
+  .cycle-box.func { background: rgba(82,183,136,.2); border: 2px solid var(--mint); color: var(--mint); }
+  .cycle-box.deriv { background: rgba(224,92,75,.2); border: 2px solid var(--coral); color: var(--coral); }
+  .cycle-box.integ { background: rgba(167,139,219,.2); border: 2px solid var(--lilac); color: var(--lilac); }
+  .cycle-arrow {
+    font-size: 2rem; padding: 0 16px;
+    display: flex; flex-direction: column; align-items: center; gap: 2px;
+  }
+  .cycle-arrow span { font-size: .75rem; color: rgba(255,255,255,.5); font-weight: 300; }
+
+  /* ── FORMULA GRID ── */
+  .formula-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+    gap: 16px;
+    width: 100%; max-width: 1100px;
+  }
+  .formula-card {
+    border-radius: 14px;
+    padding: 18px 24px;
+    display: flex; align-items: center; gap: 16px;
+    font-size: 1.25rem;
+    border: 1.5px solid;
+    transition: transform .2s;
+  }
+  .formula-card:hover { transform: translateY(-3px); }
+  .formula-card .icon { font-size: 1.8rem; flex-shrink: 0; }
+  .formula-card .math-expr { direction: ltr; font-size: 1.1rem; }
+
+  .fc1 { background: rgba(224,92,75,.12);  border-color: rgba(224,92,75,.4);  }
+  .fc2 { background: rgba(244,196,48,.12); border-color: rgba(244,196,48,.4); color: var(--gold); }
+  .fc3 { background: rgba(82,183,136,.12); border-color: rgba(82,183,136,.4); }
+  .fc4 { background: rgba(167,139,219,.12);border-color: rgba(167,139,219,.4);}
+  .fc5 { background: rgba(90,169,230,.12); border-color: rgba(90,169,230,.4); }
+  .fc6 { background: rgba(255,159,28,.12); border-color: rgba(255,159,28,.4); }
+  .fc7 { background: rgba(232,143,200,.12);border-color: rgba(232,143,200,.4);}
+
+  /* ── RULE SLIDE ── */
+  .rule-big {
+    background: rgba(255,255,255,.06);
+    border: 2px solid rgba(167,139,219,.5);
+    border-radius: 20px;
+    padding: 36px 56px;
+    text-align: center;
+    max-width: 800px;
+    direction: ltr;
+  }
+  .rule-big .rule-label {
+    font-family: 'Secular One', sans-serif;
+    color: var(--lilac);
+    font-size: 1rem;
+    letter-spacing: .15em;
+    text-transform: uppercase;
+    margin-bottom: 18px;
+    direction: rtl;
+  }
+  .example-strip {
+    margin-top: 28px;
+    display: flex; gap: 18px; flex-wrap: wrap; justify-content: center;
+  }
+  .ex-card {
+    border-radius: 12px; padding: 16px 24px;
+    direction: ltr; font-size: 1.1rem;
+    border: 1.5px solid rgba(244,196,48,.35);
+    background: rgba(244,196,48,.1);
+    color: var(--gold);
+  }
+
+  /* ── TYPE CARDS ── */
+  .type-grid {
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 14px;
+    width: 100%; max-width: 1000px;
+  }
+  .type-card {
+    border-radius: 16px;
+    padding: 22px 16px;
+    text-align: center;
+    font-family: 'Secular One', sans-serif;
+    font-size: 1.1rem;
+    cursor: default;
+    transition: transform .2s, box-shadow .2s;
+    border: 1.5px solid;
+  }
+  .type-card:hover { transform: scale(1.06); box-shadow: 0 8px 30px rgba(0,0,0,.3); }
+  .type-card .t-icon { font-size: 2rem; margin-bottom: 10px; }
+
+  /* ── AREA SLIDES ── */
+  .area-layout {
+    display: flex; gap: 48px; align-items: center;
+    width: 100%; max-width: 1000px;
+  }
+  .area-diagram { flex-shrink: 0; }
+  .area-info { flex: 1; display: flex; flex-direction: column; gap: 18px; }
+  .rule-pill {
+    border-radius: 12px; padding: 14px 24px;
+    font-size: 1.1rem;
+    text-align: center;
+    direction: ltr;
+    font-weight: 700;
+  }
+  .note-box {
+    border-radius: 12px; padding: 14px 22px;
+    background: rgba(255,255,255,.06);
+    border: 1px solid rgba(255,255,255,.15);
+    font-size: 1rem; line-height: 1.6;
+    direction: rtl;
+  }
+  .note-box strong { color: var(--gold); }
+
+  /* ── NAV ── */
+  #nav {
+    position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%);
+    display: flex; align-items: center; gap: 16px;
+    background: rgba(13,27,42,.8);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255,255,255,.1);
+    border-radius: 50px;
+    padding: 10px 24px;
+    z-index: 100;
+  }
+  #nav button {
+    background: none; border: none; cursor: pointer;
+    color: var(--cream); font-size: 1.5rem;
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    transition: background .2s, color .2s;
+  }
+  #nav button:hover { background: rgba(244,196,48,.2); color: var(--gold); }
+  #nav button:disabled { opacity: .25; cursor: default; }
+  #nav .pg { font-size: .9rem; color: rgba(255,255,255,.5); min-width: 60px; text-align: center; font-family: monospace; }
+
+  /* ── PROGRESS BAR ── */
+  #progress {
+    position: fixed; top: 0; right: 0; left: 0; height: 3px;
+    background: rgba(255,255,255,.08); z-index: 200;
+  }
+  #progress-fill {
+    height: 100%; background: var(--gold);
+    transition: width .4s ease;
+  }
+
+  /* ── TITLE SLIDE SPECIFIC ── */
+  .title-accent {
+    width: 120px; height: 5px;
+    background: linear-gradient(90deg, var(--coral), var(--gold));
+    border-radius: 10px;
+    margin: 24px auto;
+  }
+  .slide-badge {
+    margin-top: 28px;
+    display: inline-block;
+    background: rgba(82,183,136,.2);
+    border: 1.5px solid var(--mint);
+    color: var(--mint);
+    padding: 8px 24px;
+    border-radius: 50px;
+    font-size: 1rem;
+  }
+</style>
+</head>
+<body>
+
+<div id="progress"><div id="progress-fill"></div></div>
+
+<div id="deck">
+
+  <!-- ══ SLIDE 1 — TITLE ══ -->
+  <section class="slide active" id="s1">
+    <div class="slide-header">
+      <span class="topic">מתמטיקה · ליזה</span>
+      <span class="counter">01 / 09</span>
+    </div>
+    <div class="slide-body">
+      <div class="deco" style="width:600px;height:600px;background:var(--teal);top:-200px;left:-200px;"></div>
+      <div class="deco" style="width:400px;height:400px;background:var(--coral);bottom:-150px;right:-100px;"></div>
+
+      <h1 class="main-title">∫ <span>אינטגרלים</span></h1>
+      <div class="title-accent"></div>
+      <p class="subtitle">הפעולה ההפוכה לנגזרת</p>
+      <span class="slide-badge">🎓 שיעור ראשון · ליזה</span>
+    </div>
+  </section>
+
+  <!-- ══ SLIDE 2 — WHAT IS INTEGRAL ══ -->
+  <section class="slide" id="s2">
+    <div class="slide-header">
+      <span class="topic">הגדרה</span>
+      <span class="counter">02 / 09</span>
+    </div>
+    <div class="slide-body" style="gap:32px;">
+      <div class="deco" style="width:500px;height:500px;background:var(--lilac);top:-180px;right:-180px;"></div>
+      <h2 class="slide-title">מה זה אינטגרל?</h2>
+      <div class="def-box">
+        <strong>אינטגרל</strong> היא הפעולה ה<strong>הפוכה</strong> לנגזרת.<br>
+        <span style="font-size:.9em;opacity:.7;">אם גזרנו פונקציה — האינטגרל מחזיר אותנו לפונקציה המקורית.</span>
+      </div>
+
+      <div class="cycle-wrap">
+        <div class="cycle-box func">F(x)<br><span style="font-size:.75rem;opacity:.7;">פונקציה מקורית</span></div>
+        <div class="cycle-arrow">
+          <div style="color:var(--coral);font-size:1.8rem;">⟶</div>
+          <span>גזירה</span>
+        </div>
+        <div class="cycle-box deriv">f(x) = F′(x)<br><span style="font-size:.75rem;opacity:.7;">נגזרת</span></div>
+        <div class="cycle-arrow">
+          <div style="color:var(--lilac);font-size:1.8rem;">⟶</div>
+          <span>אינטגרציה</span>
+        </div>
+        <div class="cycle-box integ">F(x) + C<br><span style="font-size:.75rem;opacity:.7;">האינטגרל</span></div>
+      </div>
+
+      <p style="opacity:.55;font-size:.95rem;margin-top:8px;">C = קבוע אינטגרציה (תמיד מוסיפים!)</p>
+    </div>
+  </section>
+
+  <!-- ══ SLIDE 3 — FORMULAS ══ -->
+  <section class="slide" id="s3">
+    <div class="slide-header">
+      <span class="topic">נוסחאות מיידיות</span>
+      <span class="counter">03 / 09</span>
+    </div>
+    <div class="slide-body" style="justify-content:flex-start;padding-top:32px;">
+      <h2 class="slide-title" style="margin-bottom:20px;">אינטגרלים מיידיים</h2>
+      <div class="formula-grid">
+        <div class="formula-card fc1">
+          <span class="icon">🔢</span>
+          <span class="math-expr">$\int k \, dx = kx + C$</span>
+        </div>
+        <div class="formula-card fc2">
+          <span class="icon">📐</span>
+          <span class="math-expr">$\int kx \, dx = \frac{1}{2}kx^2 + C$</span>
+        </div>
+        <div class="formula-card fc3">
+          <span class="icon">✖️</span>
+          <span class="math-expr">$\int x^n dx = \frac{x^{n+1}}{n+1} + C$</span>
+        </div>
+        <div class="formula-card fc4">
+          <span class="icon">🌊</span>
+          <span class="math-expr">$\int \sin x \, dx = -\cos x + C$</span>
+        </div>
+        <div class="formula-card fc5">
+          <span class="icon">〰️</span>
+          <span class="math-expr">$\int \cos x \, dx = \sin x + C$</span>
+        </div>
+        <div class="formula-card fc6">
+          <span class="icon">📈</span>
+          <span class="math-expr">$\int e^x dx = e^x + C$</span>
+        </div>
+        <div class="formula-card fc7">
+          <span class="icon">🔁</span>
+          <span class="math-expr">$\int \frac{1}{x} dx = \ln|x| + C$</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ SLIDE 4 — CONSTANT RULE ══ -->
+  <section class="slide" id="s4">
+    <div class="slide-header">
+      <span class="topic">חוקים</span>
+      <span class="counter">04 / 09</span>
+    </div>
+    <div class="slide-body" style="gap:28px;">
+      <div class="deco" style="width:450px;height:450px;background:var(--lilac);bottom:-180px;left:-150px;"></div>
+      <h2 class="slide-title">כפל בקבוע</h2>
+
+      <div class="rule-big">
+        <div class="rule-label">חוק כפל בקבוע</div>
+        <div style="font-size:1.6rem;">
+          $$\int k \cdot f(x)\,dx = k \cdot \int f(x)\,dx$$
+        </div>
+        <p style="opacity:.6;font-size:.95rem;margin-top:12px;direction:rtl;">
+          קבוע יוצא מחוץ לסימן האינטגרל
+        </p>
+      </div>
+
+      <div class="example-strip">
+        <div class="ex-card">
+          $$\int 5x^2\,dx = 5\cdot\int x^2\,dx = 5\cdot\frac{x^3}{3}+C = \frac{5x^3}{3}+C$$
+        </div>
+        <div class="ex-card" style="border-color:rgba(82,183,136,.35);background:rgba(82,183,136,.1);color:var(--mint);">
+          $$\int 3\cos x\,dx = 3\cdot\int\cos x\,dx = 3\sin x+C$$
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ SLIDE 5 — TYPES ══ -->
+  <section class="slide" id="s5">
+    <div class="slide-header">
+      <span class="topic">סוגי אינטגרלים</span>
+      <span class="counter">05 / 09</span>
+    </div>
+    <div class="slide-body" style="justify-content:flex-start;padding-top:32px;">
+      <h2 class="slide-title" style="margin-bottom:20px;">סוגי אינטגרלים</h2>
+      <div class="type-grid">
+        <div class="type-card" style="background:rgba(224,92,75,.12);border-color:rgba(224,92,75,.4);">
+          <div class="t-icon">🔣</div>פולינומים
+        </div>
+        <div class="type-card" style="background:rgba(244,196,48,.12);border-color:rgba(244,196,48,.4);color:var(--gold);">
+          <div class="t-icon">√</div>שורש
+        </div>
+        <div class="type-card" style="background:rgba(82,183,136,.12);border-color:rgba(82,183,136,.4);color:var(--mint);">
+          <div class="t-icon">➗</div>רציונליים
+        </div>
+        <div class="type-card" style="background:rgba(167,139,219,.12);border-color:rgba(167,139,219,.4);color:var(--lilac);">
+          <div class="t-icon">〰️</div>טריגו
+        </div>
+        <div class="type-card" style="background:rgba(90,169,230,.12);border-color:rgba(90,169,230,.4);color:#5aa9e6;">
+          <div class="t-icon">📈</div>מעריכי
+        </div>
+        <div class="type-card" style="background:rgba(255,159,28,.12);border-color:rgba(255,159,28,.4);color:var(--c6);">
+          <div class="t-icon">🔁</div>לוגריתמי
+        </div>
+        <div class="type-card" style="background:rgba(232,143,200,.12);border-color:rgba(232,143,200,.4);color:var(--c7);">
+          <div class="t-icon">🔄</div>הצבה
+        </div>
+        <div class="type-card" style="background:rgba(82,183,136,.08);border-color:rgba(82,183,136,.3);color:var(--mint);">
+          <div class="t-icon">📊</div>חילוק פולינומים
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ SLIDE 6 — AREA ABOVE ══ -->
+  <section class="slide" id="s6">
+    <div class="slide-header">
+      <span class="topic">שטחים · מעל ציר ה-x</span>
+      <span class="counter">06 / 09</span>
+    </div>
+    <div class="slide-body">
+      <h2 class="slide-title">שטח מעל ציר ה-x</h2>
+      <div class="area-layout">
+        <div class="area-diagram">
+          <svg width="320" height="240" viewBox="0 0 320 240">
+            <!-- axes -->
+            <line x1="20" y1="220" x2="300" y2="220" stroke="rgba(255,255,255,.3)" stroke-width="2"/>
+            <line x1="20" y1="20"  x2="20"  y2="220" stroke="rgba(255,255,255,.3)" stroke-width="2"/>
+            <!-- arrowheads -->
+            <polygon points="300,215 310,220 300,225" fill="rgba(255,255,255,.3)"/>
+            <polygon points="15,20 20,10 25,20"        fill="rgba(255,255,255,.3)"/>
+            <!-- labels -->
+            <text x="306" y="224" fill="rgba(255,255,255,.5)" font-size="13">x</text>
+            <text x="24"  y="16"  fill="rgba(255,255,255,.5)" font-size="13">y</text>
+            <!-- filled area -->
+            <path d="M70,210 Q100,60 160,80 Q220,100 250,200 L250,220 L70,220 Z"
+                  fill="rgba(82,183,136,.35)" stroke="none"/>
+            <!-- curve -->
+            <path d="M70,210 Q100,60 160,80 Q220,100 250,200"
+                  fill="none" stroke="var(--mint)" stroke-width="3"/>
+            <!-- a, b markers -->
+            <line x1="70"  y1="220" x2="70"  y2="210" stroke="rgba(255,255,255,.4)" stroke-width="1.5" stroke-dasharray="4"/>
+            <line x1="250" y1="220" x2="250" y2="200" stroke="rgba(255,255,255,.4)" stroke-width="1.5" stroke-dasharray="4"/>
+            <text x="64"  y="234" fill="rgba(255,255,255,.7)" font-size="13">a</text>
+            <text x="245" y="234" fill="rgba(255,255,255,.7)" font-size="13">b</text>
+            <!-- S label -->
+            <text x="145" y="170" fill="var(--mint)" font-size="22" font-weight="bold">S</text>
+          </svg>
+        </div>
+        <div class="area-info">
+          <div class="rule-pill" style="background:rgba(82,183,136,.15);border:2px solid var(--mint);color:var(--mint);">
+            $$S = \int_a^b f(x)\,dx$$
+          </div>
+          <div class="note-box">
+            הפונקציה <strong>מעל</strong> ציר ה-x לאורך כל הקטע [a, b].<br>
+            האינטגרל המסוים נותן ישירות את השטח ✓
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ SLIDE 7 — AREA BELOW ══ -->
+  <section class="slide" id="s7">
+    <div class="slide-header">
+      <span class="topic">שטחים · מתחת לציר ה-x</span>
+      <span class="counter">07 / 09</span>
+    </div>
+    <div class="slide-body">
+      <h2 class="slide-title">שטח מתחת לציר ה-x</h2>
+      <div class="area-layout">
+        <div class="area-diagram">
+          <svg width="320" height="240" viewBox="0 0 320 240">
+            <line x1="20" y1="60"  x2="300" y2="60"  stroke="rgba(255,255,255,.3)" stroke-width="2"/>
+            <line x1="20" y1="20"  x2="20"  y2="230" stroke="rgba(255,255,255,.3)" stroke-width="2"/>
+            <polygon points="300,55 310,60 300,65"   fill="rgba(255,255,255,.3)"/>
+            <polygon points="15,20 20,10 25,20"       fill="rgba(255,255,255,.3)"/>
+            <text x="306" y="64"  fill="rgba(255,255,255,.5)" font-size="13">x</text>
+            <text x="24"  y="16"  fill="rgba(255,255,255,.5)" font-size="13">y</text>
+            <!-- filled area (below axis) -->
+            <path d="M70,60 Q100,200 160,180 Q220,160 250,60 L250,60 Z"
+                  fill="rgba(224,92,75,.3)" stroke="none"/>
+            <path d="M70,60 Q100,200 160,180 Q220,160 250,60"
+                  fill="none" stroke="var(--coral)" stroke-width="3"/>
+            <line x1="70"  y1="60" x2="70"  y2="65"  stroke="rgba(255,255,255,.4)" stroke-width="1.5" stroke-dasharray="4"/>
+            <line x1="250" y1="60" x2="250" y2="65"  stroke="rgba(255,255,255,.4)" stroke-width="1.5" stroke-dasharray="4"/>
+            <text x="64"  y="50"  fill="rgba(255,255,255,.7)" font-size="13">a</text>
+            <text x="245" y="50"  fill="rgba(255,255,255,.7)" font-size="13">b</text>
+            <text x="145" y="145" fill="var(--coral)" font-size="22" font-weight="bold">S</text>
+          </svg>
+        </div>
+        <div class="area-info">
+          <div class="rule-pill" style="background:rgba(224,92,75,.15);border:2px solid var(--coral);color:var(--coral);">
+            $$S = -\int_a^b f(x)\,dx$$
+          </div>
+          <div class="note-box">
+            הפונקציה <strong>מתחת</strong> לציר ה-x — האינטגרל יוצא שלילי.<br>
+            <strong>שמים מינוס</strong> לפני האינטגרל כדי לקבל שטח חיובי.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ SLIDE 8 — ABOVE + BELOW ══ -->
+  <section class="slide" id="s8">
+    <div class="slide-header">
+      <span class="topic">שטחים · מעל ומתחת</span>
+      <span class="counter">08 / 09</span>
+    </div>
+    <div class="slide-body">
+      <h2 class="slide-title">שטח מעל ומתחת לציר ה-x</h2>
+      <div class="area-layout">
+        <div class="area-diagram">
+          <svg width="320" height="240" viewBox="0 0 320 240">
+            <line x1="20" y1="120" x2="300" y2="120" stroke="rgba(255,255,255,.3)" stroke-width="2"/>
+            <line x1="20" y1="20"  x2="20"  y2="230" stroke="rgba(255,255,255,.3)" stroke-width="2"/>
+            <polygon points="300,115 310,120 300,125" fill="rgba(255,255,255,.3)"/>
+            <polygon points="15,20 20,10 25,20"        fill="rgba(255,255,255,.3)"/>
+            <text x="306" y="124" fill="rgba(255,255,255,.5)" font-size="13">x</text>
+            <text x="24"  y="16"  fill="rgba(255,255,255,.5)" font-size="13">y</text>
+            <!-- above area -->
+            <path d="M50,120 Q90,30 160,120" fill="rgba(82,183,136,.3)" stroke="none"/>
+            <!-- below area -->
+            <path d="M160,120 Q230,200 280,120" fill="rgba(224,92,75,.3)" stroke="none"/>
+            <!-- curve -->
+            <path d="M50,120 Q90,30 160,120 Q230,200 280,120"
+                  fill="none" stroke="var(--gold)" stroke-width="3"/>
+            <!-- markers -->
+            <line x1="50"  y1="120" x2="50"  y2="130" stroke="rgba(255,255,255,.4)" stroke-width="1.5" stroke-dasharray="4"/>
+            <line x1="160" y1="120" x2="160" y2="130" stroke="rgba(255,255,255,.4)" stroke-width="1.5" stroke-dasharray="4"/>
+            <line x1="280" y1="120" x2="280" y2="130" stroke="rgba(255,255,255,.4)" stroke-width="1.5" stroke-dasharray="4"/>
+            <text x="44"  y="142" fill="rgba(255,255,255,.7)" font-size="13">a</text>
+            <text x="154" y="142" fill="rgba(255,255,255,.7)" font-size="13">c</text>
+            <text x="274" y="142" fill="rgba(255,255,255,.7)" font-size="13">b</text>
+            <text x="98"  y="90"  fill="var(--mint)"  font-size="18" font-weight="bold">S₁</text>
+            <text x="215" y="168" fill="var(--coral)" font-size="18" font-weight="bold">S₂</text>
+          </svg>
+        </div>
+        <div class="area-info">
+          <div class="rule-pill" style="background:rgba(244,196,48,.12);border:2px solid var(--gold);color:var(--gold);font-size:1rem;">
+            $$S = \int_a^c f(x)\,dx - \int_c^b f(x)\,dx$$
+          </div>
+          <div class="note-box">
+            מוצאים את נקודת החיתוך <strong>c</strong> עם ציר ה-x.<br>
+            מחשבים כל חלק <strong>בנפרד</strong> ומחברים את השטחים.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ SLIDE 9 — BETWEEN TWO FUNCTIONS ══ -->
+  <section class="slide" id="s9">
+    <div class="slide-header">
+      <span class="topic">שטחים · בין שתי פונקציות</span>
+      <span class="counter">09 / 09</span>
+    </div>
+    <div class="slide-body">
+      <h2 class="slide-title">שטח בין שתי פונקציות</h2>
+      <div class="area-layout">
+        <div class="area-diagram">
+          <svg width="320" height="240" viewBox="0 0 320 240">
+            <line x1="20" y1="220" x2="300" y2="220" stroke="rgba(255,255,255,.3)" stroke-width="2"/>
+            <line x1="20" y1="20"  x2="20"  y2="220" stroke="rgba(255,255,255,.3)" stroke-width="2"/>
+            <polygon points="300,215 310,220 300,225" fill="rgba(255,255,255,.3)"/>
+            <polygon points="15,20 20,10 25,20"        fill="rgba(255,255,255,.3)"/>
+            <text x="306" y="224" fill="rgba(255,255,255,.5)" font-size="13">x</text>
+            <text x="24"  y="16"  fill="rgba(255,255,255,.5)" font-size="13">y</text>
+            <!-- shaded region between curves -->
+            <path d="M70,170 Q130,60 250,100 L250,150 Q130,130 70,200 Z"
+                  fill="rgba(167,139,219,.3)" stroke="none"/>
+            <!-- f(x) upper -->
+            <path d="M50,180 Q130,50 270,90"
+                  fill="none" stroke="var(--lilac)" stroke-width="3"/>
+            <!-- g(x) lower -->
+            <path d="M50,205 Q130,140 270,155"
+                  fill="none" stroke="var(--coral)" stroke-width="3"/>
+            <!-- labels -->
+            <text x="210" y="75"  fill="var(--lilac)" font-size="14" font-style="italic">f(x)</text>
+            <text x="210" y="148" fill="var(--coral)" font-size="14" font-style="italic">g(x)</text>
+            <!-- a, b -->
+            <line x1="70"  y1="175" x2="70"  y2="220" stroke="rgba(255,255,255,.4)" stroke-width="1.5" stroke-dasharray="4"/>
+            <line x1="250" y1="100" x2="250" y2="220" stroke="rgba(255,255,255,.4)" stroke-width="1.5" stroke-dasharray="4"/>
+            <text x="64"  y="233" fill="rgba(255,255,255,.7)" font-size="13">a</text>
+            <text x="245" y="233" fill="rgba(255,255,255,.7)" font-size="13">b</text>
+            <text x="148" y="125" fill="white" font-size="18" font-weight="bold">S</text>
+          </svg>
+        </div>
+        <div class="area-info">
+          <div class="rule-pill" style="background:rgba(167,139,219,.15);border:2px solid var(--lilac);color:var(--lilac);">
+            $$S = \int_a^b \bigl[f(x) - g(x)\bigr]\,dx$$
+          </div>
+          <div class="note-box">
+            <strong>f(x)</strong> — פונקציה עליונה (גדולה יותר)<br>
+            <strong>g(x)</strong> — פונקציה תחתונה (קטנה יותר)<br>
+            מחסירים תחתונה מעליונה לאורך כל [a, b].
+          </div>
+          <div class="rule-pill" style="background:rgba(244,196,48,.1);border:1px solid rgba(244,196,48,.3);color:var(--gold);font-size:.95rem;">
+            ✏️ מוצאים a, b ע"י השוואת הפונקציות: $f(x)=g(x)$
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div><!-- /deck -->
+
+<!-- ── NAV ── -->
+<div id="nav">
+  <button id="btn-prev" onclick="go(-1)" disabled>&#8592;</button>
+  <span class="pg" id="pg-label">1 / 9</span>
+  <button id="btn-next" onclick="go(1)">&#8594;</button>
+</div>
+
+<script>
+  const slides = document.querySelectorAll('.slide');
+  const total  = slides.length;
+  let cur = 0;
+
+  function go(dir) {
+    const next = cur + dir;
+    if (next < 0 || next >= total) return;
+
+    slides[cur].classList.remove('active');
+    slides[cur].classList.add('exit');
+    setTimeout(() => slides[cur].classList.remove('exit'), 400);
+
+    cur = next;
+    slides[cur].classList.add('active');
+    update();
+
+    // Re-typeset MathJax on the new slide
+    if (window.MathJax) MathJax.typesetPromise([slides[cur]]);
+  }
+
+  function update() {
+    document.getElementById('pg-label').textContent = (cur+1) + ' / ' + total;
+    document.getElementById('btn-prev').disabled = cur === 0;
+    document.getElementById('btn-next').disabled = cur === total - 1;
+    document.getElementById('progress-fill').style.width = ((cur+1)/total*100) + '%';
+  }
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowLeft'  || e.key === 'ArrowDown')  go(1);
+    if (e.key === 'ArrowRight' || e.key === 'ArrowUp')    go(-1);
+  });
+
+  update();
+</script>
+</body>
+</html>

@@ -1,0 +1,1075 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>אופוריה · מטבח ובר · כשר</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&family=Heebo:wght@300;400;500;700;900&display=swap');
+
+    /* =====================
+       RESET & VARIABLES
+    ===================== */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg:        #0a0a0f;
+      --bg-2:      #0d0d14;
+      --bg-card:   #0f0f1a;
+      --magenta:   #ff00ff;
+      --cyan:      #00ffff;
+      --yellow:    #ffee00;
+      --white:     #f0f0f0;
+      --dim:       rgba(240,240,240,0.55);
+      --border:    rgba(255,255,255,0.07);
+
+      --font-h:    'Heebo', 'Orbitron', sans-serif;
+      --font-b:    'Heebo', 'Rajdhani', sans-serif;
+      --font-num:  'Orbitron', monospace;
+
+      --gm: 0 0 8px rgba(255,0,255,0.4);
+      --gc: 0 0 8px rgba(0,255,255,0.4);
+      --gy: 0 0 8px rgba(255,238,0,0.4);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--white);
+      font-family: var(--font-b);
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* subtle dot-grid bg texture */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: radial-gradient(rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    a { text-decoration: none; color: inherit; }
+    h1, h2, h3 { font-family: var(--font-h); text-transform: uppercase; letter-spacing: 0.05em; }
+
+    /* =====================
+       SHARED UTILITIES
+    ===================== */
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 28px; }
+
+    .neon-divider {
+      height: 1px;
+      background: linear-gradient(to right, transparent 0%, rgba(255,0,255,0.4) 30%, rgba(0,255,255,0.4) 70%, transparent 100%);
+      border: none;
+      position: relative;
+      z-index: 1;
+    }
+
+    .section-label {
+      font-family: var(--font-b);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.45em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    .section-title {
+      font-size: clamp(2rem, 5vw, 3.4rem);
+      font-weight: 900;
+      line-height: 1;
+    }
+
+    /* =====================
+       KEYFRAME ANIMATIONS
+    ===================== */
+    @keyframes flicker {
+      0%,100% { opacity: 1; }
+      92%     { opacity: 0.85; }
+      94%     { opacity: 1; }
+    }
+
+    @keyframes pulse {
+      0%,100% { opacity: 0.55; transform: scale(1); }
+      50%      { opacity: 0.9;  transform: scale(1.06); }
+    }
+
+    @keyframes float {
+      0%,100% { transform: translateX(-50%) translateY(0); }
+      50%      { transform: translateX(-50%) translateY(-10px); }
+    }
+
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(36px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes scanBeam {
+      0%   { top: -8%; opacity: 0.6; }
+      80%  { opacity: 0.3; }
+      100% { top: 108%; opacity: 0; }
+    }
+
+    @keyframes borderCycle {
+      0%,100% { border-color: rgba(255,238,0,0.3); }
+      50%      { border-color: rgba(255,238,0,0.5); }
+    }
+
+    /* =====================
+       NAVBAR
+    ===================== */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 500;
+      height: 68px;
+      background: rgba(10,10,15,0.82);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(255,0,255,0.18);
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 28px;
+    }
+
+    .nav-logo {
+      font-family: var(--font-h);
+      font-size: 1.35rem;
+      font-weight: 900;
+      letter-spacing: 0.12em;
+    }
+    .nav-logo .logo-o {
+      color: var(--cyan);
+      animation: flicker 14s infinite 4s;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 38px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: var(--font-b);
+      font-size: 0.88rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(240,240,240,0.6);
+      position: relative;
+      transition: color 0.25s;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--magenta);
+      transition: width 0.3s ease;
+    }
+
+    .nav-links a:hover { color: var(--magenta); }
+    .nav-links a:hover::after { width: 100%; }
+
+    .btn-nav-order {
+      font-family: var(--font-h);
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      padding: 10px 22px;
+      border: 1px solid var(--magenta);
+      color: var(--magenta);
+      background: transparent;
+      cursor: pointer;
+      transition: all 0.3s;
+      display: inline-block;
+    }
+    .btn-nav-order:hover {
+      background: var(--magenta);
+      color: var(--bg);
+    }
+
+    /* hamburger */
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 6px;
+    }
+    .nav-toggle span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--magenta);
+      box-shadow: 0 0 5px var(--magenta);
+      transition: all 0.3s;
+    }
+
+    /* =====================
+       HERO
+    ===================== */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      padding: 120px 28px 100px;
+      z-index: 1;
+    }
+
+    /* glow orbs */
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(90px);
+      pointer-events: none;
+    }
+    .orb-m {
+      width: 560px; height: 560px;
+      background: radial-gradient(circle, rgba(255,0,255,0.05) 0%, transparent 70%);
+      top: -160px; left: -120px;
+      animation: pulse 7s ease-in-out infinite;
+    }
+    .orb-c {
+      width: 440px; height: 440px;
+      background: radial-gradient(circle, rgba(0,255,255,0.04) 0%, transparent 70%);
+      bottom: -80px; right: -80px;
+      animation: pulse 9s ease-in-out infinite 1.5s reverse;
+    }
+    .orb-y {
+      width: 260px; height: 260px;
+      background: radial-gradient(circle, rgba(255,238,0,0.03) 0%, transparent 70%);
+      top: 55%; left: 55%;
+      animation: pulse 6s ease-in-out infinite 3s;
+    }
+
+    /* scan beam — removed */
+    .hero-beam { display: none; }
+
+    /* grid overlay */
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,0,255,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,0,255,0.025) 1px, transparent 1px);
+      background-size: 72px 72px;
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 3;
+      text-align: center;
+      max-width: 860px;
+    }
+
+    .hero-eyebrow {
+      font-family: var(--font-b);
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.5em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: 22px;
+      animation: slideUp 0.8s ease both;
+    }
+
+    .hero-title {
+      font-size: clamp(3.2rem, 11vw, 8.5rem);
+      font-weight: 900;
+      line-height: 0.9;
+      margin-bottom: 10px;
+    }
+
+    .hero-title .line-1 {
+      display: block;
+      color: var(--white);
+      text-shadow: 0 0 50px rgba(255,255,255,0.15);
+      animation: slideUp 0.8s ease 0.15s both;
+    }
+
+    .hero-title .line-2 {
+      display: block;
+      color: var(--magenta);
+      animation: slideUp 0.8s ease 0.3s both;
+    }
+
+    .kosher-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin: 32px 0 40px;
+      padding: 9px 24px;
+      border: 1px solid rgba(255,238,0,0.35);
+      color: var(--yellow);
+      font-family: var(--font-b);
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      animation: slideUp 0.8s ease 0.45s both, borderCycle 6s 2s infinite;
+    }
+
+    .hero-ctas {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+      animation: slideUp 0.8s ease 0.6s both;
+    }
+
+    .btn-fill {
+      font-family: var(--font-h);
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 17px 38px;
+      background: var(--magenta);
+      color: var(--bg);
+      border: none;
+      cursor: pointer;
+      display: inline-block;
+      transition: all 0.3s;
+      clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%);
+    }
+    .btn-fill:hover {
+      transform: translateY(-2px);
+      opacity: 0.9;
+    }
+
+    .btn-outline {
+      font-family: var(--font-h);
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 17px 38px;
+      background: transparent;
+      color: var(--cyan);
+      border: 1px solid var(--cyan);
+      cursor: pointer;
+      display: inline-block;
+      transition: all 0.3s;
+      clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%);
+    }
+    .btn-outline:hover {
+      background: var(--cyan);
+      color: var(--bg);
+      transform: translateY(-2px);
+    }
+
+    /* scroll hint */
+    .scroll-hint {
+      position: absolute;
+      bottom: 38px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 7px;
+      opacity: 0.35;
+      animation: float 2.5s ease-in-out infinite;
+      pointer-events: none;
+    }
+    .scroll-hint p {
+      font-family: var(--font-b);
+      font-size: 0.68rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+    }
+    .scroll-arrow {
+      width: 18px;
+      height: 18px;
+      border-right: 1.5px solid var(--white);
+      border-bottom: 1.5px solid var(--white);
+      transform: rotate(45deg);
+    }
+
+    /* =====================
+       BURGERS SECTION
+    ===================== */
+    #burgers {
+      padding: 100px 0;
+      position: relative;
+      z-index: 1;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+
+    .section-title .em { color: var(--magenta); }
+    .section-title .ec { color: var(--cyan); }
+    .section-title .ey { color: var(--yellow); }
+
+    .burgers-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .burger-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+      cursor: pointer;
+    }
+
+    /* top edge glow line on hover */
+    .burger-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      opacity: 0;
+      transition: opacity 0.35s;
+    }
+    .card-orig::before  { background: linear-gradient(to right, transparent, var(--magenta), transparent); }
+    .card-heat::before  { background: linear-gradient(to right, transparent, var(--yellow), transparent); }
+    .card-gold::before  { background: linear-gradient(to right, transparent, var(--cyan), transparent); }
+
+    /* inner glow on hover */
+    .burger-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity 0.35s;
+      pointer-events: none;
+    }
+    .card-orig::after { background: radial-gradient(circle at 50% 10%, rgba(255,0,255,0.06), transparent 65%); }
+    .card-heat::after { background: radial-gradient(circle at 50% 10%, rgba(255,238,0,0.06), transparent 65%); }
+    .card-gold::after { background: radial-gradient(circle at 50% 10%, rgba(0,255,255,0.06), transparent 65%); }
+
+    .burger-card:hover { transform: translateY(-10px); }
+    .burger-card:hover::before, .burger-card:hover::after { opacity: 1; }
+
+    .card-orig:hover { border-color: rgba(255,0,255,0.3); }
+    .card-heat:hover { border-color: rgba(255,238,0,0.3); }
+    .card-gold:hover { border-color: rgba(0,255,255,0.3); }
+
+    .burger-img-wrap {
+      height: 196px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0,0,0,0.28);
+      font-size: 88px;
+      position: relative;
+      overflow: hidden;
+    }
+    .burger-img-wrap::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+    }
+    .card-orig .burger-img-wrap::before { background: radial-gradient(circle, rgba(255,0,255,0.08) 0%, transparent 65%); }
+    .card-heat .burger-img-wrap::before { background: radial-gradient(circle, rgba(255,120,0,0.10) 0%, transparent 65%); }
+    .card-gold .burger-img-wrap::before { background: radial-gradient(circle, rgba(0,255,255,0.08) 0%, transparent 65%); }
+
+    .burger-emoji {
+      position: relative;
+      z-index: 1;
+      transition: transform 0.35s ease, filter 0.35s ease;
+    }
+    .card-orig .burger-emoji { filter: drop-shadow(0 0 18px rgba(255,0,255,0.5)); }
+    .card-heat .burger-emoji { filter: drop-shadow(0 0 18px rgba(255,120,0,0.6)); }
+    .card-gold .burger-emoji { filter: drop-shadow(0 0 18px rgba(0,255,255,0.5)); }
+    .burger-card:hover .burger-emoji { transform: scale(1.12) translateY(-6px); }
+
+    .burger-info { padding: 24px 24px 22px; }
+
+    .burger-name {
+      font-family: var(--font-h);
+      font-size: 0.9rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+    .card-orig .burger-name { color: var(--magenta); }
+    .card-heat .burger-name { color: var(--yellow); }
+    .card-gold .burger-name { color: var(--cyan); }
+
+    .burger-desc {
+      font-size: 0.96rem;
+      font-weight: 400;
+      color: rgba(240,240,240,0.52);
+      line-height: 1.55;
+      margin-bottom: 20px;
+    }
+
+    .burger-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding-top: 16px;
+    }
+
+    .burger-price {
+      font-family: var(--font-num);
+      font-size: 1.3rem;
+      font-weight: 900;
+      color: var(--white);
+      direction: ltr;
+    }
+
+    .burger-badge {
+      font-family: var(--font-b);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border: 1px solid;
+    }
+    .card-orig .burger-badge { border-color: rgba(255,0,255,0.35);  color: var(--magenta); }
+    .card-heat .burger-badge { border-color: rgba(255,238,0,0.35);  color: var(--yellow); }
+    .card-gold .burger-badge { border-color: rgba(0,255,255,0.35);  color: var(--cyan); }
+
+    /* =====================
+       VIBE STRIP
+    ===================== */
+    #vibe {
+      background: var(--bg-2);
+      padding: 0;
+      position: relative;
+      z-index: 1;
+    }
+
+    .vibe-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .vibe-item {
+      text-align: center;
+      padding: 56px 24px;
+      border-right: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+      transition: background 0.3s;
+    }
+    .vibe-item:last-child { border-right: none; }
+    .vibe-item:hover { background: rgba(255,0,255,0.03); }
+
+    .vibe-item::before {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 2px;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .vibe-item:nth-child(1)::before { background: linear-gradient(to right, transparent, var(--magenta), transparent); }
+    .vibe-item:nth-child(2)::before { background: linear-gradient(to right, transparent, var(--cyan), transparent); }
+    .vibe-item:nth-child(3)::before { background: linear-gradient(to right, transparent, var(--yellow), transparent); }
+    .vibe-item:nth-child(4)::before { background: linear-gradient(to right, transparent, var(--magenta), transparent); }
+    .vibe-item:hover::before { opacity: 1; }
+
+    .vibe-icon {
+      font-size: 2.6rem;
+      display: block;
+      margin-bottom: 14px;
+      transition: transform 0.3s, filter 0.3s;
+    }
+    .vibe-item:hover .vibe-icon {
+      transform: scale(1.15);
+    }
+
+    .vibe-title {
+      font-family: var(--font-h);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+
+    .vibe-sub {
+      font-family: var(--font-b);
+      font-size: 0.92rem;
+      color: rgba(240,240,240,0.38);
+      line-height: 1.6;
+    }
+
+    /* =====================
+       CTA / NEWSLETTER
+    ===================== */
+    #cta {
+      padding: 130px 28px;
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+      z-index: 1;
+    }
+
+    .cta-blob {
+      position: absolute;
+      width: 700px; height: 700px;
+      background: radial-gradient(circle, rgba(255,0,255,0.05) 0%, rgba(0,255,255,0.02) 50%, transparent 70%);
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      filter: blur(70px);
+      pointer-events: none;
+      animation: pulse 8s ease-in-out infinite;
+    }
+
+    .cta-content {
+      position: relative;
+      z-index: 2;
+      max-width: 580px;
+      margin: 0 auto;
+    }
+
+    .cta-title {
+      font-size: clamp(2.2rem, 6vw, 3.8rem);
+      font-weight: 900;
+      margin-bottom: 14px;
+    }
+    .cta-title .em { color: var(--magenta); }
+
+    .cta-sub {
+      font-family: var(--font-b);
+      font-size: 1.05rem;
+      color: rgba(240,240,240,0.45);
+      margin-bottom: 44px;
+      font-weight: 400;
+      letter-spacing: 0.03em;
+    }
+
+    .cta-form {
+      display: flex;
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    .cta-input {
+      flex: 1;
+      padding: 16px 20px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-right: none;
+      color: var(--white);
+      font-family: var(--font-b);
+      font-size: 1rem;
+      outline: none;
+      transition: border-color 0.3s, background 0.3s;
+    }
+    .cta-input::placeholder { color: rgba(240,240,240,0.22); letter-spacing: 0.04em; }
+    .cta-input:focus {
+      border-color: rgba(255,0,255,0.4);
+      background: rgba(255,0,255,0.03);
+    }
+
+    .btn-join {
+      font-family: var(--font-h);
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 16px 26px;
+      background: var(--magenta);
+      color: var(--bg);
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s;
+      white-space: nowrap;
+    }
+    .btn-join:hover {
+      background: var(--white);
+      box-shadow: 0 0 22px var(--magenta), 0 0 44px rgba(255,0,255,0.3);
+    }
+    .btn-join.success {
+      background: var(--cyan);
+      color: var(--bg);
+      box-shadow: 0 0 20px var(--cyan);
+    }
+
+    /* =====================
+       FOOTER
+    ===================== */
+    footer {
+      padding: 52px 28px 36px;
+      position: relative;
+      z-index: 1;
+      background: rgba(0,0,0,0.3);
+    }
+
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 28px;
+    }
+
+    .footer-logo {
+      font-family: var(--font-h);
+      font-size: 1.15rem;
+      font-weight: 900;
+      letter-spacing: 0.12em;
+    }
+    .footer-logo .logo-o {
+      color: var(--cyan);
+    }
+
+    .footer-center {
+      text-align: center;
+    }
+    .footer-kosher {
+      font-family: var(--font-b);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--yellow);
+      opacity: 0.8;
+      margin-bottom: 5px;
+    }
+    .footer-copy {
+      font-family: var(--font-b);
+      font-size: 0.78rem;
+      color: rgba(240,240,240,0.22);
+      letter-spacing: 0.04em;
+    }
+
+    .footer-social {
+      display: flex;
+      gap: 24px;
+    }
+    .social-link {
+      font-family: var(--font-b);
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(240,240,240,0.35);
+      transition: color 0.25s, text-shadow 0.25s;
+    }
+    .social-link:hover { color: var(--cyan); }
+
+    /* =====================
+       RESPONSIVE
+    ===================== */
+    @media (max-width: 900px) {
+      .burgers-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+      .card-gold { grid-column: span 2; max-width: 480px; margin: 0 auto; }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links, .btn-nav-order { display: none; }
+      .nav-toggle { display: flex; }
+
+      .nav-links.open {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 68px;
+        left: 0; right: 0;
+        background: rgba(10,10,15,0.97);
+        padding: 28px;
+        gap: 22px;
+        border-bottom: 1px solid rgba(255,0,255,0.2);
+        backdrop-filter: blur(18px);
+      }
+      .nav-links.open a { font-size: 1rem; }
+
+      .vibe-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+      .vibe-item:nth-child(2) { border-right: none; }
+      .vibe-item:nth-child(3) { border-right: 1px solid var(--border); }
+      .vibe-item { border-bottom: 1px solid var(--border); }
+      .vibe-item:nth-child(3), .vibe-item:nth-child(4) { border-bottom: none; }
+
+      .footer-inner { flex-direction: column; align-items: center; text-align: center; }
+
+      .cta-form { flex-direction: column; }
+      .cta-input { border-right: 1px solid rgba(255,255,255,0.1); border-bottom: none; }
+    }
+
+    @media (max-width: 600px) {
+      .burgers-grid { grid-template-columns: 1fr; }
+      .card-gold { grid-column: span 1; max-width: 100%; }
+
+      .hero-ctas { flex-direction: column; align-items: center; }
+      .btn-fill, .btn-outline { width: 100%; max-width: 300px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ======== NAVBAR ======== -->
+  <nav id="nav">
+    <div class="nav-inner">
+      <a href="#" class="nav-logo"><span class="logo-o">א</span>ופוריה</a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#burgers">תפריט</a></li>
+        <li><a href="#vibe">מבצעים</a></li>
+        <li><a href="#cta">אודות</a></li>
+        <li><a href="#footer">מצאו אותנו</a></li>
+      </ul>
+      <a href="#cta" class="btn-nav-order">הזמן עכשיו</a>
+      <div class="nav-toggle" id="navToggle" onclick="toggleNav()">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ======== HERO ======== -->
+  <section id="hero">
+    <div class="orb orb-m"></div>
+    <div class="orb orb-c"></div>
+    <div class="orb orb-y"></div>
+    <div class="hero-grid"></div>
+    <div class="hero-beam"></div>
+
+    <div class="hero-content">
+      <p class="hero-eyebrow">מטבח ובר &nbsp;·&nbsp; כשר</p>
+      <h1 class="hero-title">
+        <span class="line-1">חווה את</span>
+        <span class="line-2">האופוריה</span>
+      </h1>
+      <div class="kosher-badge">
+        <span>✦</span>
+        <span>כשר למהדרין · אשקלון</span>
+        <span>✦</span>
+      </div>
+      <div class="hero-ctas">
+        <a href="#burgers" class="btn-fill">לתפריט</a>
+        <a href="#cta" class="btn-outline">הזמן שולחן</a>
+      </div>
+    </div>
+
+    <div class="scroll-hint" aria-hidden="true">
+      <p>גלול</p>
+      <div class="scroll-arrow"></div>
+    </div>
+  </section>
+
+  <hr class="neon-divider" />
+
+  <!-- ======== SIGNATURE BURGERS ======== -->
+  <section id="burgers">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">הסיגנטורים שלנו</span>
+        <h2 class="section-title">בורגרים <span class="em">אייקוניים</span></h2>
+      </div>
+
+      <div class="burgers-grid">
+
+        <!-- המקורי -->
+        <article class="burger-card card-orig reveal">
+          <div class="burger-img-wrap">
+            <span class="burger-emoji">🍔</span>
+          </div>
+          <div class="burger-info">
+            <h3 class="burger-name">המקורי</h3>
+            <p class="burger-desc">פטי סמאש, רוטב סודי ורוד, גבינת צ'דר מיושנת, בצל מקורמל — על לחמנית בריוש. זה שהכל התחיל ממנו.</p>
+            <div class="burger-footer">
+              <span class="burger-price">₪58</span>
+              <span class="burger-badge">קלאסי</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- נאון חריף -->
+        <article class="burger-card card-heat reveal">
+          <div class="burger-img-wrap">
+            <span class="burger-emoji">🌶️</span>
+          </div>
+          <div class="burger-info">
+            <h3 class="burger-name">נאון חריף</h3>
+            <p class="burger-desc">דאבל סמאש, ריבת פלפל גוסט, חלפניוס קריספי, קולסלו סריראצ'ה, בצל סגול כבוש. לא מתאים לחלשי לב.</p>
+            <div class="burger-footer">
+              <span class="burger-price">₪65</span>
+              <span class="burger-badge">🔥 חריף</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- גולד ראש -->
+        <article class="burger-card card-gold reveal">
+          <div class="burger-img-wrap">
+            <span class="burger-emoji">👑</span>
+          </div>
+          <div class="burger-info">
+            <h3 class="burger-name">גולד ראש</h3>
+            <p class="burger-desc">בשר וואגיו, אאיולי כמהין, שאלוטס קריספי, גאודה מיושן, לחמנית בריוש. כשרק הכי טוב מספיק.</p>
+            <div class="burger-footer">
+              <span class="burger-price">₪72</span>
+              <span class="burger-badge">פרמיום</span>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <hr class="neon-divider" />
+
+  <!-- ======== VIBE STRIP ======== -->
+  <section id="vibe">
+    <div class="vibe-grid">
+      <div class="vibe-item reveal">
+        <span class="vibe-icon">🌙</span>
+        <h3 class="vibe-title">פתוח עד מאוחר</h3>
+        <p class="vibe-sub">א׳–ה׳ עד 02:00<br>ו׳–ש׳ עד 04:00</p>
+      </div>
+      <div class="vibe-item reveal">
+        <span class="vibe-icon">🎸</span>
+        <h3 class="vibe-title">מוזיקה חיה</h3>
+        <p class="vibe-sub">רביעי–שבת מ־22:00<br>כניסה חופשית</p>
+      </div>
+      <div class="vibe-item reveal">
+        <span class="vibe-icon">✡</span>
+        <h3 class="vibe-title">100% כשר</h3>
+        <p class="vibe-sub">כשר למהדרין<br>בפיקוח מלא</p>
+      </div>
+      <div class="vibe-item reveal">
+        <span class="vibe-icon">🍸</span>
+        <h3 class="vibe-title">בר מלא</h3>
+        <p class="vibe-sub">קוקטיילים מיוחדים<br>ומשקאות פרמיום</p>
+      </div>
+    </div>
+  </section>
+
+  <hr class="neon-divider" />
+
+  <!-- ======== CTA / NEWSLETTER ======== -->
+  <section id="cta">
+    <div class="cta-blob"></div>
+    <div class="cta-content">
+      <span class="section-label" style="color:var(--yellow)">הישארו בעניינים</span>
+      <h2 class="cta-title">קבל את <span class="em">ה-DROP</span></h2>
+      <p class="cta-sub">מנות חדשות, מבצעים סודיים ומקומות ברגע האחרון.<br>ראשון לדעת. ראשון בתור.</p>
+      <form class="cta-form" id="ctaForm" onsubmit="handleJoin(event)">
+        <input type="email" class="cta-input" placeholder="האימייל שלך" required aria-label="כתובת אימייל" />
+        <button type="submit" class="btn-join" id="joinBtn">הצטרפו</button>
+      </form>
+    </div>
+  </section>
+
+  <hr class="neon-divider" />
+
+  <!-- ======== FOOTER ======== -->
+  <footer id="footer">
+    <div class="footer-inner">
+      <div class="footer-logo"><span class="logo-o">א</span>ופוריה</div>
+      <div class="footer-center">
+        <p class="footer-kosher">✦ כשר למהדרין ✦</p>
+        <p class="footer-copy">&copy; 2025 אופוריה מטבח ובר &nbsp;·&nbsp; כל הזכויות שמורות</p>
+      </div>
+      <nav class="footer-social" aria-label="קישורים חברתיים">
+        <a href="#" class="social-link">Instagram</a>
+        <a href="#" class="social-link">TikTok</a>
+        <a href="#" class="social-link">WhatsApp</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script>
+    /* ---- Mobile nav ---- */
+    function toggleNav() {
+      document.getElementById('navLinks').classList.toggle('open');
+    }
+    // close on outside click
+    document.addEventListener('click', e => {
+      const nav = document.getElementById('navLinks');
+      const toggle = document.getElementById('navToggle');
+      if (nav.classList.contains('open') && !nav.contains(e.target) && !toggle.contains(e.target)) {
+        nav.classList.remove('open');
+      }
+    });
+
+    /* ---- Smooth scroll ---- */
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          document.getElementById('navLinks').classList.remove('open');
+        }
+      });
+    });
+
+    /* ---- Newsletter form ---- */
+    function handleJoin(e) {
+      e.preventDefault();
+      const btn = document.getElementById('joinBtn');
+      btn.textContent = 'נרשמת ✦';
+      btn.classList.add('success');
+      btn.disabled = true;
+      e.target.querySelector('input').value = '';
+    }
+
+    /* ---- Scroll-reveal animation ---- */
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          // stagger siblings
+          const siblings = entry.target.parentElement.querySelectorAll('.reveal');
+          const idx = Array.from(siblings).indexOf(entry.target);
+          entry.target.style.transitionDelay = (idx * 0.12) + 's';
+          entry.target.classList.add('revealed');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.reveal').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(32px)';
+      el.style.transition = 'opacity 0.65s ease, transform 0.65s ease';
+      observer.observe(el);
+    });
+
+    document.querySelectorAll('.revealed').forEach; // flush
+    // inject revealed class style once
+    const style = document.createElement('style');
+    style.textContent = '.revealed { opacity: 1 !important; transform: none !important; }';
+    document.head.appendChild(style);
+  </script>
+
+</body>
+</html>

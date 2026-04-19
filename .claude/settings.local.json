@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__claude_ai_Google_Calendar__gcal_create_event",
+      "mcp__notebooklm-mcp__studio_status",
+      "mcp__notebooklm-mcp__download_artifact",
+      "mcp__notebooklm-mcp__studio_create",
+      "Bash(open:*)",
+      "WebFetch(domain:www.mishlohim.co.il)",
+      "Bash(sudo npm:*)"
+    ]
+  }
+}
