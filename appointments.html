@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>שיעורים פרטיים</title>
+    <link rel="icon" type="image/x-icon" href="./images/brainstorm.png">
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" 
+    rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" 
+    crossorigin="anonymous">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Secular+One&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
+    
+    <link rel="stylesheet" href="./styles.css">
+    
+    <style>
+      :root {
+        --body-bg: #ffffff;
+        --text-color: #212529;
+        --card-bg: #ffffff;
+        --header-bg: #ffffff;
+        --primary-color: #0d6efd;
+        --primary-hover: #0b5ed7;
+        --section-bg: #f8f9fa;
+        --shadow-color: rgba(0, 0, 0, 0.1);
+        --border-color: #dee2e6;
+      }
+      
+      [data-theme="dark"] {
+        --body-bg: #121212;
+        --text-color: #ffffff;
+        --card-bg: #2d2d2d;
+        --header-bg: #1e1e1e;
+        --primary-color: #4d8bf8;
+        --primary-hover: #3b7deb;
+        --section-bg: #1e1e1e;
+        --shadow-color: rgba(0, 0, 0, 0.5);
+        --border-color: rgba(255, 255, 255, 0.1);
+      }
+      
+      body {
+        background-color: var(--body-bg);
+        color: var(--text-color);
+        transition: background-color 0.3s ease, color 0.3s ease;
+      }
+      
+      .theme-toggle {
+        position: fixed;
+        top: 20px;
+        left: 20px;
+        z-index: 1100;
+        background-color: var(--primary-color);
+        color: white;
+        border: none;
+        border-radius: 50%;
+        width: 45px;
+        height: 45px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 20px;
+        cursor: pointer;
+        box-shadow: 0 2px 10px var(--shadow-color);
+        transition: all 0.3s ease;
+      }
+      
+      .theme-toggle:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px var(--shadow-color);
+      }
+      
+      #header {
+        position: sticky;
+        top: 0;
+        background: var(--header-bg);
+        z-index: 1000;
+        box-shadow: 0 2px 4px var(--shadow-color);
+        margin-bottom: 0;
+        padding: 0.5rem 0;
+      }
+      
+      .btn-outline-primary {
+        border-color: var(--primary-color);
+        color: var(--primary-color);
+        font-weight: 500;
+        padding: 0.3rem 1.5rem;
+        transition: all 0.3s ease;
+        line-height: 1.2;
+        border-radius: 20px;
+        font-size: 1.1rem;
+      }
+
+      .btn-outline-primary:hover {
+        background-color: var(--primary-color);
+        color: white;
+        transform: translateY(-1px);
+        box-shadow: 0 2px 4px var(--shadow-color);
+      }
+      
+      .bg-body-tertiary {
+        background-color: var(--section-bg) !important;
+      }
+      
+      .appointment-btn {
+        border-radius: 50px;
+        padding: 20px 40px;
+        font-size: 2rem;
+        background-color: var(--primary-color);
+        border: none;
+        transition: transform 0.2s, box-shadow 0.2s;
+        font-family: 'Secular One', sans-serif;
+        color: white;
+      }
+
+      .appointment-btn:hover {
+        background-color: var(--primary-hover);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px var(--shadow-color);
+      }
+      
+      /* Dark mode specific styles */
+      [data-theme="dark"] .btn-outline-primary {
+        color: #60a5fa !important;
+        border-color: #60a5fa !important;
+        background-color: rgba(13, 110, 253, 0.05) !important;
+      }
+      
+      [data-theme="dark"] .btn-outline-primary:hover {
+        color: #ffffff !important;
+        background-color: #4d8bf8 !important;
+        border-color: #4d8bf8 !important;
+        box-shadow: 0 0 8px rgba(77, 139, 248, 0.5) !important;
+      }
+      
+      [data-theme="dark"] .appointment-btn {
+        background-color: #4d8bf8 !important;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4) !important;
+      }
+      
+      [data-theme="dark"] .appointment-btn:hover {
+        background-color: #3b7deb !important;
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.5) !important;
+      }
+
+      @media (max-width: 768px) {
+        .appointment-btn {
+          font-size: 1.5rem;
+          padding: 15px 30px;
+        }
+        
+        .btn-outline-primary {
+          padding: 0.3rem 1rem;
+          font-size: 1rem;
+        }
+        
+        .nav-pills {
+          gap: 0.25rem;
+        }
+        
+        .mx-1 {
+          margin-left: 0.25rem !important;
+          margin-right: 0.25rem !important;
+        }
+      }
+      
+      .nav-pills {
+        gap: 0.5rem;
+        height: 45px;
+        align-items: center;
+      }
+    </style>
+</head>
+<body class="container-fluid">
+  <!-- Dark Mode Toggle -->
+  <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+    <i class="fa fa-moon-o"></i>
+  </button>
+
+  <section id="header">
+      <header class="container d-flex justify-content-between align-items-center px-2">
+          <a href="./index.html" class="nav-link p-0" aria-current="page">
+              <img src="./images/brainstorm.png" alt="Logo" width="32" height="32" class="flex-shrink-0">
+          </a>
+          <ul class="nav nav-pills mx-auto d-flex flex-nowrap">
+              <li class="nav-item">
+                <a href="./index.html#pricing" class="btn btn-outline-primary rounded-pill mx-1">תעריף</a>
+              </li>
+              <li class="nav-item">
+                <a href="./index.html#faqs" class="btn btn-outline-primary rounded-pill mx-1">שאלות</a>
+              </li>
+              <li class="nav-item">
+                <a href="./index.html#about-us" class="btn btn-outline-primary rounded-pill mx-1">עלינו</a>
+              </li>
+          </ul>
+          <div style="width: 32px"></div>
+      </header>
+  </section>
+    
+    <section id="appointments">
+    <div class="text-center bg-body-tertiary rounded-3">
+      <div class="container px-5 d-flex flex-column align-items-center" style="min-height: 70vh;">
+        <div class="row justify-content-center w-100 gap-5 mt-5 pt-5">
+          <div class="col-md-6">
+            <a href="./appointments_nikol.html" class="btn btn-primary btn-lg w-100 appointment-btn">ניקול</a>
+          </div>
+          <div class="col-md-6">
+            <a href="./appointments_lior.html" class="btn btn-primary btn-lg w-100 appointment-btn">ליאור</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    </section>
+    
+  <script>
+    // Dark Mode Functionality
+    const themeToggle = document.getElementById('themeToggle');
+    const htmlElement = document.documentElement;
+    const themeIcon = themeToggle.querySelector('i');
+    
+    // Check for saved theme preference or use device preference
+    const getCurrentTheme = () => {
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme) {
+        return savedTheme;
+      }
+      
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    };
+    
+    // Apply the current theme
+    const applyTheme = (theme) => {
+      htmlElement.setAttribute('data-theme', theme);
+      
+      // Update button icon
+      if (theme === 'dark') {
+        themeIcon.classList.remove('fa-moon-o');
+        themeIcon.classList.add('fa-sun-o');
+      } else {
+        themeIcon.classList.remove('fa-sun-o');
+        themeIcon.classList.add('fa-moon-o');
+      }
+      
+      localStorage.setItem('theme', theme);
+    };
+    
+    // Initialize theme
+    applyTheme(getCurrentTheme());
+    
+    // Toggle theme
+    themeToggle.addEventListener('click', () => {
+      const currentTheme = htmlElement.getAttribute('data-theme');
+      const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+      applyTheme(newTheme);
+    });
+  </script>
+</body>
+</html>

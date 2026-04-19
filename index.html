@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>מאה בקליק</title>
+  <link rel="icon" type="image/svg+xml" href="./images/favicon.svg" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ── BACK TO TOP ──────────────────────────────────── -->
+  <button class="back-to-top" id="backToTop" aria-label="חזרה לראש">↑</button>
+
+  <!-- ── SIDEBAR OVERLAY ──────────────────────────────── -->
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <!-- ── SIDEBAR ──────────────────────────────────────── -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <span class="sidebar-title">תפריט</span>
+      <button class="sidebar-close" id="sidebarClose" aria-label="סגירה">×</button>
+    </div>
+    <nav class="sidebar-nav">
+      <button class="sidebar-btn" onclick="closeSidebar(); scrollToSection('subjects')">📚 מקצועות</button>
+      <button class="sidebar-btn" onclick="closeSidebar(); scrollToSection('features-showcase')">🎮 מה תקבלו</button>
+      <button class="sidebar-btn" onclick="closeSidebar(); scrollToSection('testimonials')">💬 המלצות</button>
+      <button class="sidebar-btn" onclick="closeSidebar(); scrollToSection('pricing')">💳 תעריף</button>
+      <button class="sidebar-btn" onclick="closeSidebar(); scrollToSection('faqs')">❓ שאלות</button>
+    </nav>
+    <a href="https://wa.me/972546969891?text=היי,%20אשמח%20להזמין%20שיעור" class="sidebar-whatsapp">
+      💬 הזמינו שיעור בוואטסאפ
+    </a>
+  </aside>
+
+  <!-- ── NAV ─────────────────────────────────────────── -->
+  <section id="header">
+    <div class="nav-inner">
+      <!-- Hamburger — right side (RTL start) -->
+      <button class="hamburger" id="hamburger" aria-label="פתיחת תפריט">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <!-- Logo — centered -->
+      <a href="#hero" class="nav-logo">
+        <svg width="72" height="30" viewBox="0 0 130 56" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="לוגו">
+          <!-- "1" with serif cap -->
+          <line x1="12" y1="10" x2="12" y2="48" stroke="var(--accent)" stroke-width="7" stroke-linecap="round"/>
+          <line x1="8" y1="10" x2="16" y2="10" stroke="var(--accent)" stroke-width="5" stroke-linecap="round"/>
+          <line x1="7" y1="6" x2="17" y2="6" stroke="var(--accent)" stroke-width="3.5" stroke-linecap="round"/>
+          <!-- left "0" -->
+          <circle cx="43" cy="29" r="17" stroke="var(--accent)" stroke-width="7" fill="none"/>
+          <!-- right "0" -->
+          <circle cx="83" cy="29" r="17" stroke="var(--accent)" stroke-width="7" fill="none"/>
+          <!-- cursor arrow on right 0 -->
+          <polygon points="95,14 95,34 99.5,30 102,38 106,36.5 103.5,29 108,29"
+                   fill="var(--accent2)" stroke="var(--bg-base)" stroke-width="1.5" stroke-linejoin="round"/>
+          <!-- click ripple arcs -->
+          <path d="M 110,22 A 10,10 0 0 1 110,36" stroke="var(--accent2)" stroke-width="1.8" fill="none" stroke-linecap="round" opacity="0.7"/>
+          <path d="M 115,17 A 16,16 0 0 1 115,41" stroke="var(--accent2)" stroke-width="1.4" fill="none" stroke-linecap="round" opacity="0.45"/>
+          <path d="M 120,13 A 22,22 0 0 1 120,45" stroke="var(--accent2)" stroke-width="1" fill="none" stroke-linecap="round" opacity="0.25"/>
+        </svg>
+        <span>מאה</span> בקליק
+      </a>
+
+      <!-- CTA — left side -->
+      <div class="nav-right">
+        <a class="nav-cta" href="https://wa.me/972546969891?text=היי,%20אשמח%20להזמין%20שיעור">הזמינו שיעור</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── HERO ─────────────────────────────────────────── -->
+  <section id="hero">
+    <div class="hero-badge">🚀 שיעורים פרטיים מהדור הבא</div>
+
+    <h1 class="hero-title">בואו <span class="accent">נלמד</span> ביחד</h1>
+
+    <div class="hero-subtitle-row">
+      <span class="hero-sub-a">שיעורים פרטיים בדרך שמתאימה לכם</span>
+      <span class="hero-sub-b">עם תוצאות שרואים! ✨</span>
+    </div>
+
+    <!-- Tutors + surrounding feature cards -->
+    <div class="tutors-showcase">
+
+      <!-- Center: Tutor photos -->
+      <div class="tutors-preview">
+
+        <div class="tutor-card tutor-nikol" id="tutor-nikol">
+          <img src="./images/nikol-modified.png" class="tutor-img" alt="ניקול" />
+          <div class="tutor-name-badge">ניקול</div>
+          <div class="tutor-info" id="info-nikol">
+            <div class="popup-close" data-close>×</div>
+            <h3>ניקול 👩‍🏫</h3>
+            <ul>
+              <li>⭐ סיימה שירות משמעותי בתפקיד בכיר</li>
+              <li>📚 סטודנטית לריפוי בעיסוק</li>
+              <li>👩‍🏫 ניסיון רב בהוראה פרטית</li>
+              <li>🎯 מתמחה במתמטיקה ופיזיקה</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="tutor-card tutor-lior" id="tutor-lior">
+          <img src="./images/lior-modified.png" class="tutor-img" alt="ליאור" />
+          <div class="tutor-name-badge">ליאור</div>
+          <div class="tutor-info" id="info-lior">
+            <div class="popup-close" data-close>×</div>
+            <h3>ליאור 👨‍🏫</h3>
+            <ul>
+              <li>🎓 בעל תואר שני בהנדסת נתונית</li>
+              <li>💻 משרת בתפקיד בכיר בצבא</li>
+              <li>👨‍🏫 מדריך בתכניות סטארטק ומגשימים</li>
+              <li>🎯 מתמחה במתמטיקה ותכנות</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+
+
+      <!-- Left of photos: Carousel -->
+      <div class="hero-mini-carousel">
+        <div class="hero-preview-title">מצגות AI</div>
+        <div class="slides-carousel-outer">
+            <div class="slides-carousel-track" id="slidesTrack">
+
+              <!-- Real slide images -->
+              <div class="sp-card">
+                <img src="images/slides/slide1.png" alt="מצגת 1" class="sp-img">
+              </div>
+              <div class="sp-card">
+                <img src="images/slides/slide2.png" alt="מצגת 2" class="sp-img">
+              </div>
+              <div class="sp-card">
+                <img src="images/slides/slide3.png" alt="מצגת 3" class="sp-img">
+              </div>
+              <div class="sp-card">
+                <img src="images/slides/slide4.png" alt="מצגת 4" class="sp-img">
+              </div>
+              <div class="sp-card">
+                <img src="images/slides/slide5.png" alt="מצגת 5" class="sp-img">
+              </div>
+              <div class="sp-card">
+                <img src="images/slides/slide6.png" alt="מצגת 6" class="sp-img">
+              </div>
+              <div class="sp-card">
+                <img src="images/slides/slide7.png" alt="מצגת 7" class="sp-img">
+              </div>
+              <div class="sp-card">
+                <img src="images/slides/slide8.png" alt="מצגת 8" class="sp-img">
+              </div>
+              <!-- Duplicates for seamless loop -->
+              <div class="sp-card">
+                <img src="images/slides/slide1.png" alt="מצגת 1" class="sp-img">
+              </div>
+              <div class="sp-card">
+                <img src="images/slides/slide2.png" alt="מצגת 2" class="sp-img">
+              </div>
+              <div class="sp-card">
+                <img src="images/slides/slide3.png" alt="מצגת 3" class="sp-img">
+              </div>
+              <div class="sp-card">
+                <img src="images/slides/slide4.png" alt="מצגת 4" class="sp-img">
+              </div>
+              <div class="sp-card">
+                <img src="images/slides/slide5.png" alt="מצגת 5" class="sp-img">
+              </div>
+              <div class="sp-card">
+                <img src="images/slides/slide6.png" alt="מצגת 6" class="sp-img">
+              </div>
+              <div class="sp-card">
+                <img src="images/slides/slide7.png" alt="מצגת 7" class="sp-img">
+              </div>
+              <div class="sp-card">
+                <img src="images/slides/slide8.png" alt="מצגת 8" class="sp-img">
+              </div>
+
+
+
+            </div><!-- /track -->
+          </div><!-- /outer -->
+        </div><!-- /hero-mini-carousel -->
+
+      <!-- Center: Dashboard static preview -->
+        <div class="hero-dashboard-mini">
+          <div class="hero-preview-title">פורטל הורים</div>
+          <div class="dash-preview">
+            <!-- Student header -->
+            <div class="dp-header">
+              <div class="dp-avatar">🎓</div>
+              <div class="dp-info">
+                <div class="dp-name">תלמיד לדוגמה</div>
+                <div class="dp-meta">מתמטיקה · בינוני · מורה: ניקול</div>
+              </div>
+            </div>
+            <!-- Stats row -->
+            <div class="dp-stats">
+              <div class="dp-stat">
+                <div class="dp-stat-val">3</div>
+                <div class="dp-stat-lbl">שיעורים</div>
+              </div>
+              <div class="dp-stat">
+                <div class="dp-stat-val" style="color:#FF7F50">1</div>
+                <div class="dp-stat-lbl">שיעורי בית</div>
+              </div>
+              <div class="dp-stat">
+                <div class="dp-stat-val" style="color:#008080">72%</div>
+                <div class="dp-stat-lbl">התקדמות</div>
+              </div>
+            </div>
+            <!-- Progress bar -->
+            <div class="dp-bar-wrap">
+              <div class="dp-bar-fill" style="width:72%"></div>
+            </div>
+            <!-- Next lesson -->
+            <div class="dp-next">📅 שיעור הבא: כ׳ ניסן, 17:00</div>
+            <!-- Recent lessons -->
+            <div class="dp-section-title">שיעורים אחרונים</div>
+            <div class="dp-lesson-row">
+              <span class="dp-lesson-dot teal"></span>
+              <span class="dp-lesson-text">נגזרות — כלל השרשרת</span>
+              <span class="dp-lesson-date">13.4</span>
+            </div>
+            <div class="dp-lesson-row">
+              <span class="dp-lesson-dot coral"></span>
+              <span class="dp-lesson-text">מבוא לאינטגרלים</span>
+              <span class="dp-lesson-date">6.4</span>
+            </div>
+            <!-- Homework -->
+            <div class="dp-section-title">שיעורי בית</div>
+            <div class="dp-lesson-row">
+              <span class="dp-hw-badge open">פתוח</span>
+              <span class="dp-lesson-text">פלאשקארדים — נגזרות</span>
+            </div>
+            <div class="dp-lesson-row">
+              <span class="dp-hw-badge done">הושלם ✓</span>
+              <span class="dp-lesson-text">קווין — אינטגרלים</span>
+            </div>
+          </div>
+          <!-- Scroll hint -->
+          <div class="dp-scroll-hint">
+            <span class="dp-scroll-arrow">↓</span>
+          </div>
+        </div><!-- /hero-dashboard-mini -->
+
+      <!-- Right of photos: Games carousel -->
+        <div class="hero-games-mini">
+          <div class="hero-preview-title">כלי למידה אינטראקטיביים</div>
+          <div class="games-carousel-outer">
+            <div class="games-carousel-track">
+
+              <!-- Flashcards card -->
+              <div class="gmc-card" style="background:#071828">
+                <svg viewBox="0 0 160 130" preserveAspectRatio="xMidYMid meet" fill="none" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+                  <defs>
+                    <linearGradient id="fc-bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#071828"/><stop offset="100%" stop-color="#0a1e30"/></linearGradient>
+                  </defs>
+                  <rect width="160" height="130" fill="url(#fc-bg)"/>
+                  <!-- Stacked cards -->
+                  <rect x="22" y="28" width="100" height="68" rx="10" fill="#163045" opacity="0.6" transform="rotate(-7 72 62)"/>
+                  <rect x="22" y="28" width="100" height="68" rx="10" fill="#1a3a55" opacity="0.8" transform="rotate(-3 72 62)"/>
+                  <!-- Front card -->
+                  <rect x="22" y="26" width="100" height="68" rx="10" fill="#1e4268" stroke="#2AA8A8" stroke-width="1.8"/>
+                  <!-- Card label top -->
+                  <rect x="30" y="34" width="44" height="10" rx="5" fill="#2AA8A8" opacity="0.2"/>
+                  <text x="52" y="42" font-size="6.5" fill="#2AA8A8" font-family="sans-serif" text-anchor="middle" font-weight="700">שאלה 3/10</text>
+                  <!-- Big math -->
+                  <text x="72" y="72" font-size="26" fill="#ffffff" font-weight="900" font-family="sans-serif" text-anchor="middle" opacity="0.95">x²</text>
+                  <!-- Divider -->
+                  <line x1="34" y1="80" x2="110" y2="80" stroke="#2AA8A8" stroke-width="0.8" opacity="0.3"/>
+                  <!-- Hint -->
+                  <text x="72" y="91" font-size="8.5" fill="#7ecece" font-family="sans-serif" text-anchor="middle">הקש להפיכה ↩</text>
+                  <!-- Flip icon -->
+                  <circle cx="138" cy="38" r="16" fill="#2AA8A8" opacity="0.12"/>
+                  <text x="138" y="44" font-size="18" text-anchor="middle">🃏</text>
+                  <!-- Bottom label -->
+                  <rect x="8" y="112" width="70" height="14" rx="7" fill="#2AA8A8" opacity="0.15"/>
+                  <text x="43" y="122" font-size="8" fill="#2AA8A8" font-family="sans-serif" text-anchor="middle" font-weight="700">פלאשקארדים</text>
+                </svg>
+              </div>
+
+              <!-- Quiz card -->
+              <div class="gmc-card" style="background:#0e0820">
+                <svg viewBox="0 0 160 130" preserveAspectRatio="xMidYMid meet" fill="none" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+                  <defs>
+                    <linearGradient id="qz-bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#0e0820"/><stop offset="100%" stop-color="#160c2a"/></linearGradient>
+                  </defs>
+                  <rect width="160" height="130" fill="url(#qz-bg)"/>
+                  <!-- Progress bar top -->
+                  <rect x="8" y="10" width="144" height="5" rx="2.5" fill="#A855F7" opacity="0.15"/>
+                  <rect x="8" y="10" width="50" height="5" rx="2.5" fill="#A855F7" opacity="0.8"/>
+                  <text x="152" y="15" font-size="7" fill="#A855F7" font-family="sans-serif" text-anchor="end" opacity="0.7">5/10</text>
+                  <!-- Question box -->
+                  <rect x="8" y="22" width="144" height="26" rx="8" fill="#2d1a4a"/>
+                  <text x="80" y="33" font-size="8" fill="#e0c8ff" font-family="sans-serif" text-anchor="middle" font-weight="700">מה הנגזרת של x²?</text>
+                  <text x="80" y="43" font-size="7" fill="#c4a0ff" font-family="sans-serif" text-anchor="middle" opacity="0.6">בחרו תשובה נכונה</text>
+                  <!-- Options 2x2 -->
+                  <rect x="8" y="55" width="68" height="18" rx="7" fill="#3b1f5e" stroke="#A855F7" stroke-width="0.8"/>
+                  <text x="42" y="67" font-size="8" fill="#c4a0ff" font-family="sans-serif" text-anchor="middle">א. x</text>
+                  <rect x="84" y="55" width="68" height="18" rx="7" fill="#133320" stroke="#3fb950" stroke-width="1.8"/>
+                  <text x="118" y="67" font-size="8" fill="#3fb950" font-family="sans-serif" text-anchor="middle" font-weight="800">ב. 2x ✓</text>
+                  <rect x="8" y="80" width="68" height="18" rx="7" fill="#3b1f5e" stroke="#A855F7" stroke-width="0.8"/>
+                  <text x="42" y="92" font-size="8" fill="#c4a0ff" font-family="sans-serif" text-anchor="middle">ג. 2x²</text>
+                  <rect x="84" y="80" width="68" height="18" rx="7" fill="#3b1f5e" stroke="#A855F7" stroke-width="0.8"/>
+                  <text x="118" y="92" font-size="8" fill="#c4a0ff" font-family="sans-serif" text-anchor="middle">ד. x³</text>
+                  <!-- Score badge -->
+                  <rect x="8" y="112" width="50" height="14" rx="7" fill="#A855F7" opacity="0.15"/>
+                  <text x="33" y="122" font-size="8" fill="#A855F7" font-family="sans-serif" text-anchor="middle" font-weight="700">קוויז 🎯</text>
+                  <!-- XP badge -->
+                  <rect x="110" y="112" width="42" height="14" rx="7" fill="#3fb950" opacity="0.15"/>
+                  <text x="131" y="122" font-size="8" fill="#3fb950" font-family="sans-serif" text-anchor="middle" font-weight="700">+50 XP 🏆</text>
+                </svg>
+              </div>
+
+              <!-- Audio card -->
+              <div class="gmc-card" style="background:#061410">
+                <svg viewBox="0 0 160 130" preserveAspectRatio="xMidYMid meet" fill="none" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+                  <defs>
+                    <linearGradient id="au-bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#061410"/><stop offset="100%" stop-color="#0a2018"/></linearGradient>
+                    <linearGradient id="au-wave" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#3fb950" stop-opacity="0.3"/><stop offset="50%" stop-color="#3fb950"/><stop offset="100%" stop-color="#3fb950" stop-opacity="0.3"/></linearGradient>
+                  </defs>
+                  <rect width="160" height="130" fill="url(#au-bg)"/>
+                  <!-- Glow -->
+                  <circle cx="80" cy="70" r="55" fill="#3fb950" opacity="0.04"/>
+                  <!-- Topic pill -->
+                  <rect x="8" y="10" width="120" height="18" rx="9" fill="#3fb950" opacity="0.14"/>
+                  <text x="68" y="22" font-size="8" fill="#3fb950" font-family="sans-serif" text-anchor="middle" font-weight="700">מבוא לאינטגרלים 📖</text>
+                  <!-- Headphone -->
+                  <circle cx="138" cy="19" r="13" fill="#3fb950" opacity="0.12"/>
+                  <text x="138" y="25" font-size="15" text-anchor="middle">🎧</text>
+                  <!-- Waveform centered -->
+                  <rect x="8"  y="52" width="6" height="14" rx="3" fill="url(#au-wave)" opacity="0.5"/>
+                  <rect x="17" y="44" width="6" height="30" rx="3" fill="url(#au-wave)" opacity="0.7"/>
+                  <rect x="26" y="38" width="6" height="42" rx="3" fill="url(#au-wave)"/>
+                  <rect x="35" y="34" width="6" height="50" rx="3" fill="url(#au-wave)"/>
+                  <rect x="44" y="40" width="6" height="38" rx="3" fill="url(#au-wave)" opacity="0.85"/>
+                  <rect x="53" y="46" width="6" height="26" rx="3" fill="url(#au-wave)" opacity="0.65"/>
+                  <rect x="62" y="42" width="6" height="34" rx="3" fill="url(#au-wave)" opacity="0.75"/>
+                  <rect x="71" y="36" width="6" height="46" rx="3" fill="url(#au-wave)"/>
+                  <rect x="80" y="42" width="6" height="34" rx="3" fill="url(#au-wave)" opacity="0.8"/>
+                  <rect x="89" y="50" width="6" height="18" rx="3" fill="url(#au-wave)" opacity="0.55"/>
+                  <!-- Play button -->
+                  <circle cx="136" cy="72" r="22" fill="#3fb950" opacity="0.18"/>
+                  <circle cx="136" cy="72" r="15" fill="#3fb950"/>
+                  <polygon points="132,65 132,79 145,72" fill="white"/>
+                  <!-- Progress -->
+                  <rect x="8" y="100" width="110" height="5" rx="2.5" fill="#3fb950" opacity="0.15"/>
+                  <rect x="8" y="100" width="52" height="5" rx="2.5" fill="#3fb950" opacity="0.85"/>
+                  <text x="125" y="104" font-size="7" fill="#3fb950" font-family="sans-serif" opacity="0.7">3:12</text>
+                  <!-- Label -->
+                  <rect x="8" y="115" width="50" height="12" rx="6" fill="#3fb950" opacity="0.15"/>
+                  <text x="33" y="124" font-size="8" fill="#3fb950" font-family="sans-serif" text-anchor="middle" font-weight="700">אודיו 🎧</text>
+                </svg>
+              </div>
+
+              <!-- Songs card -->
+              <div class="gmc-card" style="background:#1c0900">
+                <svg viewBox="0 0 160 130" preserveAspectRatio="xMidYMid meet" fill="none" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+                  <defs>
+                    <linearGradient id="sg-bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#1c0900"/><stop offset="100%" stop-color="#241000"/></linearGradient>
+                  </defs>
+                  <rect width="160" height="130" fill="url(#sg-bg)"/>
+                  <!-- Glow -->
+                  <circle cx="30" cy="65" r="45" fill="#FF7F50" opacity="0.07"/>
+                  <circle cx="140" cy="65" r="40" fill="#FFD166" opacity="0.06"/>
+                  <!-- Now playing box -->
+                  <rect x="8" y="8" width="144" height="30" rx="8" fill="#FF7F50" opacity="0.12"/>
+                  <text x="80" y="21" font-size="8" fill="#FFD166" font-family="sans-serif" text-anchor="middle" font-weight="800">♪ שיר הנגזרת</text>
+                  <text x="80" y="32" font-size="7" fill="#FF7F50" font-family="sans-serif" text-anchor="middle" opacity="0.8">d/dx(x²) = 2x 🎶</text>
+                  <!-- Staff lines -->
+                  <line x1="8" y1="50" x2="152" y2="50" stroke="#FF7F50" stroke-width="1" opacity="0.3"/>
+                  <line x1="8" y1="58" x2="152" y2="58" stroke="#FF7F50" stroke-width="1" opacity="0.3"/>
+                  <line x1="8" y1="66" x2="152" y2="66" stroke="#FF7F50" stroke-width="1" opacity="0.3"/>
+                  <line x1="8" y1="74" x2="152" y2="74" stroke="#FF7F50" stroke-width="1" opacity="0.3"/>
+                  <line x1="8" y1="82" x2="152" y2="82" stroke="#FF7F50" stroke-width="1" opacity="0.3"/>
+                  <!-- Treble clef -->
+                  <text x="6" y="84" font-size="48" fill="#FF7F50" opacity="0.55" font-family="serif">𝄞</text>
+                  <!-- Notes with equations -->
+                  <ellipse cx="80" cy="70" rx="8" ry="6" fill="#FFD166" transform="rotate(-15 80 70)"/>
+                  <line x1="88" y1="70" x2="88" y2="36" stroke="#FFD166" stroke-width="2"/>
+                  <text x="92" y="40" font-size="8" fill="#FFD166" font-family="sans-serif" font-weight="700">∫x dx</text>
+                  <ellipse cx="116" cy="62" rx="8" ry="6" fill="#FF7F50" transform="rotate(-15 116 62)"/>
+                  <line x1="124" y1="62" x2="124" y2="30" stroke="#FF7F50" stroke-width="2"/>
+                  <text x="128" y="34" font-size="8" fill="#FF7F50" font-family="sans-serif" font-weight="700">x²/2</text>
+                  <!-- Beam -->
+                  <line x1="88" y1="36" x2="124" y2="30" stroke="#FFD166" stroke-width="3"/>
+                  <!-- Progress + controls -->
+                  <rect x="8" y="97" width="100" height="5" rx="2.5" fill="#FF7F50" opacity="0.15"/>
+                  <rect x="8" y="97" width="62" height="5" rx="2.5" fill="#FF7F50" opacity="0.8"/>
+                  <circle cx="140" cy="99" r="12" fill="#FF7F50" opacity="0.2"/>
+                  <polygon points="136,94 136,104 146,99" fill="#FF7F50"/>
+                  <!-- Label -->
+                  <rect x="8" y="115" width="60" height="12" rx="6" fill="#FF7F50" opacity="0.14"/>
+                  <text x="38" y="124" font-size="8" fill="#FF7F50" font-family="sans-serif" text-anchor="middle" font-weight="700">שירי לימוד 🎵</text>
+                </svg>
+              </div>
+
+              <!-- Duplicates for seamless loop -->
+              <div class="gmc-card" style="background:#071828">
+                <svg viewBox="0 0 160 130" preserveAspectRatio="xMidYMid meet" fill="none" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+                  <defs><linearGradient id="fc-bg2" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#071828"/><stop offset="100%" stop-color="#0a1e30"/></linearGradient></defs>
+                  <rect width="160" height="130" fill="url(#fc-bg2)"/>
+                  <rect x="22" y="28" width="100" height="68" rx="10" fill="#163045" opacity="0.6" transform="rotate(-7 72 62)"/>
+                  <rect x="22" y="28" width="100" height="68" rx="10" fill="#1a3a55" opacity="0.8" transform="rotate(-3 72 62)"/>
+                  <rect x="22" y="26" width="100" height="68" rx="10" fill="#1e4268" stroke="#2AA8A8" stroke-width="1.8"/>
+                  <rect x="30" y="34" width="44" height="10" rx="5" fill="#2AA8A8" opacity="0.2"/>
+                  <text x="52" y="42" font-size="6.5" fill="#2AA8A8" font-family="sans-serif" text-anchor="middle" font-weight="700">שאלה 3/10</text>
+                  <text x="72" y="72" font-size="26" fill="#ffffff" font-weight="900" font-family="sans-serif" text-anchor="middle" opacity="0.95">x²</text>
+                  <line x1="34" y1="80" x2="110" y2="80" stroke="#2AA8A8" stroke-width="0.8" opacity="0.3"/>
+                  <text x="72" y="91" font-size="8.5" fill="#7ecece" font-family="sans-serif" text-anchor="middle">הקש להפיכה ↩</text>
+                  <circle cx="138" cy="38" r="16" fill="#2AA8A8" opacity="0.12"/>
+                  <text x="138" y="44" font-size="18" text-anchor="middle">🃏</text>
+                  <rect x="8" y="112" width="70" height="14" rx="7" fill="#2AA8A8" opacity="0.15"/>
+                  <text x="43" y="122" font-size="8" fill="#2AA8A8" font-family="sans-serif" text-anchor="middle" font-weight="700">פלאשקארדים</text>
+                </svg>
+              </div>
+              <div class="gmc-card" style="background:#0e0820">
+                <svg viewBox="0 0 160 130" preserveAspectRatio="xMidYMid meet" fill="none" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+                  <defs><linearGradient id="qz-bg2" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#0e0820"/><stop offset="100%" stop-color="#160c2a"/></linearGradient></defs>
+                  <rect width="160" height="130" fill="url(#qz-bg2)"/>
+                  <rect x="8" y="10" width="144" height="5" rx="2.5" fill="#A855F7" opacity="0.15"/>
+                  <rect x="8" y="10" width="50" height="5" rx="2.5" fill="#A855F7" opacity="0.8"/>
+                  <text x="152" y="15" font-size="7" fill="#A855F7" font-family="sans-serif" text-anchor="end" opacity="0.7">5/10</text>
+                  <rect x="8" y="22" width="144" height="26" rx="8" fill="#2d1a4a"/>
+                  <text x="80" y="33" font-size="8" fill="#e0c8ff" font-family="sans-serif" text-anchor="middle" font-weight="700">מה הנגזרת של x²?</text>
+                  <text x="80" y="43" font-size="7" fill="#c4a0ff" font-family="sans-serif" text-anchor="middle" opacity="0.6">בחרו תשובה נכונה</text>
+                  <rect x="8" y="55" width="68" height="18" rx="7" fill="#3b1f5e" stroke="#A855F7" stroke-width="0.8"/>
+                  <text x="42" y="67" font-size="8" fill="#c4a0ff" font-family="sans-serif" text-anchor="middle">א. x</text>
+                  <rect x="84" y="55" width="68" height="18" rx="7" fill="#133320" stroke="#3fb950" stroke-width="1.8"/>
+                  <text x="118" y="67" font-size="8" fill="#3fb950" font-family="sans-serif" text-anchor="middle" font-weight="800">ב. 2x ✓</text>
+                  <rect x="8" y="80" width="68" height="18" rx="7" fill="#3b1f5e" stroke="#A855F7" stroke-width="0.8"/>
+                  <text x="42" y="92" font-size="8" fill="#c4a0ff" font-family="sans-serif" text-anchor="middle">ג. 2x²</text>
+                  <rect x="84" y="80" width="68" height="18" rx="7" fill="#3b1f5e" stroke="#A855F7" stroke-width="0.8"/>
+                  <text x="118" y="92" font-size="8" fill="#c4a0ff" font-family="sans-serif" text-anchor="middle">ד. x³</text>
+                  <rect x="8" y="112" width="50" height="14" rx="7" fill="#A855F7" opacity="0.15"/>
+                  <text x="33" y="122" font-size="8" fill="#A855F7" font-family="sans-serif" text-anchor="middle" font-weight="700">קוויז 🎯</text>
+                  <rect x="110" y="112" width="42" height="14" rx="7" fill="#3fb950" opacity="0.15"/>
+                  <text x="131" y="122" font-size="8" fill="#3fb950" font-family="sans-serif" text-anchor="middle" font-weight="700">+50 XP 🏆</text>
+                </svg>
+              </div>
+              <div class="gmc-card" style="background:#061410">
+                <svg viewBox="0 0 160 130" preserveAspectRatio="xMidYMid meet" fill="none" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+                  <defs>
+                    <linearGradient id="au-bg2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#061410"/><stop offset="100%" stop-color="#0a2018"/></linearGradient>
+                    <linearGradient id="au-wave2" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#3fb950" stop-opacity="0.3"/><stop offset="50%" stop-color="#3fb950"/><stop offset="100%" stop-color="#3fb950" stop-opacity="0.3"/></linearGradient>
+                  </defs>
+                  <rect width="160" height="130" fill="url(#au-bg2)"/>
+                  <circle cx="80" cy="70" r="55" fill="#3fb950" opacity="0.04"/>
+                  <rect x="8" y="10" width="120" height="18" rx="9" fill="#3fb950" opacity="0.14"/>
+                  <text x="68" y="22" font-size="8" fill="#3fb950" font-family="sans-serif" text-anchor="middle" font-weight="700">מבוא לאינטגרלים 📖</text>
+                  <circle cx="138" cy="19" r="13" fill="#3fb950" opacity="0.12"/>
+                  <text x="138" y="25" font-size="15" text-anchor="middle">🎧</text>
+                  <rect x="8"  y="52" width="6" height="14" rx="3" fill="url(#au-wave2)" opacity="0.5"/>
+                  <rect x="17" y="44" width="6" height="30" rx="3" fill="url(#au-wave2)" opacity="0.7"/>
+                  <rect x="26" y="38" width="6" height="42" rx="3" fill="url(#au-wave2)"/>
+                  <rect x="35" y="34" width="6" height="50" rx="3" fill="url(#au-wave2)"/>
+                  <rect x="44" y="40" width="6" height="38" rx="3" fill="url(#au-wave2)" opacity="0.85"/>
+                  <rect x="53" y="46" width="6" height="26" rx="3" fill="url(#au-wave2)" opacity="0.65"/>
+                  <rect x="62" y="42" width="6" height="34" rx="3" fill="url(#au-wave2)" opacity="0.75"/>
+                  <rect x="71" y="36" width="6" height="46" rx="3" fill="url(#au-wave2)"/>
+                  <rect x="80" y="42" width="6" height="34" rx="3" fill="url(#au-wave2)" opacity="0.8"/>
+                  <rect x="89" y="50" width="6" height="18" rx="3" fill="url(#au-wave2)" opacity="0.55"/>
+                  <circle cx="136" cy="72" r="22" fill="#3fb950" opacity="0.18"/>
+                  <circle cx="136" cy="72" r="15" fill="#3fb950"/>
+                  <polygon points="132,65 132,79 145,72" fill="white"/>
+                  <rect x="8" y="100" width="110" height="5" rx="2.5" fill="#3fb950" opacity="0.15"/>
+                  <rect x="8" y="100" width="52" height="5" rx="2.5" fill="#3fb950" opacity="0.85"/>
+                  <text x="125" y="104" font-size="7" fill="#3fb950" font-family="sans-serif" opacity="0.7">3:12</text>
+                  <rect x="8" y="115" width="50" height="12" rx="6" fill="#3fb950" opacity="0.15"/>
+                  <text x="33" y="124" font-size="8" fill="#3fb950" font-family="sans-serif" text-anchor="middle" font-weight="700">אודיו 🎧</text>
+                </svg>
+              </div>
+              <div class="gmc-card" style="background:#1c0900">
+                <svg viewBox="0 0 160 130" preserveAspectRatio="xMidYMid meet" fill="none" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+                  <defs><linearGradient id="sg-bg2" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#1c0900"/><stop offset="100%" stop-color="#241000"/></linearGradient></defs>
+                  <rect width="160" height="130" fill="url(#sg-bg2)"/>
+                  <circle cx="30" cy="65" r="45" fill="#FF7F50" opacity="0.07"/>
+                  <circle cx="140" cy="65" r="40" fill="#FFD166" opacity="0.06"/>
+                  <rect x="8" y="8" width="144" height="30" rx="8" fill="#FF7F50" opacity="0.12"/>
+                  <text x="80" y="21" font-size="8" fill="#FFD166" font-family="sans-serif" text-anchor="middle" font-weight="800">♪ שיר הנגזרת</text>
+                  <text x="80" y="32" font-size="7" fill="#FF7F50" font-family="sans-serif" text-anchor="middle" opacity="0.8">d/dx(x²) = 2x 🎶</text>
+                  <line x1="8" y1="50" x2="152" y2="50" stroke="#FF7F50" stroke-width="1" opacity="0.3"/>
+                  <line x1="8" y1="58" x2="152" y2="58" stroke="#FF7F50" stroke-width="1" opacity="0.3"/>
+                  <line x1="8" y1="66" x2="152" y2="66" stroke="#FF7F50" stroke-width="1" opacity="0.3"/>
+                  <line x1="8" y1="74" x2="152" y2="74" stroke="#FF7F50" stroke-width="1" opacity="0.3"/>
+                  <line x1="8" y1="82" x2="152" y2="82" stroke="#FF7F50" stroke-width="1" opacity="0.3"/>
+                  <text x="6" y="84" font-size="48" fill="#FF7F50" opacity="0.55" font-family="serif">𝄞</text>
+                  <ellipse cx="80" cy="70" rx="8" ry="6" fill="#FFD166" transform="rotate(-15 80 70)"/>
+                  <line x1="88" y1="70" x2="88" y2="36" stroke="#FFD166" stroke-width="2"/>
+                  <text x="92" y="40" font-size="8" fill="#FFD166" font-family="sans-serif" font-weight="700">∫x dx</text>
+                  <ellipse cx="116" cy="62" rx="8" ry="6" fill="#FF7F50" transform="rotate(-15 116 62)"/>
+                  <line x1="124" y1="62" x2="124" y2="30" stroke="#FF7F50" stroke-width="2"/>
+                  <text x="128" y="34" font-size="8" fill="#FF7F50" font-family="sans-serif" font-weight="700">x²/2</text>
+                  <line x1="88" y1="36" x2="124" y2="30" stroke="#FFD166" stroke-width="3"/>
+                  <rect x="8" y="97" width="100" height="5" rx="2.5" fill="#FF7F50" opacity="0.15"/>
+                  <rect x="8" y="97" width="62" height="5" rx="2.5" fill="#FF7F50" opacity="0.8"/>
+                  <circle cx="140" cy="99" r="12" fill="#FF7F50" opacity="0.2"/>
+                  <polygon points="136,94 136,104 146,99" fill="#FF7F50"/>
+                  <rect x="8" y="115" width="60" height="12" rx="6" fill="#FF7F50" opacity="0.14"/>
+                  <text x="38" y="124" font-size="8" fill="#FF7F50" font-family="sans-serif" text-anchor="middle" font-weight="700">שירי לימוד 🎵</text>
+                </svg>
+              </div>
+
+            </div><!-- /games-carousel-track -->
+          </div><!-- /games-carousel-outer -->
+        </div><!-- /hero-games-mini -->
+
+
+    </div><!-- /tutors-showcase -->
+
+  </section>
+
+  <!-- ── FEATURES SHOWCASE ─────────────────────────────── -->
+  <section id="features-showcase">
+    <div class="container section-center">
+      <div class="section-label">מה תקבלו</div>
+      <h2 class="section-title">הלמידה שלנו נראית כך 👇</h2>
+      <p class="section-sub">כלים אמיתיים שעובדים — לא דפי עבודה מצולמים מהספר</p>
+
+      <div class="showcase-grid">
+
+        <!-- Slides -->
+        <div class="showcase-card reveal reveal-delay-1">
+          <div class="showcase-icon-wrap teal">📊</div>
+          <h3>מצגות חכמות</h3>
+          <p>חומר לימוד מותאם אישית — מצגות ברורות שנבנות בדיוק לפי הנושאים שהתלמיד צריך.</p>
+          <div class="mini-slides">
+            <div class="mini-slide"></div>
+            <div class="mini-slide"></div>
+            <div class="mini-slide"></div>
+          </div>
+        </div>
+
+        <!-- Dashboard -->
+        <div class="showcase-card reveal reveal-delay-2">
+          <div class="showcase-icon-wrap coral">📈</div>
+          <h3>לוח התקדמות</h3>
+          <p>כל שיעור מתועד. הורים רואים בדיוק מה נלמד, מה השתפר, ומה הצעד הבא.</p>
+          <div class="mini-dashboard">
+            <div class="dash-bar-row">
+              <span>מתמטיקה</span>
+              <div class="dash-bar"><div class="dash-fill" style="width:82%"></div></div>
+            </div>
+            <div class="dash-bar-row">
+              <span>פיזיקה</span>
+              <div class="dash-bar"><div class="dash-fill" style="width:65%"></div></div>
+            </div>
+            <div class="dash-bar-row">
+              <span>אנגלית</span>
+              <div class="dash-bar"><div class="dash-fill" style="width:90%"></div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Games -->
+        <div class="showcase-card reveal reveal-delay-3">
+          <div class="showcase-icon-wrap green">🎮</div>
+          <h3>משחקי לימוד</h3>
+          <p>פלאשקארדים, קווינים ומשחקי ידע — כי תלמיד שנהנה לומד פי כמה יותר טוב.</p>
+          <div class="mini-game-grid">
+            <div class="mini-game-card">🃏 פלאשקארדים</div>
+            <div class="mini-game-card">🎯 קוויז</div>
+            <div class="mini-game-card">🏆 Kahoot</div>
+            <div class="mini-game-card">🧩 Quizlet</div>
+          </div>
+        </div>
+
+        <!-- Examples -->
+        <div class="showcase-card reveal reveal-delay-1">
+          <div class="showcase-icon-wrap purple">💡</div>
+          <h3>דוגמאות ותרגילים</h3>
+          <p>AI מזהה איפה התלמיד נתקע ומייצר תרגילים ממוקדים — בדיוק ברמה הנכונה.</p>
+          <div class="mini-game-grid">
+            <div class="mini-game-card">📝 דוגמה פתורה</div>
+            <div class="mini-game-card">✏️ תרגיל מודרג</div>
+            <div class="mini-game-card">🔁 חזרה חכמה</div>
+            <div class="mini-game-card">🎓 מבחן ניסיון</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SUBJECTS ──────────────────────────────────────────── -->
+  <section id="subjects">
+    <div class="container section-center">
+      <div class="section-label">מקצועות</div>
+      <h2 class="section-title">במה אנחנו מלמדים?</h2>
+      <div class="subjects-carousel-outer">
+        <div class="subjects-carousel-track">
+          <div class="subj-card"><span class="subj-icon">🌍</span><span class="subj-label">אנגלית</span></div>
+          <div class="subj-card"><span class="subj-icon">⚛️</span><span class="subj-label">פיזיקה</span></div>
+          <div class="subj-card"><span class="subj-icon">📐</span><span class="subj-label">מתמטיקה</span></div>
+          <div class="subj-card"><span class="subj-icon">✏️</span><span class="subj-label">עברית</span></div>
+          <div class="subj-card"><span class="subj-icon">💻</span><span class="subj-label">מחשבים</span></div>
+          <!-- duplicates for seamless loop -->
+          <div class="subj-card"><span class="subj-icon">🌍</span><span class="subj-label">אנגלית</span></div>
+          <div class="subj-card"><span class="subj-icon">⚛️</span><span class="subj-label">פיזיקה</span></div>
+          <div class="subj-card"><span class="subj-icon">📐</span><span class="subj-label">מתמטיקה</span></div>
+          <div class="subj-card"><span class="subj-icon">✏️</span><span class="subj-label">עברית</span></div>
+          <div class="subj-card"><span class="subj-icon">💻</span><span class="subj-label">מחשבים</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ── PRICING ────────────────────────────────────────── -->
+  <section id="pricing">
+    <div class="container section-center">
+      <div class="section-label">תעריף</div>
+      <h2 class="section-title">מחירים לשיעור</h2>
+      <p class="section-sub">תשלום בסוף כל שיעור — במזומן או בביט</p>
+      <div class="pricing-grid">
+
+        <div class="pricing-card reveal reveal-delay-1">
+          <div class="pricing-card-name">יחיד</div>
+          <div class="pricing-card-price">₪120</div>
+          <div class="pricing-card-duration">45 דקות</div>
+        </div>
+
+        <div class="pricing-card featured reveal reveal-delay-2">
+          <div class="pricing-card-name">כפול</div>
+          <div class="pricing-card-price">₪215</div>
+          <div class="pricing-card-duration">שעה וחצי</div>
+        </div>
+
+        <div class="pricing-card reveal reveal-delay-3">
+          <div class="pricing-card-name">משולש</div>
+          <div class="pricing-card-price">₪300</div>
+          <div class="pricing-card-duration">שעתיים ורבע</div>
+        </div>
+
+      </div>
+      <div class="pricing-cta-row">
+        <a href="https://wa.me/972546969891?text=היי,%20אשמח%20להזמין%20שיעור" class="book-cta pricing-cta">🗓️ הזמנת שיעור</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── TESTIMONIALS ───────────────────────────────────── -->
+  <section id="testimonials">
+    <div class="container section-center">
+      <div class="section-label">המלצות</div>
+      <h2 class="section-title">מה הלקוחות אומרים עלינו 💬</h2>
+      <div class="testimonials-grid">
+        <div class="testimonial-card reveal reveal-delay-1">
+          <div class="testimonial-quote">"</div>
+          <p>תודה רבה על ההכוונה וההסבר המעולה.<br />הציונים שלי השתפרו מאוד בזכותך :)</p>
+          <div class="testimonial-name">— זיו כהן</div>
+        </div>
+        <div class="testimonial-card reveal reveal-delay-2">
+          <div class="testimonial-quote">"</div>
+          <p>שיעור מעניין ומורה מעולה!<br />בזכותו הבנתי את כל החומר.</p>
+          <div class="testimonial-name">— מיכל ניאזוב</div>
+        </div>
+        <div class="testimonial-card reveal reveal-delay-3">
+          <div class="testimonial-quote">"</div>
+          <p>השיעורים תמיד ברורים ומובנים,<br />תודה רבה!</p>
+          <div class="testimonial-name">— לימור ישראל</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ── STICKY BOOKING BUTTON ───────────────────────────── -->
+  <section id="signup-button">
+    <a href="https://wa.me/972546969891?text=היי,%20אשמח%20להזמין%20שיעור" class="book-cta">
+      🗓️ הזמנת שיעור
+    </a>
+  </section>
+
+  <!-- ── FAQs ───────────────────────────────────────────── -->
+  <section id="faqs">
+    <div class="container section-center">
+      <div class="section-label">שאלות</div>
+      <h2 class="section-title">שאלות נפוצות</h2>
+
+      <div class="faq-list reveal">
+
+        <div class="faq-item open">
+          <div class="faq-question">
+            <span>איך מתבצע תהליך ההרשמה לשיעור?</span>
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              ניתן להירשם בקלות דרך כפתור "הזמנת שיעור" באתר, או ליצור קשר ישירות דרך הוואטסאפ. נחזור אליכם בהקדם לתיאום השיעור הראשון.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>האם השיעורים מתקיימים פנים מול פנים או אונליין?</span>
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              אנחנו מציעים גם שיעורים פרונטליים וגם שיעורים אונליין, בהתאם להעדפת התלמיד/ה. שני הפורמטים יעילים ומותאמים לצרכים השונים.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>מה משך השיעור?</span>
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              קיימת אפשרות להזמין שלושה סוגים של שיעורים: שיעור יחיד שאורכו 45 דקות, שיעור כפול שנמשך שעה וחצי ושיעור משולש שנמשך שעתיים ורבע.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>איך מתבצע התשלום?</span>
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              התשלום מתבצע בסוף כל שיעור, ניתן לשלם במזומן או בביט.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>לאיזה גילאים השיעורים מתאימים?</span>
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              השיעורים מתאימים לתלמידי בית ספר יסודי, חטיבת ביניים ותיכון.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>באילו מקצועות אתם מלמדים?</span>
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              אנחנו מלמדים מתמטיקה, פיזיקה, אנגלית, עברית ומחשבים.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>מתי מזמינים שיעור?</span>
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              בכל יום רביעי מתפרסמים תאריכים ושעות אפשריות לשיעור בשבוע שלאחר מכן. ניתן לקבוע שיעור רק בימי רביעי אחר הצהריים.
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ─────────────────────────────────────────── -->
+  <section id="footer">
+    <div class="footer-inner">
+      <svg width="24" height="24" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="לוגו">
+        <circle cx="28" cy="40" r="22" fill="var(--accent)"/>
+        <circle cx="28" cy="40" r="13" fill="var(--bg-base)"/>
+        <circle cx="60" cy="40" r="22" fill="var(--accent)"/>
+        <circle cx="60" cy="40" r="13" fill="var(--bg-base)"/>
+        <g transform="translate(50,8) rotate(18)">
+          <polygon points="0,0 0,24 6,18 9,27 13,25.5 10,17 16,17"
+                   fill="var(--accent2)" stroke="var(--bg-base)" stroke-width="1.4" stroke-linejoin="round"/>
+        </g>
+      </svg>
+      <span class="footer-text">מאה בקליק © 2026</span>
+    </div>
+  </section>
+
+  <!-- ── POPUP OVERLAY ──────────────────────────────────── -->
+  <div id="popup-overlay"></div>
+
+  <!-- ── SCRIPTS ────────────────────────────────────────── -->
+  <script>
+    /* ── Smooth scroll ───────────────────────── */
+    function scrollToSection(id) {
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    /* ── Sidebar ─────────────────────────────── */
+    const sidebar        = document.getElementById('sidebar');
+    const sidebarOverlay = document.getElementById('sidebarOverlay');
+    const hamburger      = document.getElementById('hamburger');
+    const sidebarClose   = document.getElementById('sidebarClose');
+
+    function openSidebar() {
+      sidebar.classList.add('open');
+      sidebarOverlay.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeSidebar() {
+      sidebar.classList.remove('open');
+      sidebarOverlay.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    hamburger.addEventListener('click', openSidebar);
+    sidebarClose.addEventListener('click', closeSidebar);
+    sidebarOverlay.addEventListener('click', closeSidebar);
+
+    /* ── Back to top ─────────────────────────── */
+    const btt = document.getElementById('backToTop');
+    window.addEventListener('scroll', () => {
+      btt.classList.toggle('visible', window.scrollY > 320);
+    });
+    btt.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+    /* ── Tutor popups (mobile) ───────────────── */
+    const overlay = document.getElementById('popup-overlay');
+
+    function closeAllPopups() {
+      document.querySelectorAll('.tutor-info').forEach(p => p.classList.remove('active'));
+      overlay.classList.remove('active');
+    }
+
+    document.querySelectorAll('.tutor-card').forEach(card => {
+      card.addEventListener('click', () => {
+        if (window.innerWidth > 992) return;
+        const popup = card.querySelector('.tutor-info');
+        const isOpen = popup.classList.contains('active');
+        closeAllPopups();
+        if (!isOpen) {
+          popup.classList.add('active');
+          overlay.classList.add('active');
+        }
+      });
+    });
+
+    document.querySelectorAll('[data-close]').forEach(btn => {
+      btn.addEventListener('click', e => { e.stopPropagation(); closeAllPopups(); });
+    });
+    overlay.addEventListener('click', closeAllPopups);
+
+    /* ── Scroll reveal ───────────────────────── */
+    const revealObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+    /* ── FAQ accordion ───────────────────────── */
+    document.querySelectorAll('.faq-question').forEach(q => {
+      q.addEventListener('click', () => {
+        const item = q.closest('.faq-item');
+        const isOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+        if (!isOpen) item.classList.add('open');
+      });
+    });
+  </script>
+
+</body>
+</html>
