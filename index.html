@@ -209,11 +209,7 @@
                 <div class="dp-stat-val" id="dp-stat-lessons">0</div>
                 <div class="dp-stat-lbl">שיעורים</div>
               </div>
-              <div class="dp-stat">
-                <div class="dp-stat-val" id="dp-stat-hw" style="color:#FF7F50">0</div>
-                <div class="dp-stat-lbl">שיעורי בית</div>
-              </div>
-              <div class="dp-stat">
+<div class="dp-stat">
                 <div class="dp-stat-val" id="dp-stat-progress" style="color:#008080">0%</div>
                 <div class="dp-stat-lbl">התקדמות</div>
               </div>
@@ -235,16 +231,6 @@
               <span class="dp-lesson-dot coral"></span>
               <span class="dp-lesson-text">מבוא לאינטגרלים</span>
               <span class="dp-lesson-date">6.4</span>
-            </div>
-            <!-- Homework -->
-            <div class="dp-section-title">שיעורי בית</div>
-            <div class="dp-lesson-row">
-              <span class="dp-hw-badge open">פתוח</span>
-              <span class="dp-lesson-text">פלאשקארדים — נגזרות</span>
-            </div>
-            <div class="dp-lesson-row">
-              <span class="dp-hw-badge done">הושלם ✓</span>
-              <span class="dp-lesson-text">קווין — אינטגרלים</span>
             </div>
           </div>
           <!-- Scroll hint -->
@@ -921,7 +907,6 @@
     function startDashboardAnim() {
       const bar = document.getElementById('dp-bar-fill');
       const statLessons  = document.getElementById('dp-stat-lessons');
-      const statHw       = document.getElementById('dp-stat-hw');
       const statProgress = document.getElementById('dp-stat-progress');
       if (!bar) return;
 
@@ -930,7 +915,6 @@
 
       // Count-up numbers
       countUp(statLessons,  3,   '',  900);
-      countUp(statHw,       1,   '',  500);
       countUp(statProgress, 72,  '%', 1400);
 
       // Auto-scroll the preview down then back up, on loop
