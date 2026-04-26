@@ -206,28 +206,28 @@
             <!-- Stats row -->
             <div class="dp-stats">
               <div class="dp-stat">
-                <div class="dp-stat-val">3</div>
+                <div class="dp-stat-val" id="dp-stat-lessons">0</div>
                 <div class="dp-stat-lbl">שיעורים</div>
               </div>
               <div class="dp-stat">
-                <div class="dp-stat-val" style="color:#FF7F50">1</div>
+                <div class="dp-stat-val" id="dp-stat-hw" style="color:#FF7F50">0</div>
                 <div class="dp-stat-lbl">שיעורי בית</div>
               </div>
               <div class="dp-stat">
-                <div class="dp-stat-val" style="color:#008080">72%</div>
+                <div class="dp-stat-val" id="dp-stat-progress" style="color:#008080">0%</div>
                 <div class="dp-stat-lbl">התקדמות</div>
               </div>
             </div>
             <!-- Progress bar -->
             <div class="dp-bar-wrap">
-              <div class="dp-bar-fill" style="width:72%"></div>
+              <div class="dp-bar-fill" id="dp-bar-fill"></div>
             </div>
             <!-- Next lesson -->
             <div class="dp-next">📅 שיעור הבא: כ׳ ניסן, 17:00</div>
             <!-- Recent lessons -->
             <div class="dp-section-title">שיעורים אחרונים</div>
             <div class="dp-lesson-row">
-              <span class="dp-lesson-dot teal"></span>
+              <span class="dp-lesson-dot teal dp-pulse"></span>
               <span class="dp-lesson-text">נגזרות — כלל השרשרת</span>
               <span class="dp-lesson-date">13.4</span>
             </div>
@@ -905,6 +905,59 @@
     }, { threshold: 0.1 });
 
     document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+    /* ── Dashboard animations ───────────────── */
+    function countUp(el, target, suffix, duration) {
+      let start = 0;
+      const step = target / (duration / 16);
+      const tick = () => {
+        start = Math.min(start + step, target);
+        el.textContent = Math.round(start) + suffix;
+        if (start < target) requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
+    }
+
+    function startDashboardAnim() {
+      const bar = document.getElementById('dp-bar-fill');
+      const statLessons  = document.getElementById('dp-stat-lessons');
+      const statHw       = document.getElementById('dp-stat-hw');
+      const statProgress = document.getElementById('dp-stat-progress');
+      if (!bar) return;
+
+      // Trigger bar fill
+      bar.style.width = '72%';
+
+      // Count-up numbers
+      countUp(statLessons,  3,   '',  900);
+      countUp(statHw,       1,   '',  500);
+      countUp(statProgress, 72,  '%', 1400);
+
+      // Auto-scroll the preview down then back up, on loop
+      const preview = bar.closest('.dash-preview');
+      if (!preview) return;
+      let goingDown = true;
+      setInterval(() => {
+        if (goingDown) {
+          preview.scrollTo({ top: preview.scrollHeight, behavior: 'smooth' });
+        } else {
+          preview.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        goingDown = !goingDown;
+      }, 2800);
+    }
+
+    // Trigger once the dashboard enters view
+    const dashObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          setTimeout(startDashboardAnim, 300);
+          dashObs.disconnect();
+        }
+      });
+    }, { threshold: 0.3 });
+    const dashEl = document.querySelector('.hero-dashboard-mini');
+    if (dashEl) dashObs.observe(dashEl);
 
     /* ── FAQ accordion ───────────────────────── */
     document.querySelectorAll('.faq-question').forEach(q => {
