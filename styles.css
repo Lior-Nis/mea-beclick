@@ -170,6 +170,8 @@ h1, h2, h3, h4 {
   white-space: nowrap;
 }
 .nav-logo span { color: var(--accent); }
+.nav-brand { font-size: 1.25rem; font-weight: 900; color: var(--text-primary); }
+.nav-brand-maah { color: var(--accent); }
 
 /* Hamburger button — right side (RTL start) */
 .hamburger {
